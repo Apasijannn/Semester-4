@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://xwlia7old1am"]
+
+[ext_resource type="Script" uid="uid://b5lvavyicmn0v" path="res://scripts/lapak.gd" id="1_2w5pg"]
+[ext_resource type="Texture2D" uid="uid://boanwmqqqtk1v" path="res://assets/stalls/fish_stall.png" id="2_2w5pg"]
+
+[sub_resource type="Gradient" id="Gradient_spv1j"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_y3b6y"]
+gradient = SubResource("Gradient_spv1j")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ob3un"]
+radius = 22.5
+
+[node name="Lapak" type="Area2D" unique_id=495338258]
+script = ExtResource("1_2w5pg")
+
+[node name="Lapak" type="Sprite2D" parent="." unique_id=490268569]
+scale = Vector2(2, 2)
+texture = ExtResource("2_2w5pg")
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=1643823739]
+position = Vector2(-1, 7)
+scale = Vector2(1, 1.25)
+enabled = false
+color = Color(1, 0.84313726, 0.5686275, 1)
+texture = SubResource("GradientTexture2D_y3b6y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=820703307]
+position = Vector2(-1, 16)
+scale = Vector2(2, 2)
+shape = SubResource("CircleShape2D_ob3un")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

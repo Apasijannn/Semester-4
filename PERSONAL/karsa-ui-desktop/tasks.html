@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Karsa — Task Manager (Desktop)</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+  .split{ display:grid; grid-template-columns: 40% 60%; gap:22px; height:100%; }
+
+  /* LEFT: list */
+  .list-card{ display:flex; flex-direction:column; height:100%; min-height:0; }
+  .filter-row{ display:flex; gap:8px; margin-bottom:14px; }
+  .chip{ font-size:11.5px; font-weight:700; padding:7px 13px; border:2px solid var(--ink); border-radius:20px; background:var(--cream); cursor:pointer; }
+  .chip.active{ background:var(--navy); color:var(--cream); }
+
+  .task-item{
+    display:flex; align-items:flex-start; gap:12px;
+    padding:13px; border:2px solid var(--ink); border-radius:14px;
+    margin-bottom:10px; background:var(--cream); cursor:pointer;
+  }
+  .task-item.selected{ background:var(--coral); transform:translate(-2px,-2px); box-shadow:4px 4px 0 var(--ink); }
+  .task-item .prio{ width:9px; height:9px; border-radius:50%; margin-top:5px; border:1.5px solid var(--ink); flex-shrink:0; }
+  .task-item .body{ flex:1; }
+  .task-item .ti-title{ font-weight:700; font-size:13.5px; margin-bottom:4px; }
+  .task-item .ti-meta{ display:flex; gap:8px; align-items:center; font-size:10.5px; opacity:.75; }
+
+  /* RIGHT: detail panel */
+  .detail-card{ height:100%; display:flex; flex-direction:column; min-height:0; }
+  .field-label{ font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.5px; opacity:.6; margin-bottom:6px; display:block; }
+  .field{ margin-bottom:18px; }
+  .input-box{
+    width:100%; border:2px solid var(--ink); border-radius:12px; padding:11px 14px;
+    font-family:'Space Grotesk',sans-serif; font-size:14px; background:var(--cream); outline:none;
+  }
+  .input-box.title-input{ font-family:'Archivo Black',sans-serif; font-size:19px; padding:13px 16px; }
+  textarea.input-box{ resize:none; height:80px; font-size:13px; }
+  .prio-row{ display:flex; gap:10px; }
+  .prio-btn{ flex:1; text-align:center; padding:9px; border:2px solid var(--ink); border-radius:12px; font-weight:700; font-size:12.5px; cursor:pointer; }
+  .prio-btn.on-low{ background:var(--teal-light); }
+  .prio-btn.on-med{ background:var(--mustard-light); }
+  .prio-btn.on-high{ background:var(--coral-light); border-width:3px; box-shadow:3px 3px 0 var(--ink); }
+  .tag-row{ display:flex; gap:8px; flex-wrap:wrap; }
+  .subtask-row{ display:flex; align-items:center; gap:10px; padding:9px 0; border-bottom:1.5px dashed #cfc7b3; font-size:13px; }
+  .subtask-row:last-child{ border-bottom:none; }
+  .detail-actions{ margin-top:auto; display:flex; gap:12px; padding-top:16px; border-top:2px solid var(--ink); }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <aside class="sidebar">
+    <div class="logo">
+      <div class="logo-mark"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 12L10 18L20 6" stroke="#1A1A1A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="logo-word">Karsa</div>
+    </div>
+    <nav class="nav">
+      <div class="nav-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="8" height="8" rx="2" stroke="#1A1A1A" stroke-width="2"/><rect x="13" y="3" width="8" height="8" rx="2" stroke="#1A1A1A" stroke-width="2"/><rect x="3" y="13" width="8" height="8" rx="2" stroke="#1A1A1A" stroke-width="2"/><rect x="13" y="13" width="8" height="8" rx="2" stroke="#1A1A1A" stroke-width="2"/></svg>Dashboard</div>
+      <div class="nav-item active"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12L10 17L19 6" stroke="#1A1A1A" stroke-width="2" stroke-linecap="round"/><rect x="3" y="3" width="18" height="18" rx="4" stroke="#1A1A1A" stroke-width="2"/></svg>Tasks</div>
+      <div class="nav-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-4.6-9.5-9.2C1 8.4 2.6 5 6 5c2 0 3.4 1.1 4 2.2C10.6 6.1 12 5 14 5c3.4 0 5 3.4 3.5 6.8C19 16.4 12 21 12 21z" stroke="#1A1A1A" stroke-width="2" stroke-linejoin="round"/></svg>Health</div>
+      <div class="nav-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="6" width="18" height="13" rx="2" stroke="#1A1A1A" stroke-width="2"/><path d="M3 10H21" stroke="#1A1A1A" stroke-width="2"/><circle cx="16" cy="14.5" r="1.4" fill="#1A1A1A"/></svg>Finance</div>
+      <div class="nav-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 4H20V16H8L4 20V4Z" stroke="#1A1A1A" stroke-width="2" stroke-linejoin="round"/><circle cx="9" cy="10" r="1.2" fill="#1A1A1A"/><circle cx="12" cy="10" r="1.2" fill="#1A1A1A"/><circle cx="15" cy="10" r="1.2" fill="#1A1A1A"/></svg>AI Chat</div>
+    </nav>
+    <div class="profile-card">
+      <div class="profile-avatar">K</div>
+      <div><div class="profile-name" style="color:#1A1A1A">Karsa Putri</div><div class="profile-sub" style="color:#1A1A1A">Free plan</div></div>
+    </div>
+  </aside>
+
+  <div class="main">
+    <div class="topbar">
+      <div class="greeting">Good Morning, <span>Karsa</span> 👋</div>
+      <div class="search-bar">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="#1A1A1A" stroke-width="2"/><path d="M21 21L16.5 16.5" stroke="#1A1A1A" stroke-width="2" stroke-linecap="round"/></svg>
+        <input placeholder="Search tasks, notes, transactions…">
+      </div>
+      <div class="topbar-right">
+        <div class="icon-btn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 9a6 6 0 1 1 12 0c0 5 2 6 2 6H4s2-1 2-6" stroke="#1A1A1A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 20a2 2 0 0 0 4 0" stroke="#1A1A1A" stroke-width="2" stroke-linecap="round"/></svg><div class="dot"></div></div>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="split">
+
+        <!-- LEFT: task list 40% -->
+        <div class="card list-card tilt-l">
+          <div class="card-corner tl"></div>
+          <div class="card-title" style="justify-content:space-between;">
+            <span>📋 All Tasks (12)</span>
+            <button class="btn sm primary">+ New</button>
+          </div>
+          <div class="filter-row">
+            <div class="chip active">All</div>
+            <div class="chip">Work</div>
+            <div class="chip">Health</div>
+            <div class="chip">Finance</div>
+          </div>
+          <div class="scroll" style="overflow-y:auto;">
+            <div class="task-item selected">
+              <div class="prio" style="background:var(--coral)"></div>
+              <div class="body"><div class="ti-title">Finish Q3 budget review</div><div class="ti-meta"><span class="tag tint-mustard">Finance</span><span>Today, 14:00</span></div></div>
+            </div>
+            <div class="task-item">
+              <div class="prio" style="background:var(--mustard)"></div>
+              <div class="body"><div class="ti-title">Call with design team</div><div class="ti-meta"><span class="tag tint-navy">Work</span><span>Today, 13:00</span></div></div>
+            </div>
+            <div class="task-item">
+              <div class="prio" style="background:var(--teal)"></div>
+              <div class="body"><div class="ti-title">Refill prescription</div><div class="ti-meta"><span class="tag tint-coral">Health</span><span>Today, 15:00</span></div></div>
+            </div>
+            <div class="task-item">
+              <div class="prio" style="background:var(--mustard)"></div>
+              <div class="body"><div class="ti-title">Pay electricity bill</div><div class="ti-meta"><span class="tag tint-mustard">Finance</span><span>Today, 18:00</span></div></div>
+            </div>
+            <div class="task-item">
+              <div class="prio" style="background:var(--teal)"></div>
+              <div class="body"><div class="ti-title">Write journal entry</div><div class="ti-meta"><span class="tag tint-teal">Personal</span><span>Today, 21:00</span></div></div>
+            </div>
+            <div class="task-item">
+              <div class="prio" style="background:var(--teal)"></div>
+              <div class="body"><div class="ti-title">Plan weekend trip</div><div class="ti-meta"><span class="tag tint-navy">Personal</span><span>Tomorrow</span></div></div>
+            </div>
+            <div class="task-item">
+              <div class="prio" style="background:var(--coral)"></div>
+              <div class="body"><div class="ti-title">Submit tax documents</div><div class="ti-meta"><span class="tag tint-mustard">Finance</span><span>Fri, 12:00</span></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: detail panel 60% -->
+        <div class="card detail-card tilt-r">
+          <div class="card-corner tr"></div>
+
+          <div class="field">
+            <input class="input-box title-input" value="Finish Q3 budget review">
+          </div>
+
+          <div class="field">
+            <span class="field-label">Description</span>
+            <textarea class="input-box">Reconcile marketing + ops spend, compare against forecast, and flag variances over 10% for the leadership sync.</textarea>
+          </div>
+
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+            <div class="field">
+              <span class="field-label">Due Date</span>
+              <input class="input-box" value="Today · 04 Jul 2026">
+            </div>
+            <div class="field">
+              <span class="field-label">Time</span>
+              <input class="input-box" value="2:00 PM">
+            </div>
+          </div>
+
+          <div class="field">
+            <span class="field-label">Priority</span>
+            <div class="prio-row">
+              <div class="prio-btn on-low">🟢 Low</div>
+              <div class="prio-btn on-med">🟡 Medium</div>
+              <div class="prio-btn on-high">🔴 High</div>
+            </div>
+          </div>
+
+          <div class="field">
+            <span class="field-label">Tags</span>
+            <div class="tag-row">
+              <span class="tag tint-mustard">Finance</span>
+              <span class="tag tint-navy">Work</span>
+              <span class="tag" style="background:var(--cream);">+ Add tag</span>
+            </div>
+          </div>
+
+          <div class="field" style="flex:1; min-height:0; display:flex; flex-direction:column;">
+            <span class="field-label">Subtasks (2/4)</span>
+            <div class="scroll" style="overflow-y:auto;">
+              <div class="subtask-row"><div class="chk done"><svg width="11" height="11" viewBox="0 0 24 24"><path d="M5 13L9 17L19 7" stroke="#1A1A1A" stroke-width="3" fill="none" stroke-linecap="round"/></svg></div>Pull marketing spend report</div>
+              <div class="subtask-row"><div class="chk done"><svg width="11" height="11" viewBox="0 0 24 24"><path d="M5 13L9 17L19 7" stroke="#1A1A1A" stroke-width="3" fill="none" stroke-linecap="round"/></svg></div>Pull ops spend report</div>
+              <div class="subtask-row"><div class="chk"></div>Compare vs. forecast</div>
+              <div class="subtask-row"><div class="chk"></div>Flag variances &gt; 10%</div>
+            </div>
+          </div>
+
+          <div class="detail-actions">
+            <button class="btn primary" style="flex:1;">💾 Save Changes</button>
+            <button class="btn ghost">🗑 Delete</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Karsa — myITS Connector</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <div class="brand">
+        <span class="brand-logo">Karsa</span>
+        <span class="brand-subtitle">myITS Connector</span>
+      </div>
+      <span class="badge-count" id="badgeCount">0</span>
+    </header>
+
+    <div class="actions">
+      <button id="syncBtn" class="btn btn-primary">Sync Sekarang</button>
+      <p class="sync-status" id="syncStatus"></p>
+    </div>
+
+    <p class="counter" id="counterText">0 tugas ditemukan</p>
+
+    <div class="tabs" id="tabs">
+      <button class="tab active" data-filter="all">Semua</button>
+      <button class="tab" data-filter="pending">Pending</button>
+      <button class="tab" data-filter="done">Selesai</button>
+    </div>
+
+    <ul class="task-list" id="taskList"></ul>
+
+    <footer class="footer">
+      <button id="openAppBtn" class="btn btn-secondary">Buka Karsa App</button>
+      <button id="clearBtn" class="btn btn-link">Hapus semua data</button>
+    </footer>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

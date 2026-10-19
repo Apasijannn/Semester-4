@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>KARSA_V1.0 - Health</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&amp;family=JetBrains+Mono:wght@400&amp;family=Space+Mono:wght@700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container": "#f2eee3",
+                        "tertiary": "#002217",
+                        "error-container": "#ffdad6",
+                        "surface-variant": "#e6e2d8",
+                        "background": "#fdf9ee",
+                        "tertiary-fixed-dim": "#27e0a9",
+                        "surface": "#fdf9ee",
+                        "outline": "#77767d",
+                        "on-primary-fixed-variant": "#424658",
+                        "tertiary-fixed": "#54fdc4",
+                        "outline-variant": "#c7c6cd",
+                        "on-error": "#ffffff",
+                        "inverse-primary": "#c2c5db",
+                        "on-secondary-container": "#5a001e",
+                        "secondary": "#b71849",
+                        "on-error-container": "#93000a",
+                        "surface-dim": "#dddacf",
+                        "on-surface": "#1c1c15",
+                        "surface-bright": "#fdf9ee",
+                        "surface-container-low": "#f7f3e8",
+                        "error": "#ba1a1a",
+                        "on-primary": "#ffffff",
+                        "surface-container-high": "#ece8dd",
+                        "on-primary-container": "#9599ad",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-container": "#003a29",
+                        "on-tertiary-fixed-variant": "#00513b",
+                        "primary-container": "#2d3142",
+                        "secondary-fixed-dim": "#ffb2bc",
+                        "on-surface-variant": "#46464c",
+                        "primary-fixed-dim": "#c2c5db",
+                        "on-tertiary-container": "#00af82",
+                        "surface-tint": "#5a5d70",
+                        "on-secondary": "#ffffff",
+                        "inverse-surface": "#313129",
+                        "secondary-fixed": "#ffd9dd",
+                        "inverse-on-surface": "#f4f1e6",
+                        "primary": "#181c2c",
+                        "secondary-container": "#fd5179",
+                        "surface-container-highest": "#e6e2d8",
+                        "primary-fixed": "#dee1f8",
+                        "on-primary-fixed": "#171b2b",
+                        "on-tertiary-fixed": "#002116",
+                        "on-secondary-fixed": "#400013",
+                        "on-background": "#1c1c15",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-fixed-variant": "#910034"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "bento-padding": "1.5rem",
+                        "stack-sm": "0.5rem",
+                        "grid-margin": "2rem",
+                        "grid-gutter": "1.5rem",
+                        "stack-lg": "2rem",
+                        "stack-xs": "0.25rem",
+                        "stack-md": "1rem"
+                    },
+                    "fontFamily": {
+                        "label-caps": ["Space Mono"],
+                        "body-sm": ["JetBrains Mono"],
+                        "headline-xl": ["Bricolage Grotesque"],
+                        "body-md": ["JetBrains Mono"],
+                        "headline-lg-mobile": ["Bricolage Grotesque"],
+                        "headline-lg": ["Bricolage Grotesque"]
+                    },
+                    "fontSize": {
+                        "label-caps": ["12px", { "lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "700" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "headline-xl": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: theme('colors.background');
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+            color: theme('colors.on-background');
+        }
+        
+        .bento-card {
+            background-color: theme('colors.surface');
+            border: 2px solid theme('colors.primary');
+            box-shadow: 4px 4px 0px 0px theme('colors.primary');
+            transition: all 0.1s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .bento-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none;
+        }
+
+        .bento-card.interactive:hover {
+            box-shadow: 6px 6px 0px 0px theme('colors.primary');
+            transform: translate(-2px, -2px);
+        }
+
+        .bento-card.interactive:active {
+            box-shadow: 0px 0px 0px 0px theme('colors.primary');
+            transform: translate(4px, 4px);
+        }
+        
+        .sticky-note {
+            background-color: #fef08a; /* A generic yellow for the sticky note, bypassing strict color rules for this specific artistic element */
+            border: 1px solid theme('colors.primary');
+            box-shadow: 3px 3px 0px 0px theme('colors.primary');
+            transform: rotate(-2deg);
+        }
+        
+        .wobbly-border-bottom {
+            border-bottom: 2px solid theme('colors.primary');
+            border-bottom-left-radius: 10px 3px;
+            border-bottom-right-radius: 3px 10px;
+        }
+        
+        .hand-drawn-bar {
+            border: 2px solid theme('colors.primary');
+            border-radius: 4px 4px 0 0;
+            position: relative;
+            background: repeating-linear-gradient(
+              45deg,
+              theme('colors.tertiary-fixed-dim'),
+              theme('colors.tertiary-fixed-dim') 4px,
+              theme('colors.surface') 4px,
+              theme('colors.surface') 8px
+            );
+        }
+        
+        .tally-mark {
+            width: 4px;
+            height: 30px;
+            background-color: theme('colors.primary');
+            border-radius: 2px;
+            transform: rotate(calc(-5deg + 10deg * var(--rand)));
+        }
+        
+        .tally-strike {
+            width: 40px;
+            height: 4px;
+            background-color: theme('colors.secondary');
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            border-radius: 2px;
+        }
+        
+        /* Side Nav specific styles injected from JSON */
+        .side-nav-active {
+            color: theme('colors.primary');
+            font-weight: bold;
+            border: 2px solid theme('colors.primary');
+            background-color: theme('colors.secondary-container');
+            transform: translate(4px, 4px);
+            box-shadow: none;
+        }
+        .side-nav-inactive {
+            color: theme('colors.on-surface-variant');
+        }
+        .side-nav-inactive:hover {
+            transform: translate(-2px, -2px);
+        }
+        .nav-item-hover:hover {
+            background-color: theme('colors.surface-container-high');
+            transition: all 75ms;
+        }
+        .nav-item-active:active {
+            transform: translate(4px, 4px);
+            box-shadow: none;
+            transition: transform;
+        }
+
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden antialiased selection:bg-tertiary selection:text-on-tertiary">
+<!-- TopAppBar for Mobile (Hidden on Desktop) -->
+<header class="md:hidden flex justify-between items-center px-grid-margin py-stack-sm w-full bg-background border-b-4 border-primary z-50 fixed top-0">
+<div class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-primary">KARSA_OS</div>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-primary cursor-pointer active:scale-95">notifications</span>
+<span class="material-symbols-outlined text-primary cursor-pointer active:scale-95">account_circle</span>
+</div>
+</header>
+<!-- SideNavBar (Hidden on Mobile, Visible on Desktop) -->
+<nav class="hidden md:flex flex-col h-screen w-64 border-r-4 border-primary bg-surface-container shrink-0 p-stack-md shadow-[4px_4px_0px_0px_rgba(24,28,44,1)] z-40 relative font-body-md text-body-md font-label-caps text-label-caps">
+<div class="mb-stack-lg p-stack-sm">
+<h1 class="font-headline-lg text-headline-lg font-black text-primary">KARSA_V1.0</h1>
+<p class="font-label-caps text-label-caps text-on-surface-variant mt-1">SYSTEM_ONLINE</p>
+</div>
+<button class="w-full bg-primary text-on-primary font-label-caps text-label-caps py-3 mb-8 border-2 border-primary shadow-[4px_4px_0px_0px_rgba(24,28,44,1)] hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[6px_6px_0px_0px_rgba(24,28,44,1)] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none transition-all">
+            New Entry
+        </button>
+<ul class="flex flex-col gap-2 flex-grow">
+<li>
+<a class="flex items-center gap-3 p-3 rounded-DEFAULT side-nav-inactive nav-item-hover nav-item-active" href="#">
+<span class="material-symbols-outlined" data-icon="grid_view">grid_view</span>
+<span>Dashboard</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 p-3 rounded-DEFAULT side-nav-inactive nav-item-hover nav-item-active" href="#">
+<span class="material-symbols-outlined" data-icon="checklist">checklist</span>
+<span>Tasks</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 p-3 rounded-DEFAULT side-nav-active" href="#">
+<span class="material-symbols-outlined" data-icon="monitor_heart">monitor_heart</span>
+<span>Health</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 p-3 rounded-DEFAULT side-nav-inactive nav-item-hover nav-item-active" href="#">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+<span>Finance</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 p-3 rounded-DEFAULT side-nav-inactive nav-item-hover nav-item-active" href="#">
+<span class="material-symbols-outlined" data-icon="smart_toy">smart_toy</span>
+<span>Chat</span>
+</a>
+</li>
+</ul>
+<div class="mt-auto border-t-2 border-primary pt-4">
+<ul class="flex flex-col gap-2">
+<li>
+<a class="flex items-center gap-3 p-3 rounded-DEFAULT side-nav-inactive nav-item-hover nav-item-active" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span>Settings</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 p-3 rounded-DEFAULT side-nav-inactive nav-item-hover nav-item-active text-secondary" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span>Log Out</span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 overflow-y-auto p-grid-margin pt-24 md:pt-grid-margin h-screen">
+<!-- Header -->
+<div class="mb-8 wobbly-border-bottom pb-4 flex justify-between items-end">
+<div>
+<h2 class="font-headline-xl text-headline-xl text-primary">Health Log</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2">Track your daily meatbag maintenance.</p>
+</div>
+<div class="hidden md:flex gap-4">
+<div class="bg-tertiary-container text-on-tertiary-container px-3 py-1 font-label-caps text-label-caps border border-primary transform rotate-2">Status: Optimal</div>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-grid-gutter">
+<!-- Streak Counter (Spans 4) -->
+<div class="md:col-span-4 bento-card p-bento-padding flex flex-col justify-between interactive min-h-[200px]">
+<div class="flex justify-between items-start">
+<span class="font-label-caps text-label-caps text-on-surface-variant">HABIT_STREAK</span>
+<span class="material-symbols-outlined text-tertiary-fixed-dim" data-icon="local_fire_department">local_fire_department</span>
+</div>
+<div class="flex-1 flex flex-col items-center justify-center mt-4">
+<div class="flex gap-2 relative">
+<!-- Group 1 -->
+<div class="relative flex gap-1 mx-2">
+<div class="tally-mark" style="--rand: 0.2"></div>
+<div class="tally-mark" style="--rand: 0.8"></div>
+<div class="tally-mark" style="--rand: 0.4"></div>
+<div class="tally-mark" style="--rand: 0.9"></div>
+<div class="tally-strike"></div>
+</div>
+<!-- Group 2 -->
+<div class="relative flex gap-1 mx-2">
+<div class="tally-mark" style="--rand: 0.5"></div>
+<div class="tally-mark" style="--rand: 0.1"></div>
+<div class="tally-mark" style="--rand: 0.7"></div>
+</div>
+</div>
+<div class="font-headline-lg text-headline-lg text-primary mt-4">8 Days</div>
+</div>
+</div>
+<!-- Activity Chart (Spans 8) -->
+<div class="md:col-span-8 bento-card p-bento-padding flex flex-col interactive min-h-[250px]">
+<div class="flex justify-between items-start mb-6">
+<span class="font-label-caps text-label-caps text-on-surface-variant">WEEKLY_ACTIVITY</span>
+<span class="material-symbols-outlined text-primary" data-icon="directions_run">directions_run</span>
+</div>
+<div class="flex-1 flex items-end justify-between gap-2 px-4 pb-2 border-b-2 border-primary relative">
+<!-- Y Axis Labels -->
+<div class="absolute left-0 top-0 bottom-0 flex flex-col justify-between text-label-caps font-label-caps text-outline text-[10px] -ml-2 py-2">
+<span>High</span>
+<span>Med</span>
+<span>Low</span>
+</div>
+<!-- Bars -->
+<div class="flex flex-col items-center gap-2 w-full h-[40%]">
+<div class="hand-drawn-bar w-8 md:w-12 h-full"></div>
+<span class="font-label-caps text-label-caps text-[10px]">Mon</span>
+</div>
+<div class="flex flex-col items-center gap-2 w-full h-[60%]">
+<div class="hand-drawn-bar w-8 md:w-12 h-full"></div>
+<span class="font-label-caps text-label-caps text-[10px]">Tue</span>
+</div>
+<div class="flex flex-col items-center gap-2 w-full h-[30%]">
+<div class="hand-drawn-bar w-8 md:w-12 h-full border-dashed"></div>
+<span class="font-label-caps text-label-caps text-[10px]">Wed</span>
+</div>
+<div class="flex flex-col items-center gap-2 w-full h-[80%]">
+<div class="hand-drawn-bar w-8 md:w-12 h-full" style="background: theme('colors.tertiary-fixed-dim')"></div>
+<span class="font-label-caps text-label-caps text-[10px] font-bold text-tertiary-fixed-dim">Thu</span>
+</div>
+<div class="flex flex-col items-center gap-2 w-full h-[20%]">
+<div class="hand-drawn-bar w-8 md:w-12 h-full"></div>
+<span class="font-label-caps text-label-caps text-[10px]">Fri</span>
+</div>
+<div class="flex flex-col items-center gap-2 w-full h-[50%]">
+<div class="hand-drawn-bar w-8 md:w-12 h-full"></div>
+<span class="font-label-caps text-label-caps text-[10px]">Sat</span>
+</div>
+<div class="flex flex-col items-center gap-2 w-full h-[70%]">
+<div class="hand-drawn-bar w-8 md:w-12 h-full"></div>
+<span class="font-label-caps text-label-caps text-[10px]">Sun</span>
+</div>
+</div>
+</div>
+<!-- Sleep Bento (Spans 3) -->
+<div class="md:col-span-3 bento-card p-bento-padding flex flex-col interactive">
+<div class="flex justify-between items-start mb-4">
+<span class="font-label-caps text-label-caps text-on-surface-variant">SLEEP_LOG</span>
+<span class="material-symbols-outlined text-primary" data-icon="bedtime">bedtime</span>
+</div>
+<div class="flex-1 flex flex-col justify-center">
+<div class="font-headline-lg text-headline-lg text-primary">6h 42m</div>
+<div class="font-body-sm text-body-sm text-outline mt-1">Goal: 8h. Try harder.</div>
+<div class="mt-4 w-full h-2 bg-surface-variant border border-primary rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[80%]"></div>
+</div>
+</div>
+</div>
+<!-- Water Bento (Spans 3) -->
+<div class="md:col-span-3 bento-card p-bento-padding flex flex-col interactive bg-surface-container-low">
+<div class="flex justify-between items-start mb-4">
+<span class="font-label-caps text-label-caps text-on-surface-variant">HYDRATION</span>
+<span class="material-symbols-outlined text-primary" data-icon="water_drop">water_drop</span>
+</div>
+<div class="flex-1 flex flex-col justify-center items-center">
+<div class="font-headline-lg text-headline-lg text-primary text-center">4 / 8</div>
+<div class="font-body-sm text-body-sm text-outline mt-1 text-center">Glasses</div>
+<div class="flex gap-1 mt-4">
+<span class="material-symbols-outlined text-tertiary-fixed-dim" data-weight="fill">water_drop</span>
+<span class="material-symbols-outlined text-tertiary-fixed-dim" data-weight="fill">water_drop</span>
+<span class="material-symbols-outlined text-tertiary-fixed-dim" data-weight="fill">water_drop</span>
+<span class="material-symbols-outlined text-tertiary-fixed-dim" data-weight="fill">water_drop</span>
+<span class="material-symbols-outlined text-outline-variant">water_drop</span>
+<span class="material-symbols-outlined text-outline-variant">water_drop</span>
+</div>
+</div>
+</div>
+<!-- Meals Bento (Spans 3) -->
+<div class="md:col-span-3 bento-card p-bento-padding flex flex-col interactive">
+<div class="flex justify-between items-start mb-4">
+<span class="font-label-caps text-label-caps text-on-surface-variant">NUTRITION</span>
+<span class="material-symbols-outlined text-primary" data-icon="restaurant">restaurant</span>
+</div>
+<ul class="flex flex-col gap-2 font-body-sm text-body-sm">
+<li class="flex items-center gap-2">
+<div class="w-4 h-4 border-2 border-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[12px] font-bold">close</span>
+</div>
+<span class="line-through text-outline">Breakfast</span>
+</li>
+<li class="flex items-center gap-2">
+<div class="w-4 h-4 border-2 border-primary flex items-center justify-center">
+<div class="w-2 h-2 bg-primary rounded-full"></div>
+</div>
+<span>Lunch</span>
+</li>
+<li class="flex items-center gap-2">
+<div class="w-4 h-4 border-2 border-primary"></div>
+<span>Dinner</span>
+</li>
+</ul>
+</div>
+<!-- Motivational Sticky Note (Spans 3) -->
+<div class="md:col-span-3 sticky-note p-bento-padding flex flex-col justify-center items-center relative z-10 cursor-pointer hover:rotate-0 transition-transform">
+<div class="absolute top-2 left-1/2 transform -translate-x-1/2 w-8 h-3 bg-secondary/30 -rotate-2"></div>
+<p class="font-headline-lg-mobile text-headline-lg-mobile text-primary text-center leading-tight">
+                    "DRINK WATER.<br/>DONT DIE."
+                </p>
+<div class="mt-4 font-label-caps text-label-caps text-on-surface-variant self-end">- Management</div>
+</div>
+</div>
+</main>
+</body></html>

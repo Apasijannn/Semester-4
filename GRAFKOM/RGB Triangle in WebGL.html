@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>WebGL Square - Color Collision</title>
+
+    <script>
+        "use strict";
+
+        const vertexShaderSource =
+            "attribute vec2 a_coords;\n" +
+            "attribute vec3 a_color;\n" +
+            "varying vec3 v_color;\n" +
+            "void main() {\n" +
+            "   gl_Position = vec4(a_coords, 0.0, 1.0);\n" +
+            "   v_color = a_color;\n" +
+            "}\n";
+
+        const fragmentShaderSource =
+            "precision mediump float;\n" +
+            "varying vec3 v_color;\n" +
+            "void main() {\n" +
+            "   gl_FragColor = vec4(v_color, 1.0);\n" +
+            "}\n";
+
+        let gl;
+        let attributeCoords;
+        let bufferCoords;
+        let attributeColor;
+        let bufferColor;
+
+        function draw() {
+            gl.clearColor(0, 0, 0, 1); 
+            gl.clear(gl.COLOR_BUFFER_BIT);
+
+            let coords = new Float32Array([
+                -0.5, 0.5,
+                -0.5, -0.5,  
+                0.5,  0.5, 
+                0.5, -0.5
+            ]);
+
+            gl.bindBuffer(gl.ARRAY_BUFFER, bufferCoords);
+            gl.bufferData(gl.ARRAY_BUFFER, coords, gl.STREAM_DRAW);
+            gl.vertexAttribPointer(attributeCoords, 2, gl.FLOAT, false, 0, 0);
+            gl.enableVertexAttribArray(attributeCoords);
+
+            let color = new Float32Array([
+                0, 0, 1,    
+                0, 1, 0,    
+                1, 0, 0,    
+                1, 1, 1
+            ]);
+
+            gl.bindBuffer(gl.ARRAY_BUFFER, bufferColor);
+            gl.bufferData(gl.ARRAY_BUFFER, color, gl.STREAM_DRAW);
+            gl.vertexAttribPointer(attributeColor, 3, gl.FLOAT, false, 0, 0);
+            gl.enableVertexAttribArray(attributeColor);
+
+            gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+        }
+
+        function createProgram(gl, vertexShaderSource, fragmentShaderSource) {
+            let vsh = gl.createShader(gl.VERTEX_SHADER);
+            gl.shaderSource(vsh, vertexShaderSource);
+            gl.compileShader(vsh);
+            if (!gl.getShaderParameter(vsh, gl.COMPILE_STATUS)) {
+                throw new Error("Error in vertex shader: " + gl.getShaderInfoLog(vsh));
+            }
+            let fsh = gl.createShader(gl.FRAGMENT_SHADER);
+            gl.shaderSource(fsh, fragmentShaderSource);
+            gl.compileShader(fsh);
+            if (!gl.getShaderParameter(fsh, gl.COMPILE_STATUS)) {
+                throw new Error("Error in fragment shader: " + gl.getShaderInfoLog(fsh));
+            }
+            let prog = gl.createProgram();
+            gl.attachShader(prog, vsh);
+            gl.attachShader(prog, fsh);
+            gl.linkProgram(prog);
+            if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) {
+                throw new Error("Link error in program: " + gl.getProgramInfoLog(prog));
+            }
+            return prog;
+        }
+
+        function initGL() {
+            let prog = createProgram(gl, vertexShaderSource, fragmentShaderSource);
+            gl.useProgram(prog);
+            bufferCoords = gl.createBuffer();
+            bufferColor = gl.createBuffer();
+            attributeCoords = gl.getAttribLocation(prog, "a_coords");
+            attributeColor = gl.getAttribLocation(prog, "a_color");
+        }
+
+        function init() {
+            try {
+                let canvas = document.getElementById("webglcanvas");
+                gl = canvas.getContext("webgl2");
+                if (!gl) { throw "Browser does not support WebGL"; }
+            } catch (e) {
+                document.getElementById("canvas-holder").innerHTML = "<p>Sorry, could not get a WebGL graphics context.</p>";
+                return;
+            }
+            try {
+                initGL();
+            } catch (e) {
+                document.getElementById("canvas-holder").innerHTML = "<p>Sorry, could not initialize the WebGL graphics context: " + e.message + "</p>";
+                return;
+            }
+            draw();
+        }
+
+        window.onload = init;
+    </script>
+</head>
+<body>
+
+<h2>Exercise 2</h2>
+<div id="canvas-holder">
+    <canvas id="webglcanvas" width="600" height="600"></canvas>
+</div>
+
+</body>
+</html>

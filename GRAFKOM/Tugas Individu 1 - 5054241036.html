@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tugas Grafika Komputer - Animated Hummingbird</title>
+<style>
+    :root {
+        --bg-color: #f0f0f4;
+        --canvas-bg: #0d2a54;
+        --text-main: #333;
+        --text-muted: #666;
+    }
+
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        background: var(--bg-color);
+        color: var(--text-main);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 40px 20px;
+    }
+
+    .container {
+        max-width: 900px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    .canvas-wrapper {
+        display: flex;
+        justify-content: center;
+    }
+
+    canvas {
+        background: var(--canvas-bg);
+        box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        border-radius: 12px;
+        max-width: 100%;
+        height: auto;
+    }
+
+    .documentation {
+        background: white;
+        padding: 30px 40px;
+        border-radius: 12px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        line-height: 1.6;
+    }
+
+    h2, h3 {
+        color: var(--canvas-bg);
+        margin-top: 0;
+    }
+
+    h2 {
+        border-bottom: 2px solid #eee;
+        padding-bottom: 10px;
+        margin-top: 30px;
+    }
+
+    ul, ol {
+        margin-bottom: 20px;
+    }
+
+    li {
+        margin-bottom: 8px;
+    }
+
+    code {
+        background: #f4f4f4;
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-family: monospace;
+        color: #d6336c;
+    }
+</style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="canvas-wrapper">
+            <canvas id="c" width="500" height="500"></canvas>
+        </div>
+
+        <div class="documentation">
+            <h2>Konsep Transformasi</h2>
+     
+            <ul>
+                <li><strong>1. Refleksi (Flip):</strong> Menggunakan <code>ctx.translate(500, 0)</code> dan <code>ctx.scale(-1, 1)</code> untuk membalik sumbu X, sehingga gambar dicerminkan secara dinamis tanpa mengubah koordinat aslinya.</li>
+                <li><strong>2. Hover Dinamis:</strong> Menggunakan <code>ctx.translate(0, hoverOffset)</code>. Nilai offset dihitung dengan fungsi trigonometri <code>Math.sin(time)</code> untuk menciptakan efek melayang naik-turun secara periodik.</li>
+                <li><strong>3. Penyesuaian (Centering):</strong> Menggunakan <code>ctx.translate(-27.5, -40)</code> sebagai koreksi statis agar pusat massa objek tepat berada di tengah kanvas.</li>
+            </ul>
+
+            <h2>Detail Proses Drawing</h2>
+            <p>Proses penggambaran berjalan dalam <i>loop</i> <code>requestAnimationFrame</code> agar gambar bergerak secara dinamis dengan urutan eksekusi berikut:</p>
+            
+            <ol>
+                <li><strong>ClearRect:</strong> Membersihkan <i>frame</i> sebelumnya agar gambar tidak menumpuk (mencegah efek <i>trailing</i>).</li>
+                <li><strong>Save:</strong> Menyimpan <i>state</i> kanvas agar pergeseran transformasi animasi tidak terakumulasi dan merusak titik koordinat <i>frame</i> berikutnya.</li>
+                <li><strong>Aplikasi Transformasi:</strong> Menerapkan efek refleksi, hover, dan penyesuaian posisi secara berurutan.</li>
+                <li><strong>Konstruksi & Pathing:</strong> Menggambar 6 bagian burung (sayap atas, sayap, badan, ekor, leher, dan kepala) berupa segitiga poligon menggunakan fungsi kustom <code>tri()</code> dengan metode <code>moveTo</code> dan <code>lineTo</code>.</li>
+                <li><strong>Styling & Shading:</strong> Mewarnai poligon dengan gradasi linear (<code>createLinearGradient</code>) untuk membuat efek shading, serta menambahkan bayangan untuk efek kedalaman.</li>
+                <li><strong>Restore:</strong> Mengembalikan koordinat ke titik awal agar teks judul dirender statis (tidak ikut bergerak atau terbalik), sebelum memanggil ulang animasi untuk <i>frame</i> selanjutnya.</li>
+            </ol>
+        </div>
+    </div>
+
+<script>
+    const ctx = document.getElementById("c").getContext("2d");
+
+    // Fungsi menggambar segitiga poligon dengan gradasi dan bayangan
+    function tri(a, b, c, colorStart, colorEnd) {
+        const g = ctx.createLinearGradient(a.x, a.y, c.x, c.y);
+        g.addColorStop(0, colorStart);
+        g.addColorStop(1, colorEnd);
+
+        ctx.beginPath();
+        ctx.moveTo(a.x, a.y);
+        ctx.lineTo(b.x, b.y);
+        ctx.lineTo(c.x, c.y);
+        ctx.closePath();
+
+        ctx.fillStyle = g;
+        ctx.shadowColor = "rgba(0,0,0,0.25)";
+        ctx.shadowBlur = 8;
+        ctx.shadowOffsetX = 2;
+        ctx.shadowOffsetY = 4;
+        ctx.fill();
+
+        ctx.shadowBlur = 0;
+        ctx.strokeStyle = "rgba(255,255,255,0.05)";
+        ctx.stroke();
+    }
+
+    // Fungsi utama animasi rendering
+    function animate() {
+        ctx.clearRect(0, 0, 500, 500);
+        
+        const time = Date.now() / 400; 
+        const hoverOffset = Math.sin(time) * 15; 
+        
+        ctx.save();
+
+        // Transformasi: Flip horizontal, Hover dinamis, dan Centering
+        ctx.translate(500, 0); 
+        ctx.scale(-1, 1);    
+        ctx.translate(0, hoverOffset);
+        ctx.translate(-27.5, -40);
+
+        // Konstruksi 6 bagian poligon burung
+        // Sayap Atas
+        tri({x: 120, y: 140}, 
+            {x: 250, y: 130}, 
+            {x: 210, y: 250}, 
+            "#e5e5e5", "#9e9e9e"
+            );
+
+        // Sayap 
+        tri({x: 250, y: 130}, 
+            {x: 360, y: 240}, 
+            {x: 210, y: 250}, 
+            "#ffffff", "#bdbdbd"
+            );
+
+        // Badan
+        tri({x: 210, y: 250}, 
+            {x: 360, y: 240}, 
+            {x: 270, y: 360}, 
+            "#f2f2f2", "#8a8a8a"
+            );
+
+        // Ekor
+        tri({x: 230, y: 285}, 
+            {x: 270, y: 360}, 
+            {x: 190, y: 450}, 
+            "#a8a8a8", "#4a4a4a"
+            );
+
+        // Leher
+        tri({x: 400, y: 155}, 
+            {x: 315, y: 195}, 
+            {x: 360, y: 240}, 
+            "#ffffff", "#9e9e9e"
+            );
+            
+        // Kepala
+        tri({x: 400, y: 155}, 
+            {x: 435, y: 195}, 
+            {x: 380, y: 195}, 
+            "#ffffff", "#c4c4c4"
+            );
+
+        ctx.restore();
+
+        // Render Teks Statis
+        ctx.save(); 
+        ctx.shadowColor = "rgba(0,0,0,0.5)";
+        ctx.shadowBlur = 4;
+        ctx.shadowOffsetX = 2;
+        ctx.shadowOffsetY = 2;
+
+        ctx.font = "bold 24px 'Segoe UI', sans-serif";
+        ctx.fillStyle = "#ffffff";
+        ctx.textAlign = "center";
+        ctx.fillText("Origami Hummingbird", 250, 440);
+
+        ctx.font = "italic 16px 'Segoe UI', sans-serif";
+        ctx.fillStyle = "#a8a8a8";
+        ctx.fillText("Tugas Individu 1 - Drawing Using HTML Canvas Graphics", 250, 470);
+        
+        ctx.restore();
+
+        requestAnimationFrame(animate);
+    }
+
+    animate();
+</script>
+</body>
+</html>

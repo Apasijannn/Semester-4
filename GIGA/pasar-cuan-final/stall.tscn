@@ -1,0 +1,67 @@
+[gd_scene format=3 uid="uid://chopmbqv5c3ki"]
+
+[ext_resource type="Script" uid="uid://cqydgtcwvwvl6" path="res://scripts/stall.gd" id="1_iv7pk"]
+[ext_resource type="Texture2D" uid="uid://ckjgcqfkiaibq" path="res://assets/Stalls/drink_stall.png" id="2_k6q3x"]
+[ext_resource type="FontFile" uid="uid://da0hrw7j6wqbi" path="res://assets/MainMenu/fot-yuruka-std.ttf" id="3_k6q3x"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iv7pk"]
+size = Vector2(40, 91)
+
+[sub_resource type="Gradient" id="Gradient_iv7pk"]
+offsets = PackedFloat32Array(0, 0.0018248175, 0.4251825, 0.5091241, 0.5930657, 1)
+colors = PackedColorArray(0.9624394, 0.9624394, 0.9624394, 1, 1, 0.7490196, 0, 1, 0.29803923, 0.29803923, 0, 1, 0.23905109, 0.23905109, 0.23905109, 1, 0, 0, 0, 1, 0.019607844, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_k6q3x"]
+gradient = SubResource("Gradient_iv7pk")
+width = 128
+height = 128
+use_hdr = true
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0, 0)
+
+[node name="Stall" type="Area2D" unique_id=70651080 groups=["stall_aoe"]]
+script = ExtResource("1_iv7pk")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1020039698]
+texture_filter = 1
+scale = Vector2(2, 2)
+texture = ExtResource("2_k6q3x")
+offset = Vector2(8, 8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=826961078]
+position = Vector2(27, 21.5)
+shape = SubResource("RectangleShape2D_iv7pk")
+
+[node name="QueuePoint" type="Marker2D" parent="." unique_id=2090899288]
+position = Vector2(14, 44)
+
+[node name="NameTag" type="Label" parent="." unique_id=1656059477]
+layout_direction = 2
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 48.0
+offset_bottom = 8.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("3_k6q3x")
+theme_override_font_sizes/font_size = 10
+horizontal_alignment = 1
+autowrap_mode = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="StallLamp" type="PointLight2D" parent="." unique_id=768262090]
+texture_filter = 1
+position = Vector2(16, 19)
+color = Color(1, 0.8, 0.4, 1)
+energy = 0.0
+shadow_enabled = true
+shadow_color = Color(0, 0, 0.4862745, 0)
+shadow_filter = 1
+texture = SubResource("GradientTexture2D_k6q3x")
+texture_scale = 1.5

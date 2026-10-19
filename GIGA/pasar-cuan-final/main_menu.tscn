@@ -1,0 +1,212 @@
+[gd_scene format=3 uid="uid://db8wj0dt174qg"]
+
+[ext_resource type="Script" uid="uid://dr10t7xjmua7u" path="res://scripts/main_menu.gd" id="1_06t4h"]
+[ext_resource type="Texture2D" uid="uid://dbbhbta6p5d12" path="res://assets/MainMenu/BG.png" id="1_nlkkf"]
+[ext_resource type="Texture2D" uid="uid://dppbimwel58u4" path="res://assets/MainMenu/mulai_button.png" id="3_nlkkf"]
+[ext_resource type="Texture2D" uid="uid://vrrtdvshqyfa" path="res://assets/MainMenu/kredit_button.png" id="4_qe12f"]
+[ext_resource type="Texture2D" uid="uid://doxssk6ycbp6g" path="res://assets/MainMenu/keluar_button.png" id="5_8qtwp"]
+[ext_resource type="Texture2D" uid="uid://cksygcq0wirf4" path="res://assets/MainMenu/Logo.png" id="6_dy7ct"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dy7ct"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0o4t1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_j5v2v"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_glbon"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nlkkf"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qe12f"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8qtwp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dy7ct"]
+
+[sub_resource type="Animation" id="Animation_nlkkf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_qe12f"]
+resource_name = "fade_in"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_8qtwp"]
+resource_name = "fade_out"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dy7ct"]
+_data = {
+&"RESET": SubResource("Animation_nlkkf"),
+&"fade_in": SubResource("Animation_qe12f"),
+&"fade_out": SubResource("Animation_8qtwp")
+}
+
+[node name="MainMenu" type="Control" unique_id=562090966]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_06t4h")
+
+[node name="Bg" type="TextureRect" parent="." unique_id=2032569438]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_nlkkf")
+stretch_mode = 1
+
+[node name="Panel" type="Panel" parent="." unique_id=1294525720]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_dy7ct")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1581473937]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.50078124
+anchor_top = 0.6513889
+anchor_right = 0.50078124
+anchor_bottom = 0.6513889
+offset_left = -206.0
+offset_top = -198.0
+offset_right = 206.0
+offset_bottom = 198.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+metadata/_edit_use_anchors_ = true
+
+[node name="Start" type="Button" parent="VBoxContainer" unique_id=1819877389]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 45
+theme_override_styles/normal = SubResource("StyleBoxEmpty_0o4t1")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_j5v2v")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_j5v2v")
+icon = ExtResource("3_nlkkf")
+icon_alignment = 1
+
+[node name="Credits" type="Button" parent="VBoxContainer" unique_id=1581869797]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/normal = SubResource("StyleBoxEmpty_glbon")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_nlkkf")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_qe12f")
+icon = ExtResource("4_qe12f")
+icon_alignment = 1
+
+[node name="Exit" type="Button" parent="VBoxContainer" unique_id=1000940691]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 45
+theme_override_styles/normal = SubResource("StyleBoxEmpty_j5v2v")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_8qtwp")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_dy7ct")
+icon = ExtResource("5_8qtwp")
+icon_alignment = 1
+
+[node name="Logo" type="Sprite2D" parent="." unique_id=1588277465]
+position = Vector2(634, 127)
+texture = ExtResource("6_dy7ct")
+
+[node name="Transition" type="AnimationPlayer" parent="." unique_id=343075995]
+libraries/ = SubResource("AnimationLibrary_dy7ct")
+autoplay = &"fade_in"
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1682895115]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[connection signal="pressed" from="VBoxContainer/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="VBoxContainer/Credits" to="." method="_on_credits_pressed"]
+[connection signal="pressed" from="VBoxContainer/Exit" to="." method="_on_exit_pressed"]
+[connection signal="animation_finished" from="Transition" to="." method="_on_transition_animation_finished"]

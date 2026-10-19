@@ -1,0 +1,25 @@
+{
+  "manifest_version": 3,
+  "name": "Karsa — myITS Connector",
+  "version": "1.0",
+  "description": "Sync deadline & tugas dari myITS Classroom ke Karsa",
+  "permissions": ["storage", "alarms", "notifications", "scripting"],
+  "host_permissions": ["https://classroom.its.ac.id/*"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://classroom.its.ac.id/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_icon": "icons/icon-128.png"
+  },
+  "icons": {
+    "128": "icons/icon-128.png"
+  }
+}

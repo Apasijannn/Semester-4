@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ruang Sintaks | Modul HTML Dasar</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ===== NAVIGASI ===== -->
+    <nav>
+        <div class="nav-inner">
+            <a href="index.html" class="logo">
+                <span class="logo-text">Ruang<span>Sintaks</span></span>
+            </a>
+            <ul class="navbar">
+                <li><a href="index.html" class="nav-active">Beranda</a></li>
+                <li><a href="daftar.html" class="nav-cta">Daftar Sekarang</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ===== PROGRESS BAR ===== -->
+    <div class="materi-progress-bar">
+        <div class="materi-progress-fill" style="width: 25%"></div>
+    </div>
+
+    <main>
+
+        <!-- ===== HEADER MODUL ===== -->
+        <div class="materi-hero">
+            <div class="materi-hero-inner">
+                <span class="modul-badge modul-html">Modul 1 · HTML5</span>
+                <h1>HTML Dasar:<br>Struktur Dokumen</h1>
+                <p>Pelajari fondasi utama dalam membangun website — dari anatomi tag, elemen semantik, hingga struktur halaman yang benar dan bermakna.</p>
+                <div class="materi-hero-meta">
+                    <span>⏱ <strong>10 Jam</strong> Materi</span>
+                    <span>📊 <strong>Tingkat:</strong> Dasar</span>
+                    <span>🏆 <strong>Bersertifikat</strong></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== KONTEN MATERI ===== -->
+        <div class="material-container">
+
+            <!-- Video Tutorial -->
+            <div class="material-panel">
+                <div class="panel-title">
+                    <div class="panel-icon icon-video">🎬</div>
+                    Video Tutorial
+                </div>
+                <div class="video-placeholder">
+                    <div class="play-btn">
+                        <svg viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+                    </div>
+                    <p class="video-title">Pengenalan HTML: Anatomi Tag & Struktur Halaman</p>
+                </div>
+            </div>
+
+            <!-- Catatan Materi -->
+            <div class="material-panel">
+                <div class="panel-title">
+                    <div class="panel-icon icon-notes">📖</div>
+                    Catatan Materi
+                </div>
+                <div class="notes-content">
+                    <p><strong>HTML (HyperText Markup Language)</strong> adalah bahasa markup standar untuk membangun struktur halaman web. HTML menggunakan <em>tag</em> — penanda yang membungkus konten dan memberi tahu browser bagaimana menampilkannya.</p>
+                    <ul class="notes-list">
+                        <li><strong><code>&lt;!DOCTYPE html&gt;</code></strong> — Deklarasi wajib di baris pertama. Memberitahu browser bahwa ini adalah dokumen HTML5.</li>
+                        <li><strong><code>&lt;html lang="id"&gt;</code></strong> — Elemen root yang membungkus seluruh dokumen. Atribut <code>lang</code> menyatakan bahasa konten.</li>
+                        <li><strong><code>&lt;head&gt;</code></strong> — Berisi informasi meta (judul tab, charset, link CSS). Tidak terlihat langsung di layar.</li>
+                        <li><strong><code>&lt;body&gt;</code></strong> — Semua konten yang ditampilkan ke pengguna — teks, gambar, tombol — ada di sini.</li>
+                        <li><strong><code>&lt;h1&gt;</code> – <code>&lt;h6&gt;</code></strong> — Heading dengan hierarki. <code>h1</code> adalah yang paling penting, gunakan hanya sekali per halaman.</li>
+                        <li><strong><code>&lt;p&gt;</code></strong> — Paragraf. Gunakan untuk setiap blok teks yang berdiri sendiri.</li>
+                        <li><strong><code>&lt;a href="..."&gt;</code></strong> — Anchor/tautan. Atribut <code>href</code> menentukan tujuan link.</li>
+                        <li><strong><code>&lt;img src="..." alt="..."&gt;</code></strong> — Menyisipkan gambar. Atribut <code>alt</code> wajib diisi untuk aksesibilitas.</li>
+                    </ul>
+
+                    <div class="info-box info-box-html">
+                        <span class="info-box-icon">💡</span>
+                        <div><strong>Tip Penting:</strong> HTML bukan bahasa pemrograman — ia tidak punya logika atau kalkulasi. HTML hanya mendefinisikan <em>struktur dan makna</em> konten. Tampilan visual adalah urusan CSS.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contoh Kode -->
+            <div class="material-panel">
+                <div class="panel-title">
+                    <div class="panel-icon icon-code">💻</div>
+                    Contoh Kode
+                </div>
+                <p class="code-desc">Struktur lengkap file <code>index.html</code> yang benar dan siap pakai:</p>
+                <div class="code-box">
+                    <div class="code-header">
+                        <span class="dot" style="background: #FF5F56;"></span>
+                        <span class="dot" style="background: #FFBD2E;"></span>
+                        <span class="dot" style="background: #27C93F;"></span>
+                        <span class="code-lang">HTML</span>
+                    </div>
+                    <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="id"&gt;
+
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Website Pertamaku&lt;/title&gt;
+    &lt;link rel="stylesheet" href="style.css"&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+    &lt;h1&gt;Halo, Dunia!&lt;/h1&gt;
+    &lt;p&gt;Ini adalah &lt;strong&gt;paragraf pertama&lt;/strong&gt; saya.&lt;/p&gt;
+
+    &lt;a href="https://google.com"&gt;Kunjungi Google&lt;/a&gt;
+
+    &lt;img src="foto.jpg" alt="Foto profil saya"&gt;
+
+&lt;/body&gt;
+
+&lt;/html&gt;</code></pre>
+                </div>
+            </div>
+
+            <!-- Latihan Interaktif -->
+            <div class="material-panel interactive-panel">
+                <div class="panel-title">
+                    <div class="panel-icon icon-quiz">✍️</div>
+                    Latihan Interaktif
+                </div>
+
+                <!-- Soal 1 -->
+                <p class="quiz-question">
+                    <strong>Soal 1 dari 3</strong><br><br>
+                    Tag HTML mana yang digunakan untuk membuat tulisan <strong>tebal (bold)</strong> yang sekaligus memiliki makna penting secara semantik?
+                </p>
+                <div class="quiz-form" id="quiz1">
+                    <label class="quiz-option">
+                        <input type="radio" name="q1" value="a">
+                        <span>A. <code>&lt;b&gt;</code></span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q1" value="b">
+                        <span>B. <code>&lt;strong&gt;</code></span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q1" value="c">
+                        <span>C. <code>&lt;bold&gt;</code></span>
+                    </label>
+                </div>
+                <div class="quiz-result" id="result1"></div>
+                <button class="btn-primary" onclick="checkQuiz('q1', 'b', 'result1', 'Tag &lt;strong&gt; tidak hanya membuat teks tebal secara visual, tapi juga memberi sinyal semantik ke browser dan screen reader bahwa teks ini penting. Berbeda dengan &lt;b&gt; yang hanya bersifat visual semata.')">
+                    Cek Jawaban
+                </button>
+
+                <hr style="border: none; border-top: 1px solid var(--border); margin: 28px 0;">
+
+                <!-- Soal 2 -->
+                <p class="quiz-question">
+                    <strong>Soal 2 dari 3</strong><br><br>
+                    Atribut apa yang <strong>wajib</strong> disertakan pada tag <code>&lt;img&gt;</code> demi alasan aksesibilitas?
+                </p>
+                <div class="quiz-form" id="quiz2">
+                    <label class="quiz-option">
+                        <input type="radio" name="q2" value="a">
+                        <span>A. <code>src</code> — Lokasi file gambar</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q2" value="b">
+                        <span>B. <code>width</code> — Lebar gambar</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q2" value="c">
+                        <span>C. <code>alt</code> — Teks deskripsi alternatif</span>
+                    </label>
+                </div>
+                <div class="quiz-result" id="result2"></div>
+                <button class="btn-primary" onclick="checkQuiz('q2', 'c', 'result2', 'Atribut alt berisi deskripsi gambar yang dibacakan oleh screen reader untuk pengguna tunanetra, dan juga ditampilkan saat gambar gagal dimuat. Ini adalah standar aksesibilitas web yang wajib dipenuhi.')">
+                    Cek Jawaban
+                </button>
+
+                <hr style="border: none; border-top: 1px solid var(--border); margin: 28px 0;">
+
+                <!-- Soal 3 -->
+                <p class="quiz-question">
+                    <strong>Soal 3 dari 3</strong><br><br>
+                    Elemen HTML mana yang berisi semua konten yang <strong>terlihat</strong> oleh pengguna di browser?
+                </p>
+                <div class="quiz-form" id="quiz3">
+                    <label class="quiz-option">
+                        <input type="radio" name="q3" value="a">
+                        <span>A. <code>&lt;head&gt;</code></span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q3" value="b">
+                        <span>B. <code>&lt;meta&gt;</code></span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q3" value="c">
+                        <span>C. <code>&lt;body&gt;</code></span>
+                    </label>
+                </div>
+                <div class="quiz-result" id="result3"></div>
+                <button class="btn-primary" onclick="checkQuiz('q3', 'c', 'result3', 'Elemen &lt;body&gt; adalah wadah dari semua konten yang ditampilkan — teks, gambar, tombol, video, dan lainnya. Sedangkan &lt;head&gt; berisi informasi untuk browser, bukan untuk pengguna.')">
+                    Cek Jawaban
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- Navigasi Modul -->
+        <div class="materi-nav">
+            <a href="index.html" class="materi-nav-btn prev">
+                <span class="materi-nav-arrow">←</span>
+                <div>
+                    <span class="materi-nav-label">Kembali ke</span>
+                    <span class="materi-nav-title">Beranda</span>
+                </div>
+            </a>
+            <a href="materi-css.html" class="materi-nav-btn next">
+                <span class="materi-nav-arrow">→</span>
+                <div>
+                    <span class="materi-nav-label">Modul Selanjutnya</span>
+                    <span class="materi-nav-title">CSS Styling & Layout</span>
+                </div>
+            </a>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-inner">
+            <p>&copy; 2026 Ruang Sintaks. Hak Cipta Dilindungi.</p>
+            <div class="footer-links">
+                <a href="index.html">Beranda</a>
+                <a href="materi-html.html">Materi HTML</a>
+                <a href="materi-css.html">Materi CSS</a>
+                <a href="daftar.html">Daftar</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function checkQuiz(name, correct, resultId, explanation) {
+            const selected = document.querySelector(`input[name="${name}"]:checked`);
+            const result = document.getElementById(resultId);
+            if (!selected) {
+                result.className = 'quiz-result wrong';
+                result.innerHTML = '⚠️ Pilih salah satu jawaban dulu!';
+                return;
+            }
+            if (selected.value === correct) {
+                result.className = 'quiz-result correct';
+                result.innerHTML = `✅ <strong>Benar!</strong> ${explanation}`;
+            } else {
+                result.className = 'quiz-result wrong';
+                result.innerHTML = `❌ <strong>Kurang tepat.</strong> Coba lagi! Perhatikan kata kunci di soal.`;
+            }
+        }
+    </script>
+
+</body>
+</html>

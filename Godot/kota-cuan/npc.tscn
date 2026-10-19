@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://cutur1p1nsje5"]
+
+[ext_resource type="Script" uid="uid://dblm56qekwyuy" path="res://scripts/npc.gd" id="1_ideak"]
+[ext_resource type="Texture2D" uid="uid://db5onfb6l74xh" path="res://assets/NPC/npc_walkcycle/NPC_1_walk.png" id="2_d61ma"]
+[ext_resource type="Texture2D" uid="uid://djk33uot7gajd" path="res://assets/NPC/npc_walkcycle/NPC_2_walk.png" id="3_slxoh"]
+[ext_resource type="Texture2D" uid="uid://d0eygba30hymo" path="res://assets/NPC/npc_walkcycle/NPC_3_walk.png" id="4_l64hl"]
+[ext_resource type="Texture2D" uid="uid://b83k3qfre6cf5" path="res://assets/NPC/npc_walkcycle/NPC_4_walk.png" id="5_215dd"]
+[ext_resource type="Texture2D" uid="uid://bfi65mbxiyj72" path="res://assets/NPC/npc_walkcycle/NPC_5_walk.png" id="6_p5bpe"]
+[ext_resource type="Texture2D" uid="uid://dfinktea7fld5" path="res://assets/NPC/npc_walkcycle/NPC_6_walk.png" id="7_upjdb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xxcha"]
+size = Vector2(10, 24)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_d61ma"]
+load_path = "res://.godot/imported/NPC_1_walk.png-e4e65c70f355f5e2a1bd1713591b4fe9.ctex"
+
+[node name="NPC" type="CharacterBody2D" unique_id=814605144 groups=["pelanggan"]]
+script = ExtResource("1_ideak")
+daftar_baju = Array[Texture2D]([ExtResource("2_d61ma"), ExtResource("3_slxoh"), ExtResource("4_l64hl"), ExtResource("5_215dd"), ExtResource("6_p5bpe"), ExtResource("7_upjdb")])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=251304298]
+scale = Vector2(2, 2)
+shape = SubResource("RectangleShape2D_xxcha")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1082939469]
+position = Vector2(-6, -6)
+rect = Rect2(1, -6, 10, 24)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=18497337 groups=["pelanggan"]]
+texture_filter = 1
+scale = Vector2(2, 2)
+texture = SubResource("CompressedTexture2D_d61ma")
+hframes = 4
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=353502134]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

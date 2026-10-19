@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kala Catering</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- nav -->
+<nav>
+  <div class="logo" onclick="showPage('home')">
+    <img src="images/logo.png" alt="logo" class="logo-img"> 
+    <span class="logo-text">Kala</span>
+  </div>
+  <ul class="nav-links">
+    <li><a onclick="showPage('home')" id="nav-home" class="active">Home</a></li>
+    <li><a onclick="showPage('menu')" id="nav-menu">Menu</a></li>
+    <li>
+      <a onclick="showPage('custom')" id="nav-custom">Custom</a>
+      <span class="cart-badge" id="cart-badge">0</span>
+    </li>
+    <li><a onclick="showPage('order')" id="nav-order" class="order-btn">Order</a></li>
+  </ul>
+</nav>
+
+<!-- Home page -->
+<div class="page active" id="page-home">
+  <section class="hero">
+    <div class="hero-text">
+      <p class="hero-tag">Masakan Rumahan Terbaik</p>
+      <h1>Makanan <span class="green">Enak</span> Terasa Seperti Buatan Ibu</h1>
+      <p>Kala menghadirkan masakan rumahan yang hangat, dimasak segar setiap hari, dan bisa kamu <strong>custom sendiri</strong>.</p>
+      <div class="hero-btns">
+        <button onclick="showPage('custom')">Pesan Sekarang</button>
+        <button class="btn-outline" onclick="showPage('menu')">Lihat Menu</button>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="stat-num">500+</div>
+          <div class="stat-label">Pelanggan Puas</div>
+        </div>
+        <div>
+          <div class="stat-num">15+</div>
+          <div class="stat-label">Menu Tersedia</div>
+        </div>
+        <div>
+          <div class="stat-num">⭐ 4.9</div>
+          <div class="stat-label">Rating Rata-Rata</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-img">
+      <img src="images/plate2.png" alt="makanan kala">
+    </div>
+  </section>
+
+  <div class="features-bar">
+    <div class="feature-item">
+      <img src="images/icon-daun.png" alt=""> <div><b>Bahan Segar</b><br><small>Restock tiap pagi</small></div>
+    </div>
+    <div class="feature-item">
+      <img src="images/cook.png" alt=""> <div><b>Dimasak Sendiri</b><br><small>Resep turun-temurun</small></div>
+    </div>
+    <div class="feature-item">
+      <img src="images/package.png" alt=""> <div><b>Kemasan Rapi</b><br><small>Aman & tidak tumpah</small></div>
+    </div>
+    <div class="feature-item">
+      <img src="images/petir.png" alt=""> <div><b>Tepat Waktu</b><br><small>Antar tepat waktu</small></div>
+    </div>
+  </div>
+
+  <section class="how-section">
+    <h2>Langkah Pemesanan</h2>
+    <p>Pesan makanan favoritmu kapan saja, diantar ke pintu rumahmu.</p>
+    <div class="how-grid">
+      <div class="how-card">
+        <span>📋</span>
+        <h4>Pilih Menu</h4>
+        <p>Browse menu kami atau buat custom sesuai seleramu.</p>
+      </div>
+      <div class="how-card">
+        <span>🛒</span>
+        <h4>Tambah ke Keranjang</h4>
+        <p>Masukkan makanan pilihan ke dalam cart pesananmu.</p>
+      </div>
+      <div class="how-card">
+        <span>📝</span>
+        <h4>Isi Data Pengiriman</h4>
+        <p>Lengkapi nama, alamat, dan tanggal pengirimanmu.</p>
+      </div>
+      <div class="how-card">
+        <span>🚛</span>
+        <h4>Tunggu Dikirim</h4>
+        <p>Kami masak dan antar makananmu dalam kondisi terbaik.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <strong>Kala</strong> — Masakan Rumahan yang Hangat & Lezat · Surabaya, Jawa Timur<br>
+    <small>© 2026 Kala Catering</small>
+  </footer>
+</div>
+
+<!-- menu page -->
+<div class="page" id="page-menu">
+  <section class="menu-section">
+    <h2>Menu Kami</h2>
+    <p>Dimasak segar setiap hari dengan bahan berkualitas.</p>
+
+    <div class="filter-bar">
+      <button class="filter-btn active" onclick="filterMenu(this, 'all')">Semua</button>
+      <button class="filter-btn" onclick="filterMenu(this, 'nasi')">Nasi</button>
+      <button class="filter-btn" onclick="filterMenu(this, 'lauk')">Lauk</button>
+      <button class="filter-btn" onclick="filterMenu(this, 'side')">Side Dish</button>
+      <button class="filter-btn" onclick="filterMenu(this, 'sambal')">Sambal</button>
+      <button class="filter-btn" onclick="filterMenu(this, 'paket')">Paket</button>
+    </div>
+
+    <div class="menu-grid" id="menu-grid"></div>
+  </section>
+  <footer>
+    <strong>Kala</strong> — Masakan Rumahan yang Hangat & Lezat · Surabaya, Jawa Timur<br>
+    <small>© 2026 Kala Catering</small>
+  </footer>
+</div>
+
+<!-- custom page -->
+<div class="page" id="page-custom">
+  <section class="custom-section">
+    <h2>Racik Makananmu Sendiri</h2>
+    <p>Pilih nasi, lauk, side dish, dan sambal sesuai seleramu.</p>
+
+    <div class="custom-grid">
+      <div class="selector-card">
+        <div class="selector-label">Pilih Nasi</div>
+        <div class="options-grid">
+          <div class="option-item" onclick="selectItem('nasi', 0, this)">
+            <div class="option-name">Nasi Putih</div>
+            <div class="option-price">Rp 5.000</div>
+          </div>
+          <div class="option-item" onclick="selectItem('nasi', 1, this)">
+            <div class="option-name">Nasi Uduk</div>
+            <div class="option-price">Rp 7.000</div>
+          </div>
+          <div class="option-item" onclick="selectItem('nasi', 2, this)">
+            <div class="option-name">Nasi Daun Jeruk</div>
+            <div class="option-price">Rp 7.000</div>
+          </div>
+          <div class="option-item" onclick="selectItem('nasi', 3, this)">
+            <div class="option-name">Nasi Kecombrang</div>
+            <div class="option-price">Rp 7.000</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="selector-card">
+        <div class="selector-label">Pilih Lauk</div>
+        <div class="options-grid">
+          <div class="option-item" onclick="selectItem('lauk', 0, this)">
+            <div class="option-name">Ayam Goreng</div>
+            <div class="option-price">Rp 10.000</div>
+          </div>
+          <div class="option-item" onclick="selectItem('lauk', 1, this)">
+            <div class="option-name">Telur Balado</div>
+            <div class="option-price">Rp 8.000</div>
+          </div>
+          <div class="option-item" onclick="selectItem('lauk', 2, this)">
+            <div class="option-name">Rendang Sapi</div>
+            <div class="option-price">Rp 13.000</div>
+          </div>
+          <div class="option-item" onclick="selectItem('lauk', 3, this)">
+            <div class="option-name">Ikan Bakar</div>
+            <div class="option-price">Rp 13.000</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="selector-card">
+        <div class="selector-label">Pilih Side Dish</div>
+        <div class="options-grid">
+          <div class="option-item" onclick="selectItem('side', 0, this)">
+            <div class="option-name">Sayur Sop</div>
+            <div class="option-price">Rp 5.000</div>
+          </div>
+          <div class="option-item" onclick="selectItem('side', 1, this)">
+            <div class="option-name">Mie Goreng</div>
+            <div class="option-price">Rp 4.000</div>
+          </div>
+          <div class="option-item" onclick="selectItem('side', 2, this)">
+            <div class="option-name">Tempe Orek</div>
+            <div class="option-price">Rp 5.000</div>
+          </div>
+          <div class="option-item" onclick="selectItem('side', 3, this)">
+            <div class="option-name">Tumis Buncis</div>
+            <div class="option-price">Rp 5.000</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="selector-card">
+        <div class="selector-label">Pilih Sambal</div>
+        <div class="options-grid">
+          <div class="option-item" onclick="selectItem('sambal', 0, this)">
+            <div class="option-name">Sambal Bawang</div>
+            <div class="option-price">Rp 2.000</div>
+          </div>
+          <div class="option-item" onclick="selectItem('sambal', 1, this)">
+            <div class="option-name">Sambal Tomat</div>
+            <div class="option-price">Rp 2.000</div>
+          </div>
+          <div class="option-item" onclick="selectItem('sambal', 2, this)">
+            <div class="option-name">Sambal Kecap</div>
+            <div class="option-price">Rp 2.000</div>
+          </div>
+          <div class="option-item" onclick="selectItem('sambal', 3, this)">
+            <div class="option-name">Sambal Matah</div>
+            <div class="option-price">Rp 2.000</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ringkasan custom -->
+    <div class="cart-panel">
+      <h3>Ringkasan Pilihan Custom</h3>
+      <div id="custom-cart-items">
+        <p class="cart-empty">Belum ada yang dipilih. Pilih semua kategori di atas!</p>
+      </div>
+      <div id="custom-cart-total" style="display:none;">
+        <p>Total : <strong id="custom-total-price">Rp 0</strong></p>
+      </div>
+      <div id="custom-cart-actions" style="display:none;">
+        <button class="btn-outline" onclick="resetCustom()">Reset</button>
+        <button onclick="addCustomToOrder()">+ Tambah ke Pesanan</button>
+      </div>
+    </div>
+
+    <!-- Paket praktis -->
+    <h3 style="margin-top:40px; margin-bottom:10px;">Atau Pilih Paket Langsung</h3>
+    <p style="margin-bottom:20px;">Tidak mau repot? Tambahkan paket lengkap ini ke keranjang.</p>
+
+    <div class="selector-card paket-wrapper">
+      <div class="options-grid">
+        <div class="option-item" onclick="addToCart('m17', null)">
+          <div class="option-name">Paket Hemat</div>
+          <div class="option-price">Rp 19.000</div>
+          <small>Nasi Putih + Telur Balado + Mie Goreng + Sambal Tomat</small>
+        </div>
+        <div class="option-item" onclick="addToCart('m18', null)">
+          <div class="option-name">Paket Spesial</div>
+          <div class="option-price">Rp 27.000</div>
+          <small>Nasi Daun Jeruk + Rendang + Tempe Orek + Sambal Bawang</small>
+        </div>
+      </div>
+    </div>
+
+    <!-- Keranjang penuh -->
+    <div class="cart-panel">
+      <h3>Keranjang Pesanan</h3>
+      <div id="full-cart-items">
+        <p class="cart-empty">Keranjang masih kosong.</p>
+      </div>
+      <div id="full-cart-total" style="display:none;">
+        <p>Total : <strong id="full-total-price">Rp 0</strong></p>
+      </div>
+      <div id="full-cart-actions" style="display:none;">
+        <button class="btn-outline" onclick="clearFullCart()">Kosongkan</button>
+        <button onclick="showPage('order')">Lanjut Pesan →</button>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <strong>Kala</strong> — Masakan Rumahan yang Hangat & Lezat · Surabaya, Jawa Timur<br>
+    <small>© 2026 Kala Catering</small>
+  </footer>
+</div>
+
+<!-- Order page -->
+<div class="page" id="page-order">
+  <section class="order-section">
+    <h2>Checkout</h2>
+    <p>Isi data pengiriman dan konfirmasi pesananmu.</p>
+
+    <div class="order-layout">
+      <div class="form-card">
+        <h3>Data Pengiriman</h3>
+
+        <div class="form-group">
+          <label>Nama Lengkap *</label>
+          <input type="text" id="ord-name" placeholder="Contoh: Muhammad Dayyan" />
+        </div>
+        <div class="form-group">
+          <label>Nomor WhatsApp *</label>
+          <input type="tel" id="ord-phone" placeholder="Contoh: 08123456789" />
+        </div>
+        <div class="form-group">
+          <label>Alamat Pengiriman *</label>
+          <textarea id="ord-address" placeholder="Jl. Raya ITS, Keputih, Surabaya"></textarea>
+        </div>
+        <div class="form-group">
+          <label>Tanggal Pengiriman *</label>
+          <input type="date" id="ord-date" />
+        </div>
+        <div class="form-group">
+          <label>Waktu Pengiriman</label>
+          <select id="ord-time">
+            <option value="">-- Pilih waktu --</option>
+            <option value="07:00 - 08:00">07:00 – 08:00 (Sarapan)</option>
+            <option value="11:00 - 12:00">11:00 – 12:00 (Makan Siang)</option>
+            <option value="17:00 - 18:00">17:00 – 18:00 (Makan Malam)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Catatan Tambahan</label>
+          <textarea id="ord-note" placeholder="Contoh: tidak pakai bawang goreng"></textarea>
+        </div>
+
+        <button style="width:100%;" onclick="submitOrder()">Konfirmasi Pesanan</button>
+      </div>
+
+      <div class="summary-card">
+        <h3>Ringkasan Pesanan</h3>
+        <div id="order-summary-items">
+          <p class="cart-empty">Belum ada item di keranjang.</p>
+        </div>
+        <div id="order-summary-total" style="display:none;"></div>
+      </div>
+    </div>
+  </section>
+  <footer>
+    <strong>Kala</strong> — Masakan Rumahan yang Hangat & Lezat · Surabaya, Jawa Timur<br>
+    <small>© 2026 Kala Catering</small>
+  </footer>
+</div>
+
+<!-- modal sukses -->
+<div class="modal-overlay" id="success-modal">
+  <div class="modal-box">
+    <img src="images/pesanan-berhasil.png" alt="sukses" style="width:80px; margin-bottom:16px;">
+    <h2>Pesanan Berhasil!</h2>
+    <p id="modal-text">Terima kasih! Pesananmu sudah kami terima.</p>
+    <button onclick="closeModal()" style="margin-top:20px;">Kembali ke Home</button>
+  </div>
+</div>
+
+<!-- notif toast -->
+<div class="toast" id="toast">
+  <span id="toast-text">Item ditambahkan!</span>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

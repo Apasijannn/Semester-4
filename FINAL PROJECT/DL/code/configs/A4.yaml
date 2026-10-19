@@ -1,0 +1,4 @@
+# A4 — Full model (NAFNet + PINN + DINOv2)
+variant: A4
+use_pinn: true
+use_dino: true

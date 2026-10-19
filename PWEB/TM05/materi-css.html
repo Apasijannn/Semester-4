@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ruang Sintaks | Modul CSS Styling</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ===== NAVIGASI ===== -->
+    <nav>
+        <div class="nav-inner">
+            <a href="index.html" class="logo">
+                <span class="logo-text">Ruang<span>Sintaks</span></span>
+            </a>
+            <ul class="navbar">
+                <li><a href="index.html" class="nav-active">Beranda</a></li>
+                <li><a href="daftar.html" class="nav-cta">Daftar Sekarang</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ===== PROGRESS BAR ===== -->
+    <div class="materi-progress-bar">
+        <div class="materi-progress-fill" style="width: 50%"></div>
+    </div>
+
+    <main>
+
+        <!-- ===== HEADER MODUL ===== -->
+        <div class="materi-hero">
+            <div class="materi-hero-inner">
+                <span class="modul-badge modul-css">Modul 2 · CSS3</span>
+                <h1>CSS Styling:<br>Desain & Layout</h1>
+                <p>Berikan nyawa dan keindahan visual pada struktur HTML kamu — dari warna dan tipografi, hingga layout Flexbox dan Grid yang responsif di semua layar.</p>
+                <div class="materi-hero-meta">
+                    <span>⏱ <strong>12 Jam</strong> Materi</span>
+                    <span>📊 <strong>Tingkat:</strong> Dasar – Menengah</span>
+                    <span>🏆 <strong>Bersertifikat</strong></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== KONTEN MATERI ===== -->
+        <div class="material-container">
+
+            <!-- Video Tutorial -->
+            <div class="material-panel">
+                <div class="panel-title">
+                    <div class="panel-icon icon-video">🎬</div>
+                    Video Tutorial
+                </div>
+                <div class="video-placeholder">
+                    <div class="play-btn">
+                        <svg viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+                    </div>
+                    <p class="video-title">Mempercantik Web dengan CSS: Dari Selector hingga Flexbox</p>
+                </div>
+            </div>
+
+            <!-- Catatan Materi -->
+            <div class="material-panel">
+                <div class="panel-title">
+                    <div class="panel-icon icon-notes">📖</div>
+                    Catatan Materi
+                </div>
+                <div class="notes-content">
+                    <p><strong>CSS (Cascading Style Sheets)</strong> adalah bahasa yang mengatur tampilan visual elemen HTML. CSS memisahkan konten (HTML) dari desain visual, sehingga kode lebih rapi dan mudah dikelola.</p>
+                    <ul class="notes-list css-list">
+                        <li><strong>Selector</strong> — Menentukan elemen HTML mana yang diberi gaya. Contoh: <code>p</code> (tag), <code>.class</code> (kelas), <code>#id</code> (ID).</li>
+                        <li><strong>Property</strong> — Aspek tampilan yang ingin diubah. Contoh: <code>color</code>, <code>font-size</code>, <code>margin</code>.</li>
+                        <li><strong>Value</strong> — Nilai dari properti. Contoh: <code>red</code>, <code>16px</code>, <code>auto</code>.</li>
+                        <li><strong>Box Model</strong> — Setiap elemen adalah sebuah kotak dengan lapisan: <em>Content → Padding → Border → Margin</em>.</li>
+                        <li><strong>Flexbox</strong> — Sistem layout satu dimensi (baris atau kolom). Properti utama: <code>display: flex</code>, <code>justify-content</code>, <code>align-items</code>.</li>
+                        <li><strong>CSS Grid</strong> — Sistem layout dua dimensi (baris DAN kolom sekaligus). Cocok untuk tata letak halaman yang kompleks.</li>
+                        <li><strong>Media Query</strong> — Membuat tampilan responsif berdasarkan ukuran layar. Contoh: <code>@media (max-width: 768px) { ... }</code></li>
+                    </ul>
+
+                    <div class="info-box info-box-css">
+                        <span class="info-box-icon">💡</span>
+                        <div><strong>"Cascading"</strong> dalam CSS berarti aturan diterapkan secara bertingkat. Jika ada konflik, aturan yang lebih spesifik atau yang ditulis terakhir akan menang — ini disebut <em>specificity</em> dan <em>cascade order</em>.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contoh Kode -->
+            <div class="material-panel">
+                <div class="panel-title">
+                    <div class="panel-icon icon-code">💻</div>
+                    Contoh Kode
+                </div>
+                <p class="code-desc">Contoh styling lengkap untuk membuat tombol dan kartu sederhana menggunakan Box Model dan Flexbox:</p>
+                <div class="code-box">
+                    <div class="code-header">
+                        <span class="dot" style="background: #FF5F56;"></span>
+                        <span class="dot" style="background: #FFBD2E;"></span>
+                        <span class="dot" style="background: #27C93F;"></span>
+                        <span class="code-lang">CSS</span>
+                    </div>
+                    <pre><code>/* === Tombol === */
+.tombol-keren {
+    background-color: #D85A30;
+    color: white;
+    padding: 12px 24px;       /* padding: atas-bawah kiri-kanan */
+    border: none;
+    border-radius: 100px;     /* sudut membulat sempurna */
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.tombol-keren:hover {
+    background-color: #b84a22;
+    transform: translateY(-2px); /* geser ke atas 2px */
+}
+
+/* === Kartu dengan Flexbox === */
+.kartu-container {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    flex-wrap: wrap;          /* wrap ke bawah jika layar kecil */
+}
+
+.kartu {
+    flex: 1;
+    min-width: 200px;
+    background-color: #fff;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    padding: 24px;
+}
+
+/* === Responsif === */
+@media (max-width: 600px) {
+    .kartu-container {
+        flex-direction: column;
+    }
+}</code></pre>
+                </div>
+            </div>
+
+            <!-- Latihan Interaktif -->
+            <div class="material-panel interactive-panel css-panel">
+                <div class="panel-title">
+                    <div class="panel-icon icon-quiz">✍️</div>
+                    Latihan Interaktif
+                </div>
+
+                <!-- Soal 1 -->
+                <p class="quiz-question">
+                    <strong>Soal 1 dari 3</strong><br><br>
+                    Properti CSS apa yang digunakan untuk mengubah <strong>warna latar belakang</strong> sebuah elemen?
+                </p>
+                <div class="quiz-form" id="quizCss1">
+                    <label class="quiz-option">
+                        <input type="radio" name="css_q1" value="a">
+                        <span>A. <code>color</code></span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="css_q1" value="b">
+                        <span>B. <code>background-color</code></span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="css_q1" value="c">
+                        <span>C. <code>bg-style</code></span>
+                    </label>
+                </div>
+                <div class="quiz-result" id="resultCss1"></div>
+                <button class="btn-primary" onclick="checkQuiz('css_q1', 'b', 'resultCss1', 'background-color adalah properti untuk mengubah warna latar belakang elemen. Sementara color hanya mengubah warna teks, dan bg-style bukan properti CSS yang valid.')">
+                    Cek Jawaban
+                </button>
+
+                <hr style="border: none; border-top: 1px solid var(--border); margin: 28px 0;">
+
+                <!-- Soal 2 -->
+                <p class="quiz-question">
+                    <strong>Soal 2 dari 3</strong><br><br>
+                    Urutan layer Box Model dari yang paling dalam ke luar adalah…
+                </p>
+                <div class="quiz-form" id="quizCss2">
+                    <label class="quiz-option">
+                        <input type="radio" name="css_q2" value="a">
+                        <span>A. Margin → Border → Padding → Content</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="css_q2" value="b">
+                        <span>B. Content → Padding → Border → Margin</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="css_q2" value="c">
+                        <span>C. Content → Border → Padding → Margin</span>
+                    </label>
+                </div>
+                <div class="quiz-result" id="resultCss2"></div>
+                <button class="btn-primary" onclick="checkQuiz('css_q2', 'b', 'resultCss2', 'Box Model CSS terdiri dari 4 lapisan dari dalam ke luar: Content (isi elemen) → Padding (ruang dalam sebelum border) → Border (garis tepi) → Margin (ruang luar setelah border).')">
+                    Cek Jawaban
+                </button>
+
+                <hr style="border: none; border-top: 1px solid var(--border); margin: 28px 0;">
+
+                <!-- Soal 3 -->
+                <p class="quiz-question">
+                    <strong>Soal 3 dari 3</strong><br><br>
+                    Properti CSS apa yang digunakan untuk mengaktifkan <strong>Flexbox</strong> pada sebuah container?
+                </p>
+                <div class="quiz-form" id="quizCss3">
+                    <label class="quiz-option">
+                        <input type="radio" name="css_q3" value="a">
+                        <span>A. <code>display: block</code></span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="css_q3" value="b">
+                        <span>B. <code>position: flex</code></span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="css_q3" value="c">
+                        <span>C. <code>display: flex</code></span>
+                    </label>
+                </div>
+                <div class="quiz-result" id="resultCss3"></div>
+                <button class="btn-primary" onclick="checkQuiz('css_q3', 'c', 'resultCss3', 'display: flex mengaktifkan Flexbox pada elemen container. Setelah ini, semua elemen anak di dalamnya menjadi flex items yang bisa diatur posisinya dengan justify-content dan align-items.')">
+                    Cek Jawaban
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- Navigasi Modul -->
+        <div class="materi-nav">
+            <a href="materi-html.html" class="materi-nav-btn prev">
+                <span class="materi-nav-arrow">←</span>
+                <div>
+                    <span class="materi-nav-label">Modul Sebelumnya</span>
+                    <span class="materi-nav-title">HTML Dasar</span>
+                </div>
+            </a>
+            <a href="daftar.html" class="materi-nav-btn next">
+                <span class="materi-nav-arrow">→</span>
+                <div>
+                    <span class="materi-nav-label">Selanjutnya</span>
+                    <span class="materi-nav-title">Daftar & Mulai Belajar</span>
+                </div>
+            </a>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-inner">
+            <p>&copy; 2026 Ruang Sintaks. Hak Cipta Dilindungi.</p>
+            <div class="footer-links">
+                <a href="index.html">Beranda</a>
+                <a href="materi-html.html">Materi HTML</a>
+                <a href="materi-css.html">Materi CSS</a>
+                <a href="daftar.html">Daftar</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function checkQuiz(name, correct, resultId, explanation) {
+            const selected = document.querySelector(`input[name="${name}"]:checked`);
+            const result = document.getElementById(resultId);
+            if (!selected) {
+                result.className = 'quiz-result wrong';
+                result.innerHTML = '⚠️ Pilih salah satu jawaban dulu!';
+                return;
+            }
+            if (selected.value === correct) {
+                result.className = 'quiz-result correct';
+                result.innerHTML = `✅ <strong>Benar!</strong> ${explanation}`;
+            } else {
+                result.className = 'quiz-result wrong';
+                result.innerHTML = `❌ <strong>Kurang tepat.</strong> Coba lagi! Perhatikan kata kunci di soal.`;
+            }
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Materi Web - Ruang Sintaks</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-warm: #f4f1ea; 
+      --accent: #dd5b43;  
+      --text-dark: #1a1a1a;
+      --card-radius: 1.5rem;
+    }
+
+    body {
+      background-color: var(--bg-warm);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: var(--text-dark);
+    }
+    h1, h2, h3, h4, h5, h6, .navbar-brand, .font-syne {
+      font-family: 'Syne', sans-serif;
+    }
+
+    .navbar-custom {
+      background-color: var(--bg-warm);
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .list-group-item {
+      border: none;
+      background-color: transparent;
+      padding: 0.75rem 1rem;
+      border-radius: 0.5rem !important;
+      margin-bottom: 0.25rem;
+      font-weight: 500;
+      color: #555;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .list-group-item:hover {
+      background-color: rgba(221, 91, 67, 0.1);
+      color: var(--accent);
+    }
+    .list-group-item.active {
+      background-color: var(--accent) !important;
+      color: white !important;
+      box-shadow: 0 4px 10px rgba(221, 91, 67, 0.3);
+    }
+
+    .bg-white-custom {
+      background-color: #ffffff;
+      border-radius: var(--card-radius);
+    }
+    .btn-accent {
+      background-color: var(--accent);
+      color: white;
+      border: none;
+      font-weight: 600;
+      transition: background-color 0.2s ease;
+    }
+    .btn-accent:hover {
+      background-color: #c44a33;
+      color: white;
+    }
+    .text-accent {
+      color: var(--accent);
+    }
+    .code-box {
+      background-color: var(--text-dark);
+      border-radius: 1rem;
+      overflow-x: auto;
+    }
+    
+    /* Animasi transisi halus saat pindah materi */
+    .fade-in {
+      animation: fadeIn 0.3s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-light navbar-custom sticky-top py-3">
+    <div class="container">
+      <button class="btn btn-outline-dark d-lg-none me-2 border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+      </button>
+      <a class="navbar-brand fw-bold fs-4 m-0" href="#">Ruang<span class="text-accent">Sintaks</span></a>
+      <div class="ms-auto d-none d-lg-block">
+         <a href="#" class="btn btn-dark rounded-pill px-4">Kembali ke Beranda</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container my-4 pb-5">
+    <div class="row g-4">
+      
+      <aside class="col-lg-3">
+        <div class="offcanvas-lg offcanvas-start bg-transparent border-0" tabindex="-1" id="sidebarMenu">
+          <div class="offcanvas-header border-bottom d-lg-none bg-white">
+            <h5 class="offcanvas-title fw-bold font-syne">Kurikulum</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu"></button>
+          </div>
+          
+          <div class="offcanvas-body d-block pt-3 pt-lg-0">
+            <h6 class="fw-bold mb-3 d-none d-lg-block font-syne text-muted">MODUL HTML & CSS</h6>
+            <div class="list-group w-100" id="materi-nav">
+              <a class="list-group-item list-group-item-action active" data-target="modul-1">1. Pengenalan HTML Dasar</a>
+              <a class="list-group-item list-group-item-action" data-target="modul-2">2. Struktur & Tag Meta</a>
+              <a class="list-group-item list-group-item-action" data-target="modul-3">3. Memahami CSS Selector</a>
+              <a class="list-group-item list-group-item-action" data-target="modul-4">4. Konsep Box Model</a>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <main class="col-lg-9">
+        <div class="bg-white-custom p-4 p-md-5 shadow-sm border-0 position-relative min-vh-100">
+          
+          <div id="modul-1" class="materi-content fade-in">
+            <span class="badge bg-light text-accent border px-3 py-2 rounded-pill mb-3">HTML5</span>
+            <h1 class="display-6 fw-bold mb-3">Pengenalan HTML Dasar</h1>
+            <p class="lead text-muted" style="line-height: 1.8;">Mari pahami kerangka dasar dari setiap situs web yang ada di internet sebelum kita melangkah ke desain dan interaktivitas.</p>
+            <hr class="my-4 opacity-25">
+
+            <h4 class="fw-bold mb-3">Apa itu HTML?</h4>
+            <p style="line-height: 1.8;">HTML (<em>HyperText Markup Language</em>) bukanlah bahasa pemrograman, melainkan bahasa <em>markup</em>. Tugas utamanya adalah memberikan struktur pada konten web, seperti mendefinisikan mana yang merupakan paragraf, judul, atau gambar.</p>
+            
+            <h5 class="mt-5 fw-bold mb-3">Contoh Sintaks Dasar:</h5>
+            <div class="code-box text-light p-4 mb-4">
+<pre class="mb-0" style="font-family: monospace; font-size: 0.95rem;"><code><span style="color: #8892b0;">&lt;!DOCTYPE html&gt;</span>
+&lt;<span style="color: #ff7b72;">html</span> <span style="color: #79c0ff;">lang</span>=<span style="color: #a5d6ff;">"id"</span>&gt;
+&lt;<span style="color: #ff7b72;">head</span>&gt;
+  &lt;<span style="color: #ff7b72;">title</span>&gt;Halaman Pertamaku&lt;/<span style="color: #ff7b72;">title</span>&gt;
+&lt;/<span style="color: #ff7b72;">head</span>&gt;
+&lt;<span style="color: #ff7b72;">body</span>&gt;
+  &lt;<span style="color: #ff7b72;">h1</span>&gt;Halo Dunia!&lt;/<span style="color: #ff7b72;">h1</span>&gt;
+  &lt;<span style="color: #ff7b72;">p</span>&gt;Ini adalah paragraf pertama saya.&lt;/<span style="color: #ff7b72;">p</span>&gt;
+&lt;/<span style="color: #ff7b72;">body</span>&gt;
+&lt;/<span style="color: #ff7b72;">html</span>&gt;</code></pre>
+            </div>
+            
+            <div class="text-end mt-5 pt-4 border-top">
+              <button class="btn btn-accent rounded-pill px-4 py-2 nav-trigger" data-target="modul-2">Selanjutnya &raquo;</button>
+            </div>
+          </div>
+
+          <div id="modul-2" class="materi-content d-none fade-in">
+            <span class="badge bg-light text-accent border px-3 py-2 rounded-pill mb-3">HTML5</span>
+            <h1 class="display-6 fw-bold mb-3">Struktur & Tag Meta</h1>
+            <p class="lead text-muted" style="line-height: 1.8;">Memahami anatomi dokumen HTML dan bagaimana browser serta mesin pencari membaca situsmu di balik layar.</p>
+            <hr class="my-4 opacity-25">
+
+            <h4 class="fw-bold mb-3">Anatomi Tak Terlihat</h4>
+            <p style="line-height: 1.8;">Pengguna hanya melihat apa yang ditampilkan di dalam <code>&lt;body&gt;</code>. Namun, "otak" dari sebuah halaman web sebenarnya berada di dalam <code>&lt;head&gt;</code>. Di sinilah kamu mendefinisikan set karakter, pengaturan <em>viewport</em> agar web tidak hancur di layar HP, hingga judul halaman yang muncul di tab browser.</p>
+            
+            <h5 class="mt-5 fw-bold mb-3">Sintaks Wajib Standar Global:</h5>
+            <div class="code-box text-light p-4 mb-4">
+<pre class="mb-0" style="font-family: monospace; font-size: 0.95rem;"><code><span style="color: #8892b0;">&lt;!DOCTYPE html&gt;</span>
+&lt;<span style="color: #ff7b72;">html</span> <span style="color: #79c0ff;">lang</span>=<span style="color: #a5d6ff;">"id"</span>&gt;
+&lt;<span style="color: #ff7b72;">head</span>&gt;
+  <span style="color: #8892b0;">&lt;!-- Wajib untuk render teks universal --&gt;</span>
+  &lt;<span style="color: #ff7b72;">meta</span> <span style="color: #79c0ff;">charset</span>=<span style="color: #a5d6ff;">"UTF-8"</span>&gt;
+  
+  <span style="color: #8892b0;">&lt;!-- Wajib untuk responsivitas mobile --&gt;</span>
+  &lt;<span style="color: #ff7b72;">meta</span> <span style="color: #79c0ff;">name</span>=<span style="color: #a5d6ff;">"viewport"</span> <span style="color: #79c0ff;">content</span>=<span style="color: #a5d6ff;">"width=device-width, initial-scale=1.0"</span>&gt;
+  
+  &lt;<span style="color: #ff7b72;">title</span>&gt;Dokumen Standar&lt;/<span style="color: #ff7b72;">title</span>&gt;
+&lt;/<span style="color: #ff7b72;">head</span>&gt;
+&lt;<span style="color: #ff7b72;">body</span>&gt;
+  &lt;<span style="color: #ff7b72;">p</span>&gt;Konten dimulai di sini.&lt;/<span style="color: #ff7b72;">p</span>&gt;
+&lt;/<span style="color: #ff7b72;">body</span>&gt;
+&lt;/<span style="color: #ff7b72;">html</span>&gt;</code></pre>
+            </div>
+            
+            <div class="d-flex justify-content-between mt-5 pt-4 border-top">
+              <button class="btn btn-outline-dark rounded-pill px-4 py-2 nav-trigger" data-target="modul-1">&laquo; Sebelumnya</button>
+              <button class="btn btn-accent rounded-pill px-4 py-2 nav-trigger" data-target="modul-3">Selanjutnya &raquo;</button>
+            </div>
+          </div>
+
+          <div id="modul-3" class="materi-content d-none fade-in">
+            <span class="badge bg-light text-primary border px-3 py-2 rounded-pill mb-3 border-primary">CSS3</span>
+            <h1 class="display-6 fw-bold mb-3">Memahami CSS Selector</h1>
+            <p class="lead text-muted" style="line-height: 1.8;">Pelajari cara menargetkan elemen HTML secara spesifik untuk diberikan gaya tanpa merusak elemen lainnya.</p>
+            <hr class="my-4 opacity-25">
+
+            <h4 class="fw-bold mb-3">Tiga Pilar Utama Penargetan</h4>
+            <p style="line-height: 1.8;">CSS tidak akan bekerja jika ia tidak tahu elemen mana yang harus dihias. Ada tiga cara utama untuk "memanggil" elemen HTML dari file CSS kamu:</p>
+            
+            <ul class="mb-4" style="line-height: 1.8;">
+              <li><strong>Element Selector:</strong> Menargetkan langsung nama tag (misal: <code>p</code> atau <code>h1</code>). Efeknya akan berlaku ke <em>semua</em> tag tersebut.</li>
+              <li><strong>Class Selector (<code>.</code>):</strong> Menargetkan atribut class. Sangat direkomendasikan karena bisa dipakai berulang kali.</li>
+              <li><strong>ID Selector (<code>#</code>):</strong> Menargetkan atribut id. Hanya boleh ada satu ID unik dalam satu halaman.</li>
+            </ul>
+            
+            <h5 class="mt-5 fw-bold mb-3">Contoh Implementasi:</h5>
+            <div class="code-box text-light p-4 mb-4">
+<pre class="mb-0" style="font-family: monospace; font-size: 0.95rem;"><code><span style="color: #8892b0;">/* Menargetkan semua paragraf */</span>
+<span style="color: #ff7b72;">p</span> {
+  <span style="color: #79c0ff;">color</span>: <span style="color: #a5d6ff;">#333333</span>;
+}
+
+<span style="color: #8892b0;">/* Menargetkan class .tombol-utama */</span>
+<span style="color: #ff7b72;">.tombol-utama</span> {
+  <span style="color: #79c0ff;">background-color</span>: <span style="color: #a5d6ff;">red</span>;
+  <span style="color: #79c0ff;">border-radius</span>: <span style="color: #a5d6ff;">8px</span>;
+}</code></pre>
+            </div>
+
+            <div class="d-flex justify-content-between mt-5 pt-4 border-top">
+              <button class="btn btn-outline-dark rounded-pill px-4 py-2 nav-trigger" data-target="modul-2">&laquo; Sebelumnya</button>
+              <button class="btn btn-accent rounded-pill px-4 py-2 nav-trigger" data-target="modul-4">Selanjutnya &raquo;</button>
+            </div>
+          </div>
+
+          <div id="modul-4" class="materi-content d-none fade-in">
+            <span class="badge bg-light text-primary border px-3 py-2 rounded-pill mb-3 border-primary">CSS3</span>
+            <h1 class="display-6 fw-bold mb-3">Konsep Box Model</h1>
+            <p class="lead text-muted" style="line-height: 1.8;">Rahasia utama di balik tata letak web. Semua elemen yang kamu lihat di browser pada dasarnya adalah sebuah kotak.</p>
+            <hr class="my-4 opacity-25">
+
+            <h4 class="fw-bold mb-3">Mengapa Desainmu Berantakan?</h4>
+            <p style="line-height: 1.8;">Pemula sering frustrasi saat elemen HTML saling bertumpuk atau keluar dari batas. Itu terjadi karena mereka tidak memahami Box Model. Setiap kotak elemen terdiri dari empat lapisan (dari dalam ke luar):</p>
+            
+            <div class="p-4 rounded mb-4" style="background-color: var(--bg-warm); border: 1px dashed #ccc;">
+              <ol class="mb-0" style="line-height: 1.8;">
+                <li><strong>Content:</strong> Isi utama elemen (teks, gambar).</li>
+                <li><strong>Padding:</strong> Ruang kosong di dalam elemen (jarak antara konten dengan batas).</li>
+                <li><strong>Border:</strong> Garis batas di sekeliling elemen.</li>
+                <li><strong>Margin:</strong> Ruang kosong di luar elemen (jarak elemen ini dengan elemen lainnya).</li>
+              </ol>
+            </div>
+            
+            <h5 class="mt-5 fw-bold mb-3">Reset Box Model Wajib:</h5>
+            <div class="code-box text-light p-4 mb-4">
+<pre class="mb-0" style="font-family: monospace; font-size: 0.95rem;"><code><span style="color: #8892b0;">/* Mengatur ulang logika perhitungan kotak browser */</span>
+<span style="color: #ff7b72;">*</span> {
+  <span style="color: #79c0ff;">box-sizing</span>: <span style="color: #a5d6ff;">border-box</span>;
+  <span style="color: #79c0ff;">margin</span>: <span style="color: #a5d6ff;">0</span>;
+  <span style="color: #79c0ff;">padding</span>: <span style="color: #a5d6ff;">0</span>;
+}</code></pre>
+            </div>
+
+            <div class="d-flex justify-content-between mt-5 pt-4 border-top">
+              <button class="btn btn-outline-dark rounded-pill px-4 py-2 nav-trigger" data-target="modul-3">&laquo; Sebelumnya</button>
+              <button class="btn btn-accent rounded-pill px-4 py-2" onclick="alert('Selamat! Anda menyelesaikan Modul HTML & CSS Dasar.')">Selesai &raquo;</button>
+            </div>
+          </div>
+
+        </div>
+      </main>
+
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // Ambil semua tombol navigasi (baik di sidebar maupun tombol Next/Prev)
+      const menuLinks = document.querySelectorAll('#materi-nav .list-group-item');
+      const navTriggers = document.querySelectorAll('.nav-trigger');
+      const contents = document.querySelectorAll('.materi-content');
+
+      // Fungsi untuk mengganti tab
+      function switchContent(targetId) {
+        // 1. Matikan semua konten
+        contents.forEach(content => {
+          content.classList.add('d-none');
+        });
+
+        // 2. Matikan status active di sidebar
+        menuLinks.forEach(link => {
+          link.classList.remove('active');
+        });
+
+        // 3. Nyalakan konten yang dituju
+        const targetContent = document.getElementById(targetId);
+        if (targetContent) {
+          targetContent.classList.remove('d-none');
+        }
+
+        // 4. Nyalakan status active di sidebar yang sesuai
+        const targetMenu = document.querySelector(`#materi-nav .list-group-item[data-target="${targetId}"]`);
+        if (targetMenu) {
+          targetMenu.classList.add('active');
+        }
+
+        // Scroll ke atas dengan halus
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      // Pasang event listener ke sidebar
+      menuLinks.forEach(link => {
+        link.addEventListener('click', function() {
+          const target = this.getAttribute('data-target');
+          switchContent(target);
+        });
+      });
+
+      // Pasang event listener ke tombol Prev/Next
+      navTriggers.forEach(btn => {
+        btn.addEventListener('click', function() {
+          const target = this.getAttribute('data-target');
+          switchContent(target);
+        });
+      });
+    });
+  </script>
+</body>
+</html>

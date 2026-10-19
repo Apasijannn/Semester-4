@@ -1,0 +1,374 @@
+@import "tailwindcss";
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  background: #000810;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+/* ══════════════════════════════════════════════════════════
+   ROOT — Spatial AR display shell
+══════════════════════════════════════════════════════════ */
+#root {
+  width: 874px;
+  height: 402px;
+  position: relative;
+  overflow: hidden;
+  background: #0d1117;
+  /* Rounded like a real AR lens cutout */
+  border-radius: 26px;
+  /* Outer device glow + depth shadow */
+  box-shadow:
+    0 0 0 1.5px rgba(0, 220, 195, 0.55),
+    0 0 35px rgba(0, 210, 185, 0.35),
+    0 0 90px rgba(0, 170, 150, 0.22),
+    0 0 160px rgba(0, 120, 105, 0.14),
+    0 40px 100px rgba(0, 0, 0, 0.92);
+  /* Subtle 3D perspective tilt — makes it float in space */
+  transform: perspective(2200px) rotateX(2deg);
+  transform-origin: 50% 50%;
+}
+
+/* Scale for smaller screens */
+@media (max-width: 900px) {
+  #root {
+    width: 100vw;
+    height: calc(100vw * 402 / 874);
+    border-radius: 0;
+    transform: none;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════
+   GLASS PANELS
+══════════════════════════════════════════════════════════ */
+.glass {
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(37, 99, 235, 0.18);
+  border-radius: 10px;
+  box-shadow: 0 0 12px rgba(37, 99, 235, 0.18), 0 4px 20px rgba(0, 0, 0, 0.18);
+}
+
+.glass-dark {
+  background: rgba(10, 20, 40, 0.78);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(37, 99, 235, 0.3);
+  border-radius: 10px;
+  box-shadow: 0 0 16px rgba(37, 99, 235, 0.25), 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.glass-sm {
+  background: rgba(255, 253, 253, 0.82);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(37, 99, 235, 0.15);
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(37, 99, 235, 0.12);
+}
+
+.glass-panel {
+  background: rgba(230, 238, 255, 0.82);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(37, 99, 235, 0.22);
+  border-radius: 10px;
+  box-shadow: 0 0 16px rgba(37, 99, 235, 0.2), 0 4px 24px rgba(0, 0, 0, 0.15);
+}
+
+.medi-panel {
+  background: rgba(4, 15, 35, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(37, 99, 235, 0.45);
+  border-radius: 12px;
+  box-shadow:
+    0 0 0 1px rgba(37, 99, 235, 0.2),
+    0 0 20px rgba(37, 99, 235, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+/* ══════════════════════════════════════════════════════════
+   HUD FRAME — teal AR border with pulse glow
+══════════════════════════════════════════════════════════ */
+@keyframes hud-breathe {
+  0%, 100% {
+    opacity: 0.55;
+    box-shadow:
+      0 0 0 1px rgba(0, 210, 185, 0.2),
+      inset 0 0 28px rgba(0, 180, 160, 0.05),
+      0 0 22px rgba(0, 200, 175, 0.25);
+  }
+  50% {
+    opacity: 0.85;
+    box-shadow:
+      0 0 0 1px rgba(0, 210, 185, 0.45),
+      inset 0 0 40px rgba(0, 180, 160, 0.10),
+      0 0 45px rgba(0, 200, 175, 0.45);
+  }
+}
+
+.hud-frame {
+  position: absolute;
+  inset: 2px;
+  border: 1.5px solid rgba(0, 210, 185, 0.65);
+  border-radius: 24px;
+  pointer-events: none;
+  z-index: 100;
+  animation: hud-breathe 3.5s ease-in-out infinite;
+}
+
+/* Corner accent marks — like HUD targeting brackets */
+.hud-frame::before,
+.hud-frame::after {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-color: rgba(0, 220, 195, 0.9);
+  border-style: solid;
+}
+.hud-frame::before {
+  top: -1px; left: -1px;
+  border-width: 2.5px 0 0 2.5px;
+  border-radius: 4px 0 0 0;
+}
+.hud-frame::after {
+  bottom: -1px; right: -1px;
+  border-width: 0 2.5px 2.5px 0;
+  border-radius: 0 0 4px 0;
+}
+
+/* ══════════════════════════════════════════════════════════
+   LENS VIGNETTE — heavy concave edge darkening
+══════════════════════════════════════════════════════════ */
+.lens-vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 95;
+  border-radius: 26px;
+  background:
+    /* Extreme corner darkening (4 corner cones) */
+    radial-gradient(ellipse at 0% 0%,   rgba(0,0,0,0.70) 0%, transparent 45%),
+    radial-gradient(ellipse at 100% 0%,  rgba(0,0,0,0.70) 0%, transparent 45%),
+    radial-gradient(ellipse at 0% 100%,  rgba(0,0,0,0.70) 0%, transparent 45%),
+    radial-gradient(ellipse at 100% 100%,rgba(0,0,0,0.70) 0%, transparent 45%),
+    /* Main radial vignette */
+    radial-gradient(ellipse at 50% 50%,
+      transparent 38%,
+      rgba(0,0,0,0.20) 62%,
+      rgba(0,0,0,0.52) 82%,
+      rgba(0,0,0,0.80) 100%
+    );
+}
+
+/* ══════════════════════════════════════════════════════════
+   CONCAVE GLASS OVERLAY — simulates curved AR display depth
+══════════════════════════════════════════════════════════ */
+.concave-glass {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 96;
+  border-radius: 26px;
+  background:
+    /* Top glass reflection (concave mirror highlight) */
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,0.055) 0%,
+      rgba(255,255,255,0.018) 4%,
+      transparent 10%
+    ),
+    /* Left lateral shadow (edge curves away) */
+    linear-gradient(
+      to right,
+      rgba(0,0,0,0.42) 0%,
+      rgba(0,0,0,0.14) 5%,
+      rgba(0,0,0,0.03) 13%,
+      transparent 22%
+    ),
+    /* Right lateral shadow */
+    linear-gradient(
+      to left,
+      rgba(0,0,0,0.42) 0%,
+      rgba(0,0,0,0.14) 5%,
+      rgba(0,0,0,0.03) 13%,
+      transparent 22%
+    ),
+    /* Top shadow */
+    linear-gradient(
+      to bottom,
+      rgba(0,0,0,0.32) 0%,
+      rgba(0,0,0,0.08) 5%,
+      transparent 14%
+    ),
+    /* Bottom shadow */
+    linear-gradient(
+      to top,
+      rgba(0,0,0,0.32) 0%,
+      rgba(0,0,0,0.08) 5%,
+      transparent 14%
+    );
+  /* Subtle chromatic aberration tint at edges (optical lens effect) */
+  /* (handled via box-shadow inset) */
+  box-shadow:
+    inset 8px 0 30px rgba(0, 20, 40, 0.25),
+    inset -8px 0 30px rgba(0, 20, 40, 0.25);
+}
+
+/* ══════════════════════════════════════════════════════════
+   SCANLINES — display texture
+══════════════════════════════════════════════════════════ */
+.lens-scanlines {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 94;
+  border-radius: 26px;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2.5px,
+    rgba(0, 0, 0, 0.055) 2.5px,
+    rgba(0, 0, 0, 0.055) 3.5px
+  );
+}
+
+/* ══════════════════════════════════════════════════════════
+   AR RING
+══════════════════════════════════════════════════════════ */
+@keyframes ar-ring-pulse {
+  0%, 100% { transform: scale(0.92); opacity: 0.75; }
+  50% { transform: scale(1.08); opacity: 1; }
+}
+@keyframes ar-ring-glow {
+  0%, 100% { box-shadow: 0 0 8px 2px rgba(37,99,235,0.65), 0 0 22px 5px rgba(37,99,235,0.3); }
+  50% { box-shadow: 0 0 18px 6px rgba(37,99,235,0.95), 0 0 40px 12px rgba(37,99,235,0.45); }
+}
+.ar-ring {
+  border: 2.5px solid rgba(37, 99, 235, 0.9);
+  border-radius: 50%;
+  animation: ar-ring-pulse 1.5s ease-in-out infinite, ar-ring-glow 1.5s ease-in-out infinite;
+}
+
+/* ══════════════════════════════════════════════════════════
+   STEP PROGRESS DOTS
+══════════════════════════════════════════════════════════ */
+.step-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  border: 1.5px solid;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+.step-dot.active    { border-color: #2563eb; background: white; box-shadow: 0 0 4px rgba(37,99,235,0.5); }
+.step-dot.completed { border-color: #2563eb; background: #2563eb; }
+.step-dot.pending   { border-color: #94a3b8; background: rgba(255,255,255,0.5); }
+
+/* ══════════════════════════════════════════════════════════
+   MEDI AI TYPING
+══════════════════════════════════════════════════════════ */
+@keyframes typing-bounce {
+  0%, 80%, 100% { transform: translateY(0); opacity: 0.4; }
+  40% { transform: translateY(-4px); opacity: 1; }
+}
+.typing-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #60a5fa;
+  display: inline-block;
+  animation: typing-bounce 1.2s ease-in-out infinite;
+}
+.typing-dot:nth-child(2) { animation-delay: 0.2s; }
+.typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+/* ══════════════════════════════════════════════════════════
+   SUPPLY CHECKLIST
+══════════════════════════════════════════════════════════ */
+.supply-check {
+  width: 10px;
+  height: 10px;
+  border: 1.5px solid #94a3b8;
+  border-radius: 2px;
+  flex-shrink: 0;
+  transition: all 0.25s;
+}
+.supply-check.done {
+  border-color: #009985;
+  background: #009985;
+}
+
+/* ══════════════════════════════════════════════════════════
+   BUTTONS
+══════════════════════════════════════════════════════════ */
+.btn-primary {
+  background: rgba(0, 153, 133, 0.82);
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 153, 133, 0.3);
+  transition: all 0.2s;
+}
+.btn-primary:hover { background: rgba(0, 153, 133, 0.95); }
+
+.btn-next {
+  background: rgba(37, 99, 235, 0.88);
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+  transition: all 0.2s;
+}
+.btn-next:hover { background: rgba(37, 99, 235, 1); }
+
+.btn-back {
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(37,99,235,0.35);
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+.btn-back:hover { background: rgba(255,255,255,0.22); }
+
+/* ══════════════════════════════════════════════════════════
+   MISC
+══════════════════════════════════════════════════════════ */
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(0,180,160,0.30); border-radius: 2px; }
+
+@keyframes check-pop {
+  0% { transform: scale(0); opacity: 0; }
+  60% { transform: scale(1.2); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+.check-pop { animation: check-pop 0.4s cubic-bezier(0.34,1.56,0.64,1) forwards; }
+
+@keyframes pulse-blue {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+@keyframes scan-dot-expand {
+  0%   { opacity: 0; transform: scale(0); }
+  50%  { opacity: 0.9; transform: scale(1); }
+  100% { opacity: 0.4; transform: scale(0.9); }
+}
+
+.timer-hud {
+  background: rgba(4, 15, 35, 0.75);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(37, 99, 235, 0.35);
+  border-radius: 6px;
+  box-shadow: 0 0 8px rgba(37,99,235,0.2);
+}

@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Karsa AI Chat</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&amp;family=JetBrains+Mono:wght@400&amp;family=Space+Mono:wght@700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-container": "#f2eee3",
+                      "tertiary": "#002217",
+                      "error-container": "#ffdad6",
+                      "surface-variant": "#e6e2d8",
+                      "background": "#fdf9ee",
+                      "tertiary-fixed-dim": "#27e0a9",
+                      "surface": "#fdf9ee",
+                      "outline": "#77767d",
+                      "on-primary-fixed-variant": "#424658",
+                      "tertiary-fixed": "#54fdc4",
+                      "outline-variant": "#c7c6cd",
+                      "on-error": "#ffffff",
+                      "inverse-primary": "#c2c5db",
+                      "on-secondary-container": "#5a001e",
+                      "secondary": "#b71849",
+                      "on-error-container": "#93000a",
+                      "surface-dim": "#dddacf",
+                      "on-surface": "#1c1c15",
+                      "surface-bright": "#fdf9ee",
+                      "surface-container-low": "#f7f3e8",
+                      "error": "#ba1a1a",
+                      "on-primary": "#ffffff",
+                      "surface-container-high": "#ece8dd",
+                      "on-primary-container": "#9599ad",
+                      "on-tertiary": "#ffffff",
+                      "tertiary-container": "#003a29",
+                      "on-tertiary-fixed-variant": "#00513b",
+                      "primary-container": "#2d3142",
+                      "secondary-fixed-dim": "#ffb2bc",
+                      "on-surface-variant": "#46464c",
+                      "primary-fixed-dim": "#c2c5db",
+                      "on-tertiary-container": "#00af82",
+                      "surface-tint": "#5a5d70",
+                      "on-secondary": "#ffffff",
+                      "inverse-surface": "#313129",
+                      "secondary-fixed": "#ffd9dd",
+                      "inverse-on-surface": "#f4f1e6",
+                      "primary": "#181c2c",
+                      "secondary-container": "#fd5179",
+                      "surface-container-highest": "#e6e2d8",
+                      "primary-fixed": "#dee1f8",
+                      "on-primary-fixed": "#171b2b",
+                      "on-tertiary-fixed": "#002116",
+                      "on-secondary-fixed": "#400013",
+                      "on-background": "#1c1c15",
+                      "surface-container-lowest": "#ffffff",
+                      "on-secondary-fixed-variant": "#910034"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "bento-padding": "1.5rem",
+                      "stack-sm": "0.5rem",
+                      "grid-margin": "2rem",
+                      "grid-gutter": "1.5rem",
+                      "stack-lg": "2rem",
+                      "stack-xs": "0.25rem",
+                      "stack-md": "1rem"
+              },
+              "fontFamily": {
+                      "label-caps": [
+                              "Space Mono"
+                      ],
+                      "body-sm": [
+                              "JetBrains Mono"
+                      ],
+                      "headline-xl": [
+                              "Bricolage Grotesque"
+                      ],
+                      "body-md": [
+                              "JetBrains Mono"
+                      ],
+                      "headline-lg-mobile": [
+                              "Bricolage Grotesque"
+                      ],
+                      "headline-lg": [
+                              "Bricolage Grotesque"
+                      ]
+              },
+              "fontSize": {
+                      "label-caps": [
+                              "12px",
+                              {
+                                      "lineHeight": "1",
+                                      "letterSpacing": "0.1em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-sm": [
+                              "14px",
+                              {
+                                      "lineHeight": "1.5",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-xl": [
+                              "48px",
+                              {
+                                      "lineHeight": "1.1",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "800"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "1.6",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "24px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "fontWeight": "700"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        .wobbly-border {
+            border: 2px solid theme('colors.primary');
+            border-radius: 2px 255px 3px 25px / 255px 5px 225px 3px;
+        }
+        .wobbly-shadow {
+            box-shadow: 4px 4px 0px 0px theme('colors.primary');
+        }
+        .wobbly-shadow:hover {
+            box-shadow: 6px 6px 0px 0px theme('colors.primary');
+            transform: translate(-2px, -2px);
+        }
+        .wobbly-shadow:active {
+            box-shadow: 0px 0px 0px 0px theme('colors.primary');
+            transform: translate(4px, 4px);
+        }
+        
+        .paper-grain {
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+        }
+
+        .terminal-input {
+            border: none;
+            border-bottom: 2px solid theme('colors.primary');
+            border-radius: 0;
+            background: transparent;
+        }
+        .terminal-input:focus {
+            outline: none;
+            box-shadow: none;
+            border-bottom: 3px solid theme('colors.secondary');
+            border-radius: 2px 15px 3px 25px / 25px 5px 15px 3px;
+        }
+
+        .blinking-cursor::after {
+            content: "█";
+            animation: blink 1s step-end infinite;
+            color: theme('colors.secondary');
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        .doodle-bg {
+             background-image: 
+                radial-gradient(circle at 10% 20%, theme('colors.secondary') 1px, transparent 1px),
+                radial-gradient(circle at 90% 80%, theme('colors.tertiary-fixed-dim') 1.5px, transparent 1.5px),
+                url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 10 Q 20 5 30 10 T 30 30 T 10 30 T 10 10' fill='none' stroke='%23b71849' stroke-width='1' opacity='0.1' stroke-dasharray='4 4'/%3E%3C/svg%3E");
+        }
+    </style>
+</head>
+<body class="bg-surface dark:bg-surface-dim text-on-surface flex h-screen overflow-hidden paper-grain font-body-md text-body-md">
+<!-- SideNavBar -->
+<nav class="hidden md:flex flex-col h-full p-stack-md shrink-0 bg-surface dark:bg-surface-dim text-primary dark:text-primary-fixed font-body-md text-body-md font-label-caps text-label-caps h-screen w-64 border-r-4 border-primary dark:border-primary-fixed bg-surface-container shadow-[4px_4px_0px_0px_rgba(24,28,44,1)] dark:shadow-[4px_4px_0px_0px_rgba(194,197,219,1)]">
+<div class="mb-stack-lg flex items-center gap-stack-sm">
+<div class="w-10 h-10 wobbly-border bg-secondary-container dark:bg-secondary flex items-center justify-center font-headline-lg text-headline-lg font-black text-primary dark:text-primary-fixed-dim">
+                K
+            </div>
+<div>
+<h1 class="font-headline-lg text-headline-lg font-black text-primary dark:text-primary-fixed-dim tracking-tight">KARSA_V1.0</h1>
+<p class="font-label-caps text-label-caps text-on-surface-variant dark:text-outline-variant">SYSTEM_ONLINE</p>
+</div>
+</div>
+<button class="wobbly-border wobbly-shadow bg-secondary text-on-secondary font-label-caps text-label-caps py-stack-sm px-stack-md mb-stack-lg transition-transform active:translate-x-1 active:translate-y-1 active:shadow-none">
+<span class="material-symbols-outlined align-middle mr-1">add</span> New Entry
+        </button>
+<ul class="flex-1 flex flex-col gap-stack-sm">
+<li>
+<a class="flex items-center gap-stack-sm p-stack-sm text-on-surface-variant dark:text-outline-variant hover:translate-x-[-2px] hover:translate-y-[-2px] hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-all duration-75" href="#">
+<span class="material-symbols-outlined">grid_view</span> Dashboard
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-stack-sm p-stack-sm text-on-surface-variant dark:text-outline-variant hover:translate-x-[-2px] hover:translate-y-[-2px] hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-all duration-75" href="#">
+<span class="material-symbols-outlined">checklist</span> Tasks
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-stack-sm p-stack-sm text-on-surface-variant dark:text-outline-variant hover:translate-x-[-2px] hover:translate-y-[-2px] hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-all duration-75" href="#">
+<span class="material-symbols-outlined">monitor_heart</span> Health
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-stack-sm p-stack-sm text-on-surface-variant dark:text-outline-variant hover:translate-x-[-2px] hover:translate-y-[-2px] hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-all duration-75" href="#">
+<span class="material-symbols-outlined">payments</span> Finance
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-stack-sm p-stack-sm text-primary dark:text-primary-fixed font-bold border-2 border-primary dark:border-primary-fixed bg-secondary-container dark:bg-secondary translate-x-1 translate-y-1 shadow-none" href="#">
+<span class="material-symbols-outlined">smart_toy</span> Chat
+                </a>
+</li>
+</ul>
+<ul class="mt-auto flex flex-col gap-stack-sm border-t-2 border-primary border-dashed pt-stack-md">
+<li>
+<a class="flex items-center gap-stack-sm p-stack-sm text-on-surface-variant dark:text-outline-variant hover:translate-x-[-2px] hover:translate-y-[-2px] hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-all duration-75" href="#">
+<span class="material-symbols-outlined">settings</span> Settings
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-stack-sm p-stack-sm text-on-surface-variant dark:text-outline-variant hover:translate-x-[-2px] hover:translate-y-[-2px] hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-all duration-75" href="#">
+<span class="material-symbols-outlined">logout</span> Log Out
+                </a>
+</li>
+</ul>
+</nav>
+<!-- Main Chat Canvas -->
+<main class="flex-1 flex flex-col relative doodle-bg">
+<!-- TopAppBar (Mobile Fallback / Chat Header) -->
+<header class="flex justify-between items-center px-grid-margin py-stack-sm w-full bg-background dark:bg-surface-dim text-primary dark:text-primary-fixed font-label-caps text-label-caps w-full border-b-4 border-primary dark:border-primary-fixed shrink-0">
+<div class="flex items-center gap-stack-sm">
+<button class="md:hidden p-stack-xs hover:bg-surface-container-high rounded cursor-pointer active:scale-95">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<span class="font-headline-lg text-headline-lg font-bold text-primary dark:text-primary-fixed">KARSA_OS</span>
+</div>
+<div class="hidden md:flex gap-grid-gutter">
+<a class="text-on-surface dark:text-on-surface-variant hover:text-secondary dark:hover:text-secondary-fixed transition-colors" href="#">System</a>
+<a class="text-on-surface dark:text-on-surface-variant hover:text-secondary dark:hover:text-secondary-fixed transition-colors" href="#">Files</a>
+<a class="text-on-surface dark:text-on-surface-variant hover:text-secondary dark:hover:text-secondary-fixed transition-colors" href="#">Edit</a>
+</div>
+<div class="flex gap-stack-sm">
+<button class="p-stack-xs cursor-pointer active:scale-95 hover:text-secondary dark:hover:text-secondary-fixed transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-stack-xs cursor-pointer active:scale-95 hover:text-secondary dark:hover:text-secondary-fixed transition-colors">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</header>
+<!-- Chat History -->
+<div class="flex-1 overflow-y-auto p-grid-margin flex flex-col gap-stack-lg scroll-smooth">
+<!-- Karsa Message -->
+<div class="flex gap-stack-md max-w-3xl self-start">
+<div class="w-10 h-10 shrink-0 wobbly-border bg-tertiary-fixed-dim flex items-center justify-center shadow-[2px_2px_0px_0px_rgba(24,28,44,1)]">
+<span class="material-symbols-outlined text-primary">smart_toy</span>
+</div>
+<div class="flex flex-col gap-stack-xs">
+<span class="font-label-caps text-label-caps text-tertiary-container">KARSA</span>
+<div class="wobbly-border bg-surface-container-lowest p-stack-md shadow-[4px_4px_0px_0px_rgba(24,28,44,1)] paper-grain relative">
+<!-- Doodle accent -->
+<div class="absolute -top-3 -right-3 text-secondary transform rotate-12">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p>System initialized. Ready to process your hand-drawn requests. What are we building today?</p>
+</div>
+</div>
+</div>
+<!-- User Message -->
+<div class="flex gap-stack-md max-w-3xl self-end flex-row-reverse">
+<div class="w-10 h-10 shrink-0 wobbly-border bg-secondary-container flex items-center justify-center shadow-[2px_2px_0px_0px_rgba(24,28,44,1)]">
+<span class="material-symbols-outlined text-primary">face</span>
+</div>
+<div class="flex flex-col gap-stack-xs items-end">
+<span class="font-label-caps text-label-caps text-secondary-container">USER</span>
+<div class="wobbly-border bg-secondary-fixed p-stack-md shadow-[4px_4px_0px_0px_rgba(24,28,44,1)] text-on-secondary-container paper-grain relative">
+<!-- Tape accent -->
+<div class="absolute -top-2 left-4 w-12 h-4 bg-tertiary-fixed-dim opacity-80 transform -rotate-6 border-x border-primary border-dashed"></div>
+<p>I need a new dashboard layout. Something brutally honest but friendly. Think cardboard and magic markers.</p>
+</div>
+</div>
+</div>
+<!-- Karsa Message -->
+<div class="flex gap-stack-md max-w-3xl self-start">
+<div class="w-10 h-10 shrink-0 wobbly-border bg-tertiary-fixed-dim flex items-center justify-center shadow-[2px_2px_0px_0px_rgba(24,28,44,1)]">
+<span class="material-symbols-outlined text-primary">smart_toy</span>
+</div>
+<div class="flex flex-col gap-stack-xs">
+<span class="font-label-caps text-label-caps text-tertiary-container">KARSA</span>
+<div class="wobbly-border bg-surface-container-lowest p-stack-md shadow-[4px_4px_0px_0px_rgba(24,28,44,1)] paper-grain">
+<p>Processing "Cardboard and Magic Markers" protocol...</p>
+<p class="mt-stack-sm text-outline">Generating bento grid structures with 3px wobble margin.</p>
+<div class="mt-stack-md p-stack-sm border-2 border-primary border-dashed bg-surface-variant flex gap-stack-sm items-center">
+<span class="material-symbols-outlined animate-spin">refresh</span>
+<span class="font-body-sm text-body-sm">Rendering prototype...</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Input Area -->
+<div class="p-stack-md border-t-4 border-primary bg-surface-container-low shrink-0 pb-grid-margin">
+<!-- Quick Actions -->
+<div class="flex gap-stack-sm mb-stack-md overflow-x-auto pb-2 scrollbar-hide">
+<button class="wobbly-border bg-tertiary-fixed-dim text-primary px-3 py-1 font-label-caps text-label-caps shadow-[2px_2px_0px_0px_rgba(24,28,44,1)] hover:translate-y-[-2px] hover:shadow-[4px_4px_0px_0px_rgba(24,28,44,1)] active:translate-y-[2px] active:shadow-none transition-all whitespace-nowrap">
+<span class="material-symbols-outlined align-bottom text-[16px]">draw</span> Sketch Idea
+                </button>
+<button class="wobbly-border bg-secondary text-on-secondary px-3 py-1 font-label-caps text-label-caps shadow-[2px_2px_0px_0px_rgba(24,28,44,1)] hover:translate-y-[-2px] hover:shadow-[4px_4px_0px_0px_rgba(24,28,44,1)] active:translate-y-[2px] active:shadow-none transition-all whitespace-nowrap">
+<span class="material-symbols-outlined align-bottom text-[16px]">bug_report</span> Debug
+                </button>
+<button class="wobbly-border bg-surface-container-highest text-primary px-3 py-1 font-label-caps text-label-caps shadow-[2px_2px_0px_0px_rgba(24,28,44,1)] hover:translate-y-[-2px] hover:shadow-[4px_4px_0px_0px_rgba(24,28,44,1)] active:translate-y-[2px] active:shadow-none transition-all whitespace-nowrap">
+<span class="material-symbols-outlined align-bottom text-[16px]">history</span> History
+                </button>
+</div>
+<!-- Terminal Input -->
+<div class="flex items-end gap-stack-md bg-surface p-stack-sm wobbly-border shadow-[4px_4px_0px_0px_rgba(24,28,44,1)]">
+<span class="font-headline-lg text-headline-lg text-secondary pl-2 mb-1">&gt;</span>
+<input class="flex-1 terminal-input font-body-md text-body-md py-2 px-1 focus:ring-0 placeholder:text-outline-variant" placeholder="Type a command or request..." type="text"/>
+<button class="wobbly-border bg-primary text-on-primary p-2 shadow-[2px_2px_0px_0px_rgba(183,24,73,1)] hover:bg-secondary transition-colors mb-1">
+<span class="material-symbols-outlined block">send</span>
+</button>
+</div>
+<div class="mt-2 text-right">
+<span class="font-label-caps text-label-caps text-outline-variant blinking-cursor">Awaiting input</span>
+</div>
+</div>
+</main>
+</body></html>

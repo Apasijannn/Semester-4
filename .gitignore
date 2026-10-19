@@ -1,0 +1,49 @@
+﻿node_modules/
+Library/
+Temp/
+Obj/
+build/
+Build/
+Builds/
+.venv/
+venv/
+__pycache__/
+.godot/
+.env
+.env.*
+*.zip
+*.rar
+*.7z
+*.pt
+*.pth
+*.keras
+*.h5
+*.safetensors
+*.npy
+*.pkl
+*.mp4
+*.mov
+*.dll
+*.exe
+*.lib
+*.ilk
+*.pdb
+*.dylib
+*.so
+desktop.ini
+/FINAL PROJECT/NLP/Dataset/3_dataset_corrected.csv
+/FINAL PROJECT/NLP/Dataset/3_dataset_nlp_medis_complete.csv
+/FINAL PROJECT/NLP/QWEN/modal_train/train.jsonl
+/FINAL PROJECT/NLP/data kebanyakan/dataset_nlp_medis_final_terprioritas.csv
+/FINAL PROJECT/NLP/data kebanyakan/dataset_nlp_medis_master_terupdate.csv
+/FINAL PROJECT/NLP/data kebanyakan/dataset_nlp_medis_master_v2.csv
+/FINAL PROJECT/NLP/data kebanyakan/dataset_nlp_medis_oversampled.csv
+/FINAL PROJECT/NLP/data kebanyakan/dataset_nlp_medis_paksaan_lidah_putih.csv
+/GRAFKOM/25_neural_networks.pdf
+/MEDISKIN/model/vector-index/chunks.jsonl
+/MEDISKIN/source code/scraping/data/scraping/3_skin_dataset.csv
+/NAWASENA/PPT MATERI ETIKA.pdf
+/NLP/Pembelajaran Bahasa Mendalam/Topic Modelling/topic modelling/topic modelling/model_bertopic_berita
+/PCD/TM04/citra_input.png
+/PCD/TM04/hasil_enhancement_plt.png
+/PCD/TM04/output_enhancement.png

@@ -1,0 +1,192 @@
+/* ══════════════════════════════════════
+   ATS-FRIENDLY "ENHANCV STYLE" (B&W)
+══════════════════════════════════════ */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    /* Menggunakan font sans-serif bersih ala Enhancv */
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 10.5pt;
+    line-height: 1.5;
+    color: #222;
+    background-color: #525659; 
+    display: flex;
+    justify-content: center;
+    padding: 2rem 0;
+}
+
+.resume-wrapper {
+    background-color: #FFF;
+    width: 210mm;         
+    min-height: 297mm;    
+    padding: 20mm;        
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+/* ── HEADER ── */
+header {
+    margin-bottom: 24px;
+}
+
+.name {
+    font-size: 28pt;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    color: #000;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+}
+
+.subtitle {
+    font-size: 11pt;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 12px;
+}
+
+.contact {
+    font-size: 9.5pt;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    color: #444;
+}
+
+.contact span:not(:last-child)::after {
+    content: "|";
+    margin-left: 8px;
+    color: #999;
+}
+
+.contact a {
+    color: #444;
+    text-decoration: none;
+}
+
+/* ── SECTIONS ── */
+section {
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 12pt;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #000;
+    border-bottom: 2px solid #000;
+    margin-bottom: 12px;
+    padding-bottom: 4px;
+    letter-spacing: 0.5px;
+}
+
+p {
+    text-align: justify;
+    margin-bottom: 8px;
+}
+
+.description-text {
+    font-size: 10pt;
+    color: #444;
+    margin-bottom: 6px;
+    font-style: italic;
+}
+
+/* ── ENTRIES ── */
+.entry {
+    margin-bottom: 16px;
+}
+
+.entry-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 2px;
+}
+
+.entry-title {
+    font-size: 11pt;
+    font-weight: 700;
+    color: #000;
+}
+
+.entry-date {
+    font-size: 10pt;
+    font-weight: 600;
+    color: #333;
+}
+
+.entry-subtitle {
+    font-size: 10.5pt;
+    font-weight: 500;
+    color: #555;
+    margin-bottom: 6px;
+}
+
+/* ── LISTS ── */
+.bullet-list {
+    padding-left: 18px;
+}
+
+.bullet-list li {
+    margin-bottom: 4px;
+    text-align: justify;
+}
+
+/* ── BOTTOM GRID (Strengths & Languages) ── */
+/* Sengaja dipisah jadi 2 block bersampingan khusus di bawah, 
+   ATS modern masih bisa baca struktur DOM div yang rapi ini */
+.bottom-grid {
+    display: flex;
+    gap: 40px;
+}
+
+.strengths {
+    flex: 2;
+}
+
+.languages {
+    flex: 1;
+}
+
+.strength-item, .lang-item {
+    margin-bottom: 12px;
+    font-size: 10pt;
+}
+
+.strength-item strong, .lang-item strong {
+    font-size: 10.5pt;
+    color: #000;
+}
+
+/* ── PRINT SETTINGS ── */
+@page {
+    size: A4 portrait;
+    margin: 20mm;
+}
+
+@media print {
+    body {
+        background-color: #FFF; 
+        padding: 0;
+        display: block;
+    }
+    .resume-wrapper {
+        width: 100%;
+        height: auto;
+        min-height: auto;
+        padding: 0;
+        box-shadow: none; 
+    }
+    a {
+        color: #000 !important;
+        text-decoration: none !important;
+    }
+    .entry {
+        page-break-inside: avoid;
+    }
+}

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Karsa — Healthy Life (Desktop)</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+  .health-layout{ display:flex; flex-direction:column; gap:22px; height:100%; }
+  .habit-row{ display:grid; grid-template-columns:repeat(4,1fr); gap:22px; height:220px; }
+  .habit-card{ display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; }
+  .ring{
+    width:78px; height:78px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    border:2.5px solid var(--ink);
+    position:relative;
+  }
+  .ring-inner{
+    width:58px; height:58px; border-radius:50%; background:var(--white);
+    border:2px solid var(--ink);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Archivo Black',sans-serif; font-size:13px; text-align:center; line-height:1.1;
+  }
+  .habit-name{ font-weight:700; font-size:13.5px; display:flex; align-items:center; gap:6px; }
+  .habit-goal{ font-size:10.5px; opacity:.65; }
+
+  .chart-card{ flex:1; display:flex; flex-direction:column; min-height:0; }
+  .chart-legend{ display:flex; gap:18px; margin-bottom:16px; }
+  .legend-item{ display:flex; align-items:center; gap:7px; font-size:12px; font-weight:600; }
+  .legend-dot{ width:12px; height:12px; border-radius:3px; border:1.5px solid var(--ink); }
+
+  .chart-area{ flex:1; display:flex; align-items:flex-end; gap:26px; padding:0 12px 12px; border-bottom:2.5px solid var(--ink); position:relative; }
+  .day-group{ flex:1; display:flex; align-items:flex-end; justify-content:center; gap:6px; height:100%; }
+  .bar{ width:22px; border:2.5px solid var(--ink); border-radius:6px 6px 0 0; }
+  .day-labels{ display:flex; gap:26px; padding:10px 12px 0; }
+  .day-label{ flex:1; text-align:center; font-size:11.5px; font-weight:700; opacity:.7; }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <aside class="sidebar">
+    <div class="logo"><div class="logo-mark"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 12L10 18L20 6" stroke="#1A1A1A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="logo-word">Karsa</div></div>
+    <nav class="nav">
+      <div class="nav-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="8" height="8" rx="2" stroke="#1A1A1A" stroke-width="2"/><rect x="13" y="3" width="8" height="8" rx="2" stroke="#1A1A1A" stroke-width="2"/><rect x="3" y="13" width="8" height="8" rx="2" stroke="#1A1A1A" stroke-width="2"/><rect x="13" y="13" width="8" height="8" rx="2" stroke="#1A1A1A" stroke-width="2"/></svg>Dashboard</div>
+      <div class="nav-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12L10 17L19 6" stroke="#1A1A1A" stroke-width="2" stroke-linecap="round"/><rect x="3" y="3" width="18" height="18" rx="4" stroke="#1A1A1A" stroke-width="2"/></svg>Tasks</div>
+      <div class="nav-item active"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-4.6-9.5-9.2C1 8.4 2.6 5 6 5c2 0 3.4 1.1 4 2.2C10.6 6.1 12 5 14 5c3.4 0 5 3.4 3.5 6.8C19 16.4 12 21 12 21z" stroke="#1A1A1A" stroke-width="2" stroke-linejoin="round"/></svg>Health</div>
+      <div class="nav-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="6" width="18" height="13" rx="2" stroke="#1A1A1A" stroke-width="2"/><path d="M3 10H21" stroke="#1A1A1A" stroke-width="2"/><circle cx="16" cy="14.5" r="1.4" fill="#1A1A1A"/></svg>Finance</div>
+      <div class="nav-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 4H20V16H8L4 20V4Z" stroke="#1A1A1A" stroke-width="2" stroke-linejoin="round"/><circle cx="9" cy="10" r="1.2" fill="#1A1A1A"/><circle cx="12" cy="10" r="1.2" fill="#1A1A1A"/><circle cx="15" cy="10" r="1.2" fill="#1A1A1A"/></svg>AI Chat</div>
+    </nav>
+    <div class="profile-card">
+      <div class="profile-avatar">K</div>
+      <div><div class="profile-name" style="color:#1A1A1A">Karsa Putri</div><div class="profile-sub" style="color:#1A1A1A">Free plan</div></div>
+    </div>
+  </aside>
+
+  <div class="main">
+    <div class="topbar">
+      <div class="greeting">Good Morning, <span>Karsa</span> 👋</div>
+      <div class="search-bar">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="#1A1A1A" stroke-width="2"/><path d="M21 21L16.5 16.5" stroke="#1A1A1A" stroke-width="2" stroke-linecap="round"/></svg>
+        <input placeholder="Search tasks, notes, transactions…">
+      </div>
+      <div class="topbar-right">
+        <div class="icon-btn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 9a6 6 0 1 1 12 0c0 5 2 6 2 6H4s2-1 2-6" stroke="#1A1A1A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 20a2 2 0 0 0 4 0" stroke="#1A1A1A" stroke-width="2" stroke-linecap="round"/></svg><div class="dot"></div></div>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="health-layout">
+
+        <!-- habit row -->
+        <div class="habit-row">
+          <div class="card tilt-l habit-card tint-teal">
+            <div class="card-corner tl"></div>
+            <div class="ring" style="background:conic-gradient(var(--teal) 0 78%, var(--white) 78% 100%);">
+              <div class="ring-inner">5/8<br>cups</div>
+            </div>
+            <div class="habit-name">💧 Water</div>
+            <div class="habit-goal">78% of daily goal</div>
+          </div>
+
+          <div class="card tilt-r habit-card tint-navy">
+            <div class="card-corner tr"></div>
+            <div class="ring" style="background:conic-gradient(var(--navy) 0 91%, var(--white) 91% 100%);">
+              <div class="ring-inner">7h20m</div>
+            </div>
+            <div class="habit-name">😴 Sleep</div>
+            <div class="habit-goal">91% of 8h goal</div>
+          </div>
+
+          <div class="card tilt-l tint-mustard habit-card">
+            <div class="card-corner br"></div>
+            <div class="ring" style="background:conic-gradient(var(--mustard) 0 62%, var(--white) 62% 100%);">
+              <div class="ring-inner">6,240</div>
+            </div>
+            <div class="habit-name">👣 Steps</div>
+            <div class="habit-goal">62% of 10k goal</div>
+          </div>
+
+          <div class="card tilt-r tint-coral habit-card">
+            <div class="card-corner tl"></div>
+            <div class="ring" style="background:conic-gradient(var(--coral) 0 40%, var(--white) 40% 100%);">
+              <div class="ring-inner">20<br>min</div>
+            </div>
+            <div class="habit-name">🏃 Exercise</div>
+            <div class="habit-goal">40% of 50min goal</div>
+          </div>
+        </div>
+
+        <!-- weekly chart, full width -->
+        <div class="card chart-card tilt-l">
+          <div class="card-corner tr"></div>
+          <div class="card-title" style="justify-content:space-between;">
+            <span>📊 Weekly Overview</span>
+          </div>
+          <div class="chart-legend">
+            <div class="legend-item"><div class="legend-dot" style="background:var(--teal)"></div>Water</div>
+            <div class="legend-item"><div class="legend-dot" style="background:var(--navy)"></div>Sleep</div>
+            <div class="legend-item"><div class="legend-dot" style="background:var(--mustard)"></div>Steps</div>
+            <div class="legend-item"><div class="legend-dot" style="background:var(--coral)"></div>Exercise</div>
+          </div>
+          <div class="chart-area">
+            <div class="day-group"><div class="bar" style="height:60%; background:var(--teal);"></div><div class="bar" style="height:85%; background:var(--navy);"></div><div class="bar" style="height:45%; background:var(--mustard);"></div><div class="bar" style="height:30%; background:var(--coral);"></div></div>
+            <div class="day-group"><div class="bar" style="height:70%; background:var(--teal);"></div><div class="bar" style="height:75%; background:var(--navy);"></div><div class="bar" style="height:65%; background:var(--mustard);"></div><div class="bar" style="height:20%; background:var(--coral);"></div></div>
+            <div class="day-group"><div class="bar" style="height:50%; background:var(--teal);"></div><div class="bar" style="height:90%; background:var(--navy);"></div><div class="bar" style="height:55%; background:var(--mustard);"></div><div class="bar" style="height:45%; background:var(--coral);"></div></div>
+            <div class="day-group"><div class="bar" style="height:80%; background:var(--teal);"></div><div class="bar" style="height:60%; background:var(--navy);"></div><div class="bar" style="height:70%; background:var(--mustard);"></div><div class="bar" style="height:35%; background:var(--coral);"></div></div>
+            <div class="day-group"><div class="bar" style="height:65%; background:var(--teal);"></div><div class="bar" style="height:95%; background:var(--navy);"></div><div class="bar" style="height:40%; background:var(--mustard);"></div><div class="bar" style="height:50%; background:var(--coral);"></div></div>
+            <div class="day-group"><div class="bar" style="height:90%; background:var(--teal);"></div><div class="bar" style="height:80%; background:var(--navy);"></div><div class="bar" style="height:85%; background:var(--mustard);"></div><div class="bar" style="height:60%; background:var(--coral);"></div></div>
+            <div class="day-group"><div class="bar" style="height:78%; background:var(--teal);"></div><div class="bar" style="height:91%; background:var(--navy);"></div><div class="bar" style="height:62%; background:var(--mustard);"></div><div class="bar" style="height:40%; background:var(--coral);"></div></div>
+          </div>
+          <div class="day-labels">
+            <div class="day-label">Mon</div><div class="day-label">Tue</div><div class="day-label">Wed</div><div class="day-label">Thu</div><div class="day-label">Fri</div><div class="day-label">Sat</div><div class="day-label">Sun</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

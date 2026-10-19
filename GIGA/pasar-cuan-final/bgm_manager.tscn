@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://cy62ikxabjhp1"]
+
+[ext_resource type="Script" uid="uid://bspisdaku1ekt" path="res://scripts/bgm_manager.gd" id="1_nh1nr"]
+[ext_resource type="AudioStream" uid="uid://2dctpwpmavae" path="res://assets/Audio/ES_Afternoon Chill - Sarah, the Illstrumentalist - 17000-32000.wav" id="2_bp6pk"]
+
+[node name="BGM Manager" type="AudioStreamPlayer" unique_id=155769011]
+autoplay = true
+script = ExtResource("1_nh1nr")
+musik_menu = ExtResource("2_bp6pk")

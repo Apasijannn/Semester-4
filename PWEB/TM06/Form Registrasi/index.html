@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Registrasi Mata Kuliah</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="card">
+    <div class="card-accent"></div>
+    <div class="card-body">
+
+        <div class="header">
+            <div class="header-label">Sistem Akademik</div>
+            <h2>Form Registrasi<br>Mata Kuliah</h2>
+            <div class="header-divider">
+                <span></span><i>✦</i><span></span>
+            </div>
+        </div>
+
+        <form id="formPendaftaran" onsubmit="return validasiForm(event)" novalidate autocomplete="off">
+
+            <!-- Nama Mahasiswa -->
+            <div class="form-group">
+                <label for="nama">Nama Mahasiswa <span class="required">*</span></label>
+                <div class="input-wrap" id="wrap-nama">
+                    <span class="input-icon">👤</span>
+                    <input type="text" id="nama" name="nama"
+                           placeholder="Ketik nama mahasiswa"
+                           oninput="cariNama(this)"
+                           onkeydown="handleKey(event)">
+                    <div class="autocomplete-list" id="ac-list"></div>
+                </div>
+                <div class="error-msg" id="err-nama">⚠ Nama tidak boleh kosong</div>
+            </div>
+
+            <!-- NRP -->
+            <div class="form-group">
+                <label for="nrp">NRP <span class="required">*</span></label>
+                <div class="input-wrap">
+                    <span class="input-icon">🎓</span>
+                    <input type="text" id="nrp" name="nrp" placeholder="Masukkan NRP">
+                </div>
+                <div class="error-msg" id="err-nrp">⚠ NRP tidak boleh kosong</div>
+            </div>
+
+            <!-- Mata Kuliah -->
+            <div class="form-group">
+                <label for="matakuliah">Mata Kuliah <span class="required">*</span></label>
+                <div class="input-wrap">
+                    <span class="input-icon">📚</span>
+                    <select id="matakuliah" name="matakuliah">
+                        <option value="" disabled selected>Pilih mata kuliah...</option>
+                        <option value="Kalkulus 1">Kalkulus 1</option>
+                        <option value="Kalkulus 2">Kalkulus 2</option>
+                        <option value="Bahasa Inggris">Bahasa Inggris</option>
+                        <option value="Agama">Agama</option>
+                        <option value="Kewarganegaraan">Kewarganegaraan</option>
+                    </select>
+                </div>
+                <div class="error-msg" id="err-matakuliah">⚠ Silakan pilih mata kuliah</div>
+            </div>
+
+            <!-- Dosen -->
+            <div class="form-group">
+                <label for="dosen">Dosen Pengampu <span class="required">*</span></label>
+                <div class="input-wrap">
+                    <span class="input-icon">🏫</span>
+                    <input type="text" id="dosen" name="dosen" placeholder="Masukkan nama dosen">
+                </div>
+                <div class="error-msg" id="err-dosen">⚠ Nama dosen tidak boleh kosong</div>
+            </div>
+
+            <button type="submit" class="btn-submit">Daftarkan Sekarang →</button>
+        </form>
+
+        <!-- Tampilan Sukses -->
+        <div class="success-overlay" id="successOverlay">
+            <div class="success-icon">✓</div>
+            <h3>Berhasil Didaftarkan!</h3>
+            <p id="successMsg">Data registrasi Anda telah berhasil disimpan.</p>
+            <button class="btn-reset" onclick="resetForm()">Daftar Lagi</button>
+        </div>
+
+    </div>
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,37 @@
+Character width: 64
+Character height: 62
+Character set: ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.,;:?!-_~#"'&()[]|`\/@°+=*$£€<>%ÁáÂâÀàÅåÃãÄäÆæÉéÊêÈèËëÍíÎîÌìÏïÓóÔôÒòÕõÖöÚúÛûùÙÜüÇçÑñÝý¿
+
+Copy the following JSON text and paste into the 'Spacing data' property of the SpriteFont. No extra coding is required!
+[[21,"|"],[23,"'"],[25,","],[26,"."],[28,";:"],[29,"°"],[30,"IiÍíÎîÌìÏï"],[31,"\"()<>"],[32,"1-[]"],[33,"!\\/"],[34,"Jj2*$£"],[36,"35?_¿"],[37,"Ss="],[38,"Ll67"],[39,"EFef89+ÉéÊêÈèËë"],[40,"4#"],[41,"Cc0Çç"],[42,"AaÁáÂâÀàÅåÃãÄä"],[43,"TZtz~&`"],[44,"NVnvÑñ"],[45,"BPbp€"],[46,"GOQRgoqrÓóÔôÒòÕõÖö"],[47,"DUYduyÚúÛûùÙÜüÝý"],[48,"Kk"],[49,"Xx@"],[51,"Hh"],[52,"%Ææ"],[54,"Mm"],[64,"Ww"]]
+
+These are the details for building the character widths manually, with the SpriteFont 'Set character width' action.
+21	"|"
+23	"'"
+25	","
+26	"."
+28	";:"
+29	"°"
+30	"IiÍíÎîÌìÏï"
+31	""()<>"
+32	"1-[]"
+33	"!\/"
+34	"Jj2*$£"
+36	"35?_¿"
+37	"Ss="
+38	"Ll67"
+39	"EFef89+ÉéÊêÈèËë"
+40	"4#"
+41	"Cc0Çç"
+42	"AaÁáÂâÀàÅåÃãÄä"
+43	"TZtz~&`"
+44	"NVnvÑñ"
+45	"BPbp€"
+46	"GOQRgoqrÓóÔôÒòÕõÖö"
+47	"DUYduyÚúÛûùÙÜüÝý"
+48	"Kk"
+49	"Xx@"
+51	"Hh"
+52	"%Ææ"
+54	"Mm"
+64	"Ww"

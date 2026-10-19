@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; }
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-thumb { background: #1a1a1a; border-radius: 10px; }
+</style>
+</helmet>
+<div style="min-height: 100vh; background: #FBF3E2; font-family: 'Space Grotesk', sans-serif; color: #1a1a1a; display: flex; padding: 20px; gap: 20px;">
+
+  <!-- SIDEBAR -->
+  <aside style="width: 250px; flex-shrink: 0; display: flex; flex-direction: column; gap: 22px; background: #ffffff; border: 3px solid #1a1a1a; border-radius: 20px; box-shadow: 6px 6px 0 #1a1a1a; padding: 22px 18px;">
+    <div style="display: flex; align-items: center; gap: 11px; padding: 4px 6px 14px; border-bottom: 3px solid #1a1a1a;">
+      <div style="width: 40px; height: 40px; background: #FFD84D; border: 3px solid #1a1a1a; border-radius: 11px; box-shadow: 3px 3px 0 #1a1a1a; display: flex; align-items: center; justify-content: center;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M3 8l9 5 9-5"></path></svg>
+      </div>
+      <span style="font-family: 'Archivo Black', sans-serif; font-size: 24px; letter-spacing: -0.5px;">Karsa</span>
+    </div>
+
+    <nav style="display: flex; flex-direction: column; gap: 9px;">
+      <sc-for list="{{ navItems }}" as="item" hint-placeholder-count="6">
+        <button onClick="{{ item.onClick }}" style="{{ item.style }}">
+          <span style="display: flex; width: 22px; height: 22px; align-items: center; justify-content: center;" dangerouslySetInnerHTML="{{ item.icon }}"></span>
+          <span style="font-weight: 600; font-size: 15px;">{{ item.label }}</span>
+        </button>
+      </sc-for>
+    </nav>
+
+    <div style="margin-top: auto; background: #C9E4CA; border: 3px solid #1a1a1a; border-radius: 16px; box-shadow: 4px 4px 0 #1a1a1a; padding: 16px;">
+      <div style="font-family: 'Archivo Black', sans-serif; font-size: 14px; line-height: 1.2;">Pro tip</div>
+      <div style="font-size: 12.5px; margin-top: 6px; line-height: 1.4;">Log your water 3× today to keep your streak alive.</div>
+    </div>
+  </aside>
+
+  <!-- MAIN COLUMN -->
+  <div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 22px;">
+
+    <!-- HEADER -->
+    <header style="display: flex; align-items: center; gap: 16px;">
+      <div style="flex: 1; display: flex; align-items: center; gap: 10px; background: #ffffff; border: 3px solid #1a1a1a; border-radius: 14px; box-shadow: 4px 4px 0 #1a1a1a; padding: 12px 16px;">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><path d="m21 21-4.3-4.3"></path></svg>
+        <input placeholder="Search tasks, expenses, reminders…" style="border: none; outline: none; background: transparent; font-family: 'Space Grotesk', sans-serif; font-size: 15px; width: 100%; color: #1a1a1a;" />
+      </div>
+      <button style="width: 50px; height: 50px; flex-shrink: 0; background: #FFD84D; border: 3px solid #1a1a1a; border-radius: 14px; box-shadow: 4px 4px 0 #1a1a1a; cursor: pointer; display: flex; align-items: center; justify-content: center; position: relative;">
+        <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path></svg>
+        <span style="position: absolute; top: -5px; right: -5px; width: 18px; height: 18px; background: #F58FB0; border: 2.5px solid #1a1a1a; border-radius: 50%; font-size: 10px; font-weight: 700; display: flex; align-items: center; justify-content: center; font-family: 'Space Mono', monospace;">3</span>
+      </button>
+      <div style="display: flex; align-items: center; gap: 11px; background: #ffffff; border: 3px solid #1a1a1a; border-radius: 14px; box-shadow: 4px 4px 0 #1a1a1a; padding: 6px 14px 6px 6px;">
+        <div style="width: 38px; height: 38px; border: 2.5px solid #1a1a1a; border-radius: 10px; background: #B7D7EA; display: flex; align-items: center; justify-content: center; font-family: 'Archivo Black', sans-serif; font-size: 15px;">M</div>
+        <div style="line-height: 1.1;">
+          <div style="font-weight: 700; font-size: 13.5px;">Maya R.</div>
+          <div style="font-size: 11px; color: #6b6b6b; font-family: 'Space Mono', monospace;">Free plan</div>
+        </div>
+      </div>
+    </header>
+
+    <!-- ================= DASHBOARD VIEW ================= -->
+    <sc-if value="{{ showDashboard }}" hint-placeholder-val="{{ true }}">
+    <div style="display: flex; flex-direction: column; gap: 22px;">
+    <!-- GREETING -->
+    <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; margin-top: 4px;">
+      <div>
+        <h1 style="font-family: 'Archivo Black', sans-serif; font-size: 46px; margin: 0; letter-spacing: -1.2px; line-height: 1;">Hello, Maya.</h1>
+        <p style="margin: 12px 0 0; font-size: 15.5px; color: #4a4a4a; max-width: 460px;">Here's what your day looks like — Sunday, July 6. You've got 5 tasks and 2 reminders lined up.</p>
+      </div>
+      <svg width="120" height="72" viewBox="0 0 120 72" fill="none" stroke="#1a1a1a" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;">
+        <circle cx="30" cy="30" r="15"></circle><path d="M30 21v9l6 4"></path>
+        <path d="M52 46c6-10 16-10 22 0"></path>
+        <circle cx="63" cy="30" r="3"></circle>
+        <path d="M84 24l10 8-10 8"></path><path d="M108 20v24"></path>
+      </svg>
+    </div>
+
+    <!-- SUMMARY CARDS -->
+    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px;">
+
+      <!-- Tasks (blue) -->
+      <div style="background: #B7D7EA; border: 3px solid #1a1a1a; border-radius: 18px; box-shadow: 5px 5px 0 #1a1a1a; padding: 18px; display: flex; flex-direction: column; gap: 14px;">
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+          <div style="width: 42px; height: 42px; background: #FBF3E2; border: 2.5px solid #1a1a1a; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+          </div>
+          <span style="font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700; background: #1a1a1a; color: #fff; padding: 3px 8px; border-radius: 20px;">TODAY</span>
+        </div>
+        <div>
+          <div style="font-family: 'Archivo Black', sans-serif; font-size: 38px; line-height: 1;">3<span style="font-size: 18px; color: #2c3e46;">/5</span></div>
+          <div style="font-weight: 700; font-size: 14px; margin-top: 4px;">Today's Tasks</div>
+        </div>
+        <div style="height: 9px; background: #FBF3E2; border: 2px solid #1a1a1a; border-radius: 20px; overflow: hidden;">
+          <div style="width: 60%; height: 100%; background: #1a1a1a;"></div>
+        </div>
+      </div>
+
+      <!-- Spending (yellow) -->
+      <div style="background: #FFD84D; border: 3px solid #1a1a1a; border-radius: 18px; box-shadow: 5px 5px 0 #1a1a1a; padding: 18px; display: flex; flex-direction: column; gap: 14px;">
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+          <div style="width: 42px; height: 42px; background: #FBF3E2; border: 2.5px solid #1a1a1a; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1v22"></path><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+          </div>
+          <span style="font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700; background: #1a1a1a; color: #fff; padding: 3px 8px; border-radius: 20px;">WEEK</span>
+        </div>
+        <div>
+          <div style="font-family: 'Archivo Black', sans-serif; font-size: 38px; line-height: 1;">$284</div>
+          <div style="font-weight: 700; font-size: 14px; margin-top: 4px;">Weekly Spending</div>
+        </div>
+        <div style="display: flex; align-items: flex-end; gap: 5px; height: 30px;">
+          <div style="flex: 1; height: 40%; background: #1a1a1a; border-radius: 3px 3px 0 0;"></div>
+          <div style="flex: 1; height: 70%; background: #1a1a1a; border-radius: 3px 3px 0 0;"></div>
+          <div style="flex: 1; height: 50%; background: #1a1a1a; border-radius: 3px 3px 0 0;"></div>
+          <div style="flex: 1; height: 90%; background: #1a1a1a; border-radius: 3px 3px 0 0;"></div>
+          <div style="flex: 1; height: 60%; background: #1a1a1a; border-radius: 3px 3px 0 0;"></div>
+          <div style="flex: 1; height: 35%; background: #F58FB0; border: 1.5px solid #1a1a1a; border-radius: 3px 3px 0 0;"></div>
+          <div style="flex: 1; height: 55%; background: #F58FB0; border: 1.5px solid #1a1a1a; border-radius: 3px 3px 0 0;"></div>
+        </div>
+      </div>
+
+      <!-- Skincare (pink) -->
+      <div style="background: #F9C2D6; border: 3px solid #1a1a1a; border-radius: 18px; box-shadow: 5px 5px 0 #1a1a1a; padding: 18px; display: flex; flex-direction: column; gap: 14px;">
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+          <div style="width: 42px; height: 42px; background: #FBF3E2; border: 2.5px solid #1a1a1a; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3s6 5 6 10a6 6 0 0 1-12 0c0-5 6-10 6-10z"></path></svg>
+          </div>
+          <span style="font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700; background: #1a1a1a; color: #fff; padding: 3px 8px; border-radius: 20px;">PM</span>
+        </div>
+        <div>
+          <div style="font-family: 'Archivo Black', sans-serif; font-size: 27px; line-height: 1;">9:00 PM</div>
+          <div style="font-weight: 700; font-size: 14px; margin-top: 4px;">Skincare Reminder</div>
+        </div>
+        <div style="font-size: 12.5px; background: #FBF3E2; border: 2px solid #1a1a1a; border-radius: 10px; padding: 7px 10px; font-weight: 600;">Next: Niacinamide serum</div>
+      </div>
+
+      <!-- Health (green) -->
+      <div style="background: #C9E4CA; border: 3px solid #1a1a1a; border-radius: 18px; box-shadow: 5px 5px 0 #1a1a1a; padding: 18px; display: flex; flex-direction: column; gap: 14px;">
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+          <div style="width: 42px; height: 42px; background: #FBF3E2; border: 2.5px solid #1a1a1a; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l2 6 4-14 2 8h6"></path></svg>
+          </div>
+          <span style="font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700; background: #1a1a1a; color: #fff; padding: 3px 8px; border-radius: 20px;">TODAY</span>
+        </div>
+        <div>
+          <div style="font-family: 'Archivo Black', sans-serif; font-size: 38px; line-height: 1;">7.2k</div>
+          <div style="font-weight: 700; font-size: 14px; margin-top: 4px;">Health Stats · Steps</div>
+        </div>
+        <div style="display: flex; gap: 8px;">
+          <div style="flex: 1; background: #FBF3E2; border: 2px solid #1a1a1a; border-radius: 10px; padding: 6px 8px; text-align: center;">
+            <div style="font-family: 'Archivo Black', sans-serif; font-size: 15px;">6/8</div>
+            <div style="font-size: 10px; font-family: 'Space Mono', monospace;">WATER</div>
+          </div>
+          <div style="flex: 1; background: #FBF3E2; border: 2px solid #1a1a1a; border-radius: 10px; padding: 6px 8px; text-align: center;">
+            <div style="font-family: 'Archivo Black', sans-serif; font-size: 15px;">7.5h</div>
+            <div style="font-size: 10px; font-family: 'Space Mono', monospace;">SLEEP</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- QUICK LINKS -->
+    <div style="margin-top: 4px;">
+      <h2 style="font-family: 'Archivo Black', sans-serif; font-size: 22px; margin: 0 0 14px;">Quick links</h2>
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;">
+        <sc-for list="{{ quickLinks }}" as="q" hint-placeholder-count="4">
+          <button style="{{ q.style }}">
+            <span style="font-weight: 700; font-size: 15px;">{{ q.label }}</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"></path></svg>
+          </button>
+        </sc-for>
+      </div>
+    </div>
+    </div>
+    </sc-if>
+
+    <!-- ================= TASK MANAGER VIEW ================= -->
+    <sc-if value="{{ showTasks }}" hint-placeholder-val="{{ true }}">
+    <div style="display: flex; flex-direction: column; gap: 22px;">
+
+      <!-- top bar: title + toggle + add -->
+      <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; flex-wrap: wrap;">
+        <div>
+          <h1 style="font-family: 'Archivo Black', sans-serif; font-size: 42px; margin: 0; letter-spacing: -1px; line-height: 1;">Task Manager</h1>
+          <p style="margin: 11px 0 0; font-size: 15px; color: #4a4a4a;">You have <b>{{ openCount }}</b> open tasks · 2 due today.</p>
+        </div>
+        <div style="display: flex; align-items: center; gap: 14px;">
+          <div style="display: flex; gap: 4px; background: #ffffff; border: 3px solid #1a1a1a; border-radius: 14px; box-shadow: 4px 4px 0 #1a1a1a; padding: 4px;">
+            <button onClick="{{ setList }}" style="{{ listBtnStyle }}">List</button>
+            <button onClick="{{ setCal }}" style="{{ calBtnStyle }}">Calendar</button>
+          </div>
+          <button style="display: flex; align-items: center; gap: 8px; background: #B7D7EA; border: 3px solid #1a1a1a; border-radius: 14px; box-shadow: 4px 4px 0 #1a1a1a; padding: 12px 18px; cursor: pointer; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 15px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>
+            Add Task
+          </button>
+        </div>
+      </div>
+
+      <!-- LIST VIEW: tasks + calendar widget -->
+      <sc-if value="{{ listView }}" hint-placeholder-val="{{ true }}">
+      <div style="display: grid; grid-template-columns: 1fr 320px; gap: 20px; align-items: start;">
+
+        <div style="display: flex; flex-direction: column; gap: 16px;">
+          <sc-for list="{{ tasks }}" as="t" hint-placeholder-count="5">
+            <div style="display: flex; align-items: center; gap: 15px; background: #ffffff; border: 3px solid #1a1a1a; border-radius: 16px; box-shadow: 5px 5px 0 #1a1a1a; padding: 16px 18px;">
+              <div style="{{ t.accentStyle }}"></div>
+              <button onClick="{{ t.onToggle }}" style="{{ t.checkStyle }}"><span style="display: flex;" dangerouslySetInnerHTML="{{ t.checkInner }}"></span></button>
+              <div style="flex: 1; min-width: 0;">
+                <div style="display: flex; align-items: center; gap: 9px; margin-bottom: 8px; flex-wrap: wrap;">
+                  <span style="{{ t.badgeStyle }}">{{ t.priorityLabel }}</span>
+                  <span style="{{ t.sourceStyle }}">{{ t.source }}</span>
+                </div>
+                <h3 style="{{ t.titleStyle }}">{{ t.title }}</h3>
+                <div style="display: flex; align-items: center; gap: 6px; margin-top: 7px; font-size: 13px; color: #5a5a5a; font-weight: 600;">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#5a5a5a" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>
+                  {{ t.due }}
+                </div>
+              </div>
+              <div style="flex-shrink: 0; text-align: right;">
+                <div style="font-size: 10px; font-family: 'Space Mono', monospace; font-weight: 700; color: #8a8a8a; margin-bottom: 5px;">DIFFICULTY {{ t.diffLabel }}</div>
+                <div style="display: flex; gap: 2px; justify-content: flex-end;" dangerouslySetInnerHTML="{{ t.stars }}"></div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+
+        <!-- CALENDAR WIDGET -->
+        <aside style="background: #ffffff; border: 3px solid #1a1a1a; border-radius: 18px; box-shadow: 5px 5px 0 #1a1a1a; padding: 18px;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+            <span style="font-family: 'Archivo Black', sans-serif; font-size: 17px;">July 2026</span>
+            <div style="display: flex; gap: 6px;">
+              <div style="width: 26px; height: 26px; border: 2.5px solid #1a1a1a; border-radius: 8px; display: flex; align-items: center; justify-content: center;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"></path></svg></div>
+              <div style="width: 26px; height: 26px; border: 2.5px solid #1a1a1a; border-radius: 8px; display: flex; align-items: center; justify-content: center;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"></path></svg></div>
+            </div>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; margin-bottom: 4px;">
+            <div style="text-align: center; font-family: 'Space Mono', monospace; font-size: 10px; font-weight: 700; color: #9a9a9a;">S</div>
+            <div style="text-align: center; font-family: 'Space Mono', monospace; font-size: 10px; font-weight: 700; color: #9a9a9a;">M</div>
+            <div style="text-align: center; font-family: 'Space Mono', monospace; font-size: 10px; font-weight: 700; color: #9a9a9a;">T</div>
+            <div style="text-align: center; font-family: 'Space Mono', monospace; font-size: 10px; font-weight: 700; color: #9a9a9a;">W</div>
+            <div style="text-align: center; font-family: 'Space Mono', monospace; font-size: 10px; font-weight: 700; color: #9a9a9a;">T</div>
+            <div style="text-align: center; font-family: 'Space Mono', monospace; font-size: 10px; font-weight: 700; color: #9a9a9a;">F</div>
+            <div style="text-align: center; font-family: 'Space Mono', monospace; font-size: 10px; font-weight: 700; color: #9a9a9a;">S</div>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px;">
+            <sc-for list="{{ calCells }}" as="c" hint-placeholder-count="34">
+              <div dangerouslySetInnerHTML="{{ c.miniHtml }}"></div>
+            </sc-for>
+          </div>
+
+          <div style="border-top: 2.5px solid #1a1a1a; margin: 16px 0 12px;"></div>
+          <div style="font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700; color: #8a8a8a; margin-bottom: 10px;">UPCOMING DEADLINES</div>
+          <div style="display: flex; flex-direction: column; gap: 9px;">
+            <sc-for list="{{ upcoming }}" as="u" hint-placeholder-count="3">
+              <div style="display: flex; align-items: center; gap: 11px;">
+                <div style="flex-shrink: 0; width: 42px; text-align: center; background: #FBF3E2; border: 2.5px solid #1a1a1a; border-radius: 10px; padding: 4px 0;">
+                  <div style="font-family: 'Archivo Black', sans-serif; font-size: 16px; line-height: 1;">{{ u.day }}</div>
+                  <div style="font-family: 'Space Mono', monospace; font-size: 8.5px;">{{ u.mon }}</div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; line-height: 1.25;">
+                  <span style="flex-shrink: 0; width: 10px; height: 10px; border-radius: 50%; border: 2px solid #1a1a1a; background: {{ u.color }};"></span>
+                  {{ u.label }}
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </aside>
+      </div>
+      </sc-if>
+
+      <!-- CALENDAR VIEW: full month -->
+      <sc-if value="{{ calView }}" hint-placeholder-val="{{ true }}">
+      <div style="background: #ffffff; border: 3px solid #1a1a1a; border-radius: 18px; box-shadow: 5px 5px 0 #1a1a1a; padding: 22px;">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+          <span style="font-family: 'Archivo Black', sans-serif; font-size: 24px;">July 2026</span>
+          <div style="display: flex; align-items: center; gap: 14px; font-size: 12px; font-family: 'Space Mono', monospace; font-weight: 700;">
+            <span style="display: flex; align-items: center; gap: 6px;"><span style="width: 12px; height: 12px; border-radius: 3px; border: 2px solid #1a1a1a; background: #F58FB0;"></span>HIGH</span>
+            <span style="display: flex; align-items: center; gap: 6px;"><span style="width: 12px; height: 12px; border-radius: 3px; border: 2px solid #1a1a1a; background: #FFD84D;"></span>MED</span>
+            <span style="display: flex; align-items: center; gap: 6px;"><span style="width: 12px; height: 12px; border-radius: 3px; border: 2px solid #1a1a1a; background: #C9E4CA;"></span>LOW</span>
+          </div>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; margin-bottom: 8px;">
+          <div style="text-align: center; font-family: 'Space Mono', monospace; font-size: 12px; font-weight: 700; color: #9a9a9a;">SUN</div>
+          <div style="text-align: center; font-family: 'Space Mono', monospace; font-size: 12px; font-weight: 700; color: #9a9a9a;">MON</div>
+          <div style="text-align: center; font-family: 'Space Mono', monospace; font-size: 12px; font-weight: 700; color: #9a9a9a;">TUE</div>
+          <div style="text-align: center; font-family: 'Space Mono', monospace; font-size: 12px; font-weight: 700; color: #9a9a9a;">WED</div>
+          <div style="text-align: center; font-family: 'Space Mono', monospace; font-size: 12px; font-weight: 700; color: #9a9a9a;">THU</div>
+          <div style="text-align: center; font-family: 'Space Mono', monospace; font-size: 12px; font-weight: 700; color: #9a9a9a;">FRI</div>
+          <div style="text-align: center; font-family: 'Space Mono', monospace; font-size: 12px; font-weight: 700; color: #9a9a9a;">SAT</div>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px;">
+          <sc-for list="{{ calCells }}" as="c" hint-placeholder-count="34">
+            <div dangerouslySetInnerHTML="{{ c.bigHtml }}"></div>
+          </sc-for>
+        </div>
+      </div>
+      </sc-if>
+
+    </div>
+    </sc-if>
+
+    <!-- ================= FINANCE MANAGER VIEW ================= -->
+    <sc-if value="{{ showFinance }}" hint-placeholder-val="{{ true }}">
+    <div style="display: flex; flex-direction: column; gap: 22px;">
+
+      <!-- top bar -->
+      <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; flex-wrap: wrap;">
+        <div>
+          <h1 style="font-family: 'Archivo Black', sans-serif; font-size: 42px; margin: 0; letter-spacing: -1px; line-height: 1;">Finance Manager</h1>
+          <p style="margin: 11px 0 0; font-size: 15px; color: #4a4a4a;">You've spent <b>$284</b> this week across 4 categories.</p>
+        </div>
+        <button style="display: flex; align-items: center; gap: 8px; background: #FFD84D; border: 3px solid #1a1a1a; border-radius: 14px; box-shadow: 4px 4px 0 #1a1a1a; padding: 12px 18px; cursor: pointer; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 15px;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4M7 9l5-5 5 5"></path><path d="M4 16v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"></path></svg>
+          Upload PDF
+          <span style="font-family: 'Space Mono', monospace; font-size: 10px; font-weight: 700; background: #1a1a1a; color: #fff; padding: 2px 7px; border-radius: 20px;">GoPay</span>
+        </button>
+      </div>
+
+      <!-- chart + categories -->
+      <div style="display: grid; grid-template-columns: 1fr 340px; gap: 20px; align-items: start;">
+
+        <!-- spending chart (sketchy border) -->
+        <div style="background: #ffffff; border: 3px solid #1a1a1a; border-radius: 20px; box-shadow: 5px 5px 0 #1a1a1a; padding: 22px; position: relative;">
+          <div style="position: absolute; inset: 7px; border: 2px dashed #1a1a1a; border-radius: 15px; opacity: .35; pointer-events: none;"></div>
+          <div style="display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 20px; position: relative;">
+            <div>
+              <div style="font-family: 'Archivo Black', sans-serif; font-size: 20px;">Spending overview</div>
+              <div style="font-size: 13px; color: #6a6a6a; margin-top: 3px;">Last 7 days · daily total</div>
+            </div>
+            <div style="font-family: 'Archivo Black', sans-serif; font-size: 26px;">$284</div>
+          </div>
+          <div style="display: flex; align-items: flex-end; gap: 14px; height: 180px; position: relative;">
+            <sc-for list="{{ chartBars }}" as="b" hint-placeholder-count="7">
+              <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; gap: 8px;">
+                <span style="font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700;">{{ b.amount }}</span>
+                <div style="{{ b.barStyle }}"></div>
+                <span style="font-family: 'Space Mono', monospace; font-size: 11px; color: #6a6a6a;">{{ b.label }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <!-- category breakdown -->
+        <div style="display: flex; flex-direction: column; gap: 14px;">
+          <div style="font-family: 'Archivo Black', sans-serif; font-size: 18px;">By category</div>
+          <sc-for list="{{ categories }}" as="c" hint-placeholder-count="4">
+            <div style="display: flex; align-items: center; gap: 13px; background: #ffffff; border: 3px solid #1a1a1a; border-radius: 15px; box-shadow: 4px 4px 0 #1a1a1a; padding: 13px 15px;">
+              <div style="{{ c.iconWrap }}"><span style="display: flex;" dangerouslySetInnerHTML="{{ c.icon }}"></span></div>
+              <div style="flex: 1; min-width: 0;">
+                <div style="font-weight: 700; font-size: 14.5px;">{{ c.name }}</div>
+                <div style="font-size: 11.5px; color: #7a7a7a; font-family: 'Space Mono', monospace;">{{ c.pct }} of spend</div>
+              </div>
+              <div style="font-family: 'Archivo Black', sans-serif; font-size: 18px;">{{ c.amount }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+
+      <!-- recent transactions -->
+      <div style="background: #ffffff; border: 3px solid #1a1a1a; border-radius: 20px; box-shadow: 5px 5px 0 #1a1a1a; padding: 22px; overflow: hidden;">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+          <div style="font-family: 'Archivo Black', sans-serif; font-size: 20px;">Recent transactions</div>
+          <span style="font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700; background: #FBF3E2; border: 2px solid #1a1a1a; border-radius: 20px; padding: 4px 10px;">imported · GoPay.pdf</span>
+        </div>
+        <div style="display: grid; grid-template-columns: 90px 1fr 150px 100px; gap: 12px; padding: 0 4px 10px; border-bottom: 2.5px solid #1a1a1a; font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700; color: #8a8a8a;">
+          <div>DATE</div><div>DESCRIPTION</div><div>CATEGORY</div><div style="text-align: right;">AMOUNT</div>
+        </div>
+        <sc-for list="{{ transactions }}" as="t" hint-placeholder-count="6">
+          <div style="display: grid; grid-template-columns: 90px 1fr 150px 100px; gap: 12px; align-items: center; padding: 13px 4px; border-bottom: 1.5px solid #eadfc4;">
+            <div style="font-family: 'Space Mono', monospace; font-size: 12.5px; color: #6a6a6a;">{{ t.date }}</div>
+            <div style="font-weight: 600; font-size: 14px;">{{ t.desc }}</div>
+            <div><span style="{{ t.catStyle }}">{{ t.cat }}</span></div>
+            <div style="text-align: right;"><span style="{{ t.amtStyle }}">{{ t.amt }}</span></div>
+          </div>
+        </sc-for>
+      </div>
+
+      <!-- AI recommendation -->
+      <div style="display: flex; align-items: center; gap: 18px; background: #FFD84D; border: 3px solid #1a1a1a; border-radius: 20px; box-shadow: 6px 6px 0 #1a1a1a; padding: 20px 22px;">
+        <div style="flex-shrink: 0; width: 56px; height: 56px; background: #1a1a1a; border-radius: 15px; display: flex; align-items: center; justify-content: center;">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#FFD84D" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8" width="16" height="12" rx="3"></rect><path d="M12 8V4M9 4h6"></path><circle cx="9" cy="14" r="1"></circle><circle cx="15" cy="14" r="1"></circle></svg>
+        </div>
+        <div style="flex: 1;">
+          <div style="display: flex; align-items: center; gap: 9px; margin-bottom: 5px;">
+            <span style="font-family: 'Space Mono', monospace; font-size: 10.5px; font-weight: 700; background: #1a1a1a; color: #FFD84D; padding: 3px 9px; border-radius: 20px;">KARSA AI</span>
+            <span style="font-family: 'Archivo Black', sans-serif; font-size: 17px;">Money tip</span>
+          </div>
+          <p style="margin: 0; font-size: 14.5px; font-weight: 500; line-height: 1.45;">Food &amp; Drink is <b>41%</b> of your week — up 12% from last week. Setting a <b>$90 weekly limit</b> would save you around <b>$28/week</b>. Want me to add it as a budget goal?</p>
+        </div>
+        <button style="flex-shrink: 0; background: #1a1a1a; color: #FFD84D; border: 3px solid #1a1a1a; border-radius: 13px; box-shadow: 3px 3px 0 rgba(0,0,0,.25); padding: 11px 17px; cursor: pointer; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 14px;">Set goal</button>
+      </div>
+
+    </div>
+    </sc-if>
+
+    <!-- ================= HEALTH MANAGER VIEW ================= -->
+    <sc-if value="{{ showHealth }}" hint-placeholder-val="{{ true }}">
+    <div style="display: flex; flex-direction: column; gap: 22px;">
+
+      <!-- top bar with illustration -->
+      <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 20px;">
+        <div>
+          <h1 style="font-family: 'Archivo Black', sans-serif; font-size: 42px; margin: 0; letter-spacing: -1px; line-height: 1;">Health Manager</h1>
+          <p style="margin: 11px 0 0; font-size: 15px; color: #4a4a4a;">Log today's habits — you're on a <b>4-day streak</b>. Keep it up!</p>
+        </div>
+        <svg width="130" height="76" viewBox="0 0 130 76" fill="none" stroke="#1a1a1a" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;">
+          <circle cx="30" cy="16" r="7"></circle>
+          <path d="M30 23v18M30 30l-13 6M30 30l13 6M30 41l-9 16M30 41l9 16"></path>
+          <path d="M74 40c0-9 7-16 7-16s7 7 7 16a7 7 0 0 1-14 0z"></path>
+          <path d="M104 30h18l-2 28h-14z"></path><path d="M105 40h16"></path>
+        </svg>
+      </div>
+
+      <!-- daily tracker widgets -->
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px;">
+
+        <!-- Sleep -->
+        <div style="background: #C9E4CA; border: 3px solid #1a1a1a; border-radius: 18px; box-shadow: 5px 5px 0 #1a1a1a; padding: 18px; display: flex; flex-direction: column; gap: 14px;">
+          <div style="display: flex; align-items: center; justify-content: space-between;">
+            <div style="width: 40px; height: 40px; background: #FBF3E2; border: 2.5px solid #1a1a1a; border-radius: 11px; display: flex; align-items: center; justify-content: center;"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path></svg></div>
+            <span style="font-family: 'Space Mono', monospace; font-size: 10px; font-weight: 700; color: #4a6a52;">{{ health.sleepGoal }}</span>
+          </div>
+          <div style="font-weight: 700; font-size: 14px;">Sleep</div>
+          <div style="display: flex; align-items: center; justify-content: space-between;">
+            <button onClick="{{ health.sleepDec }}" style="width: 34px; height: 34px; background: #fff; border: 2.5px solid #1a1a1a; border-radius: 10px; box-shadow: 2px 2px 0 #1a1a1a; cursor: pointer; font-family: 'Archivo Black', sans-serif; font-size: 18px; line-height: 1;">–</button>
+            <div style="font-family: 'Archivo Black', sans-serif; font-size: 26px; line-height: 1;">{{ health.sleep }}<span style="font-size: 13px;">h</span></div>
+            <button onClick="{{ health.sleepInc }}" style="width: 34px; height: 34px; background: #fff; border: 2.5px solid #1a1a1a; border-radius: 10px; box-shadow: 2px 2px 0 #1a1a1a; cursor: pointer; font-family: 'Archivo Black', sans-serif; font-size: 18px; line-height: 1;">+</button>
+          </div>
+        </div>
+
+        <!-- Water -->
+        <div style="background: #B7D7EA; border: 3px solid #1a1a1a; border-radius: 18px; box-shadow: 5px 5px 0 #1a1a1a; padding: 18px; display: flex; flex-direction: column; gap: 14px;">
+          <div style="display: flex; align-items: center; justify-content: space-between;">
+            <div style="width: 40px; height: 40px; background: #FBF3E2; border: 2.5px solid #1a1a1a; border-radius: 11px; display: flex; align-items: center; justify-content: center;"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3s6 5 6 10a6 6 0 0 1-12 0c0-5 6-10 6-10z"></path></svg></div>
+            <span style="font-family: 'Space Mono', monospace; font-size: 10px; font-weight: 700; color: #3a5a6a;">{{ health.waterGoal }}</span>
+          </div>
+          <div style="font-weight: 700; font-size: 14px;">Water intake</div>
+          <div style="display: flex; gap: 4px; flex-wrap: wrap;">
+            <sc-for list="{{ glasses }}" as="g" hint-placeholder-count="8"><div style="{{ g.style }}"></div></sc-for>
+          </div>
+          <div style="display: flex; align-items: center; justify-content: space-between;">
+            <button onClick="{{ health.waterDec }}" style="width: 34px; height: 34px; background: #fff; border: 2.5px solid #1a1a1a; border-radius: 10px; box-shadow: 2px 2px 0 #1a1a1a; cursor: pointer; font-family: 'Archivo Black', sans-serif; font-size: 18px; line-height: 1;">–</button>
+            <div style="font-family: 'Archivo Black', sans-serif; font-size: 26px; line-height: 1;">{{ health.water }}<span style="font-size: 12px;"> glasses</span></div>
+            <button onClick="{{ health.waterInc }}" style="width: 34px; height: 34px; background: #fff; border: 2.5px solid #1a1a1a; border-radius: 10px; box-shadow: 2px 2px 0 #1a1a1a; cursor: pointer; font-family: 'Archivo Black', sans-serif; font-size: 18px; line-height: 1;">+</button>
+          </div>
+        </div>
+
+        <!-- Exercise -->
+        <div style="background: #FFD84D; border: 3px solid #1a1a1a; border-radius: 18px; box-shadow: 5px 5px 0 #1a1a1a; padding: 18px; display: flex; flex-direction: column; gap: 14px;">
+          <div style="display: flex; align-items: center; justify-content: space-between;">
+            <div style="width: 40px; height: 40px; background: #FBF3E2; border: 2.5px solid #1a1a1a; border-radius: 11px; display: flex; align-items: center; justify-content: center;"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 6.5 17.5 17.5M4 9l2-2M20 15l-2 2M9 4l2 2M15 20l-2-2M3 12l3 3M18 6l3 3"></path></svg></div>
+            <span style="font-family: 'Space Mono', monospace; font-size: 10px; font-weight: 700; color: #7a6420;">{{ health.exGoal }}</span>
+          </div>
+          <div style="font-weight: 700; font-size: 14px;">Exercise</div>
+          <div style="display: flex; align-items: center; justify-content: space-between;">
+            <button onClick="{{ health.exDec }}" style="width: 34px; height: 34px; background: #fff; border: 2.5px solid #1a1a1a; border-radius: 10px; box-shadow: 2px 2px 0 #1a1a1a; cursor: pointer; font-family: 'Archivo Black', sans-serif; font-size: 18px; line-height: 1;">–</button>
+            <div style="font-family: 'Archivo Black', sans-serif; font-size: 26px; line-height: 1;">{{ health.exercise }}<span style="font-size: 13px;">m</span></div>
+            <button onClick="{{ health.exInc }}" style="width: 34px; height: 34px; background: #fff; border: 2.5px solid #1a1a1a; border-radius: 10px; box-shadow: 2px 2px 0 #1a1a1a; cursor: pointer; font-family: 'Archivo Black', sans-serif; font-size: 18px; line-height: 1;">+</button>
+          </div>
+        </div>
+
+        <!-- Mood -->
+        <div style="background: #F9C2D6; border: 3px solid #1a1a1a; border-radius: 18px; box-shadow: 5px 5px 0 #1a1a1a; padding: 18px; display: flex; flex-direction: column; gap: 14px;">
+          <div style="display: flex; align-items: center; justify-content: space-between;">
+            <div style="width: 40px; height: 40px; background: #FBF3E2; border: 2.5px solid #1a1a1a; border-radius: 11px; display: flex; align-items: center; justify-content: center;"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M8 14c1.2 1.5 6.8 1.5 8 0"></path><circle cx="9" cy="10" r="1" fill="#1a1a1a"></circle><circle cx="15" cy="10" r="1" fill="#1a1a1a"></circle></svg></div>
+            <span style="font-family: 'Space Mono', monospace; font-size: 10px; font-weight: 700; color: #8a4a62;">TODAY</span>
+          </div>
+          <div style="font-weight: 700; font-size: 14px;">Mood</div>
+          <div style="display: flex; gap: 7px;">
+            <sc-for list="{{ moods }}" as="m" hint-placeholder-count="4"><div onClick="{{ m.onClick }}" style="{{ m.style }}"><span style="display: flex;" dangerouslySetInnerHTML="{{ m.icon }}"></span></div></sc-for>
+          </div>
+        </div>
+      </div>
+
+      <!-- weekly trend chart -->
+      <div style="background: #ffffff; border: 3px solid #1a1a1a; border-radius: 20px; box-shadow: 5px 5px 0 #1a1a1a; padding: 22px; position: relative;">
+        <div style="position: absolute; inset: 7px; border: 2px dashed #1a1a1a; border-radius: 15px; opacity: .3; pointer-events: none;"></div>
+        <div style="display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 18px; position: relative;">
+          <div>
+            <div style="font-family: 'Archivo Black', sans-serif; font-size: 20px;">Weekly sleep trend</div>
+            <div style="font-size: 13px; color: #6a6a6a; margin-top: 3px;">Hours per night · last 7 days</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px; background: #C9E4CA; border: 2.5px solid #1a1a1a; border-radius: 20px; padding: 5px 12px;"><span style="font-family: 'Archivo Black', sans-serif; font-size: 15px;">6.9h</span><span style="font-size: 12px; font-weight: 600;">avg</span></div>
+        </div>
+        <div style="position: relative;" dangerouslySetInnerHTML="{{ trendSvg }}"></div>
+      </div>
+
+      <!-- AI recommendation -->
+      <div style="display: flex; align-items: center; gap: 18px; background: #C9E4CA; border: 3px solid #1a1a1a; border-radius: 20px; box-shadow: 6px 6px 0 #1a1a1a; padding: 20px 22px;">
+        <div style="flex-shrink: 0; width: 56px; height: 56px; background: #1a1a1a; border-radius: 15px; display: flex; align-items: center; justify-content: center;">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#C9E4CA" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8" width="16" height="12" rx="3"></rect><path d="M12 8V4M9 4h6"></path><circle cx="9" cy="14" r="1"></circle><circle cx="15" cy="14" r="1"></circle></svg>
+        </div>
+        <div style="flex: 1;">
+          <div style="display: flex; align-items: center; gap: 9px; margin-bottom: 5px;">
+            <span style="font-family: 'Space Mono', monospace; font-size: 10.5px; font-weight: 700; background: #1a1a1a; color: #C9E4CA; padding: 3px 9px; border-radius: 20px;">KARSA AI</span>
+            <span style="font-family: 'Archivo Black', sans-serif; font-size: 17px;">Health tip</span>
+          </div>
+          <p style="margin: 0; font-size: 14.5px; font-weight: 500; line-height: 1.45;">Your sleep dipped to <b>5.5h on Wednesday</b> and your weekly average is under 7h. Try winding down 30 min earlier tonight — and you're <b>2 glasses short</b> on water. A short evening walk could help both.</p>
+        </div>
+        <button style="flex-shrink: 0; background: #1a1a1a; color: #C9E4CA; border: 3px solid #1a1a1a; border-radius: 13px; box-shadow: 3px 3px 0 rgba(0,0,0,.25); padding: 11px 17px; cursor: pointer; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 14px;">Log walk</button>
+      </div>
+
+    </div>
+    </sc-if>
+
+    <!-- ================= SKINCARE ASSISTANT VIEW ================= -->
+    <sc-if value="{{ showSkin }}" hint-placeholder-val="{{ true }}">
+    <div style="display: flex; flex-direction: column; gap: 22px; min-height: 0;">
+
+      <!-- top bar with icon accents -->
+      <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 20px;">
+        <div>
+          <h1 style="font-family: 'Archivo Black', sans-serif; font-size: 42px; margin: 0; letter-spacing: -1px; line-height: 1;">Skincare Assistant</h1>
+          <p style="margin: 11px 0 0; font-size: 15px; color: #4a4a4a;">Chat about your routine — I remember your past consultations.</p>
+        </div>
+        <svg width="120" height="72" viewBox="0 0 120 72" fill="none" stroke="#1a1a1a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;">
+          <path d="M20 26h16v30a4 4 0 0 1-4 4H24a4 4 0 0 1-4-4z"></path><path d="M24 26v-6h8v6M22 36h12"></path>
+          <path d="M60 22s7 8 7 15a7 7 0 0 1-14 0c0-7 7-15 7-15z"></path>
+          <path d="M88 24h14v6l-3 26a3 3 0 0 1-3 3h-2a3 3 0 0 1-3-3l-3-26z"></path><path d="M88 34h14"></path>
+        </svg>
+      </div>
+
+      <!-- history + chat -->
+      <div style="display: grid; grid-template-columns: 280px 1fr; gap: 20px; align-items: stretch;">
+
+        <!-- history panel -->
+        <aside style="background: #ffffff; border: 3px solid #1a1a1a; border-radius: 18px; box-shadow: 5px 5px 0 #1a1a1a; padding: 18px; display: flex; flex-direction: column; gap: 13px;">
+          <div style="font-family: 'Archivo Black', sans-serif; font-size: 17px;">Skin history</div>
+          <sc-for list="{{ consults }}" as="c" hint-placeholder-count="4">
+            <div style="background: #FBF3E2; border: 2.5px solid #1a1a1a; border-radius: 13px; box-shadow: 3px 3px 0 #1a1a1a; padding: 12px 13px;">
+              <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 7px;">
+                <span style="font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700; color: #7a7a7a;">{{ c.date }}</span>
+                <span style="{{ c.tagStyle }}">{{ c.tag }}</span>
+              </div>
+              <div style="font-weight: 700; font-size: 13.5px; line-height: 1.2;">{{ c.title }}</div>
+              <div style="font-size: 12px; color: #6a6a6a; margin-top: 4px; line-height: 1.35;">{{ c.note }}</div>
+            </div>
+          </sc-for>
+        </aside>
+
+        <!-- chat interface -->
+        <div style="display: flex; flex-direction: column; background: #F9C2D6; border: 3px solid #1a1a1a; border-radius: 20px; box-shadow: 6px 6px 0 #1a1a1a; overflow: hidden; height: 560px;">
+          <div style="display: flex; align-items: center; gap: 11px; padding: 15px 18px; border-bottom: 3px solid #1a1a1a; background: #ffffff;">
+            <div style="width: 40px; height: 40px; background: #1a1a1a; border-radius: 11px; display: flex; align-items: center; justify-content: center;">
+              <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#F9C2D6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8" width="16" height="12" rx="3"></rect><path d="M12 8V4M9 4h6"></path><circle cx="9" cy="14" r="1"></circle><circle cx="15" cy="14" r="1"></circle></svg>
+            </div>
+            <div style="line-height: 1.15;">
+              <div style="font-family: 'Archivo Black', sans-serif; font-size: 15px;">Karsa Assistant</div>
+              <div style="display: flex; align-items: center; gap: 6px; font-size: 11.5px; color: #6a6a6a; font-weight: 600;"><span style="width: 8px; height: 8px; border-radius: 50%; background: #3aa35e; border: 1.5px solid #1a1a1a;"></span>Online</div>
+            </div>
+          </div>
+
+          <div style="flex: 1; overflow-y: auto; padding: 18px; display: flex; flex-direction: column; gap: 15px;">
+            <sc-for list="{{ chat }}" as="m" hint-placeholder-count="5">
+              <div style="{{ m.rowStyle }}">
+                <div>
+                  <div style="{{ m.whoStyle }}">{{ m.who }}</div>
+                  <div style="{{ m.bubbleStyle }}">{{ m.text }}</div>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 12px; padding: 14px 16px; border-top: 3px solid #1a1a1a; background: #ffffff;">
+            <input value="{{ draft }}" onInput="{{ onDraft }}" onKeyDown="{{ onKey }}" placeholder="Ask about your routine…" style="flex: 1; border: 3px solid #1a1a1a; border-radius: 13px; padding: 12px 15px; font-family: 'Space Grotesk', sans-serif; font-size: 14.5px; outline: none; background: #FBF3E2; color: #1a1a1a;" />
+            <button onClick="{{ sendMsg }}" style="flex-shrink: 0; display: flex; align-items: center; gap: 7px; background: #F9C2D6; border: 3px solid #1a1a1a; border-radius: 13px; box-shadow: 4px 4px 0 #1a1a1a; padding: 11px 17px; cursor: pointer; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 14px;">
+              Send
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4z"></path></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    </sc-if>
+
+    <!-- ================= PLACEHOLDER (other modules) ================= -->
+    <sc-if value="{{ showOther }}" hint-placeholder-val="{{ true }}">
+    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 16px; min-height: 400px; background: #ffffff; border: 3px dashed #1a1a1a; border-radius: 20px; padding: 40px;">
+      <div style="width: 64px; height: 64px; background: #FFD84D; border: 3px solid #1a1a1a; border-radius: 16px; box-shadow: 4px 4px 0 #1a1a1a; display: flex; align-items: center; justify-content: center;">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M3 8l9 5 9-5"></path></svg>
+      </div>
+      <h2 style="font-family: 'Archivo Black', sans-serif; font-size: 26px; margin: 0;">{{ otherTitle }}</h2>
+      <p style="margin: 0; font-size: 15px; color: #6a6a6a; max-width: 340px;">This module is coming soon. Head back to the Dashboard or Task Manager to keep going.</p>
+    </div>
+    </sc-if>
+
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = {
+    active: "Dashboard", view: "List", done: {}, water: 6, sleep: 7.5, exercise: 30, mood: "good",
+    draft: "",
+    chat: [
+      { role: "ai", text: "Hi Maya! I'm your skincare assistant. How's your skin feeling today?" },
+      { role: "user", text: "A bit dry around my cheeks, and some redness after cleansing." },
+      { role: "ai", text: "Dryness plus post-cleanse redness often points to a barrier that needs gentler care. Are you using a foaming cleanser right now?" },
+      { role: "user", text: "Yes, a foaming one twice a day." },
+      { role: "ai", text: "That's likely stripping your skin. Try a cream cleanser in the morning, keep foaming to PM only, and layer a niacinamide serum before moisturiser. Want me to set an evening reminder?" }
+    ]
+  };
+
+  sendMsg = () => {
+    const t = (this.state.draft || "").trim();
+    if (!t) return;
+    this.setState((s) => ({ chat: [...s.chat, { role: "user", text: t }], draft: "" }));
+    setTimeout(() => {
+      this.setState((s) => ({ chat: [...s.chat, { role: "ai", text: "Got it — I'll factor that in. Consistency matters most, so let's keep your routine simple and track how your skin responds over the next week." }] }));
+    }, 700);
+  };
+  onDraft = (e) => this.setState({ draft: e.target.value });
+  onKey = (e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); this.sendMsg(); } };
+
+  icons = {
+    Dashboard: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>',
+    "Health Manager": '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 5.6a5.5 5.5 0 0 0-7.8 0L12 6.6l-1-1a5.5 5.5 0 0 0-7.8 7.8L12 22l8.8-8.6a5.5 5.5 0 0 0 0-7.8z"/></svg>',
+    "Finance Manager": '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2.5"/><path d="M2 10h20"/><path d="M6 15h4"/></svg>',
+    "Task Manager": '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6h11M9 12h11M9 18h11"/><path d="M4 6l1 1 2-2M4 12l1 1 2-2M4 18l1 1 2-2"/></svg>',
+    "Skincare Assistant": '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3s6 5 6 10a6 6 0 0 1-12 0c0-5 6-10 6-10z"/></svg>',
+    Settings: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg>'
+  };
+
+  accents = {
+    Dashboard: "#FFD84D",
+    "Health Manager": "#C9E4CA",
+    "Finance Manager": "#FFD84D",
+    "Task Manager": "#B7D7EA",
+    "Skincare Assistant": "#F9C2D6",
+    Settings: "#E4D5F7"
+  };
+
+  renderVals() {
+    const labels = ["Dashboard", "Health Manager", "Finance Manager", "Task Manager", "Skincare Assistant", "Settings"];
+    const navItems = labels.map((label) => {
+      const isActive = this.state.active === label;
+      const base = "display:flex;align-items:center;gap:12px;width:100%;text-align:left;padding:11px 13px;border-radius:13px;cursor:pointer;font-family:'Space Grotesk',sans-serif;transition:transform .08s ease;";
+      const style = isActive
+        ? base + "background:" + this.accents[label] + ";border:2.5px solid #1a1a1a;box-shadow:3px 3px 0 #1a1a1a;"
+        : base + "background:transparent;border:2.5px solid transparent;color:#1a1a1a;";
+      return {
+        label,
+        icon: { __html: this.icons[label] },
+        style,
+        onClick: () => this.setState({ active: label })
+      };
+    });
+
+    const qBase = "display:flex;align-items:center;justify-content:space-between;width:100%;padding:15px 18px;background:#fff;border:3px solid #1a1a1a;border-radius:14px;box-shadow:4px 4px 0 #1a1a1a;cursor:pointer;font-family:'Space Grotesk',sans-serif;";
+    const quickLinks = [
+      { label: "Add Task", bg: "#B7D7EA" },
+      { label: "Log Expense", bg: "#FFD84D" },
+      { label: "Log Water", bg: "#C9E4CA" },
+      { label: "New Note", bg: "#F9C2D6" }
+    ].map((q) => ({ label: q.label, style: qBase + "background:" + q.bg + ";" }));
+
+    // ---- view flags ----
+    const showDashboard = this.state.active === "Dashboard";
+    const showTasks = this.state.active === "Task Manager";
+    const showFinance = this.state.active === "Finance Manager";
+    const showHealth = this.state.active === "Health Manager";
+    const showSkin = this.state.active === "Skincare Assistant";
+    const showOther = !showDashboard && !showTasks && !showFinance && !showHealth && !showSkin;
+    const otherTitle = this.state.active;
+    const listView = this.state.view === "List";
+    const calView = this.state.view === "Calendar";
+
+    // ---- view toggle ----
+    const togBase = "font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14px;padding:8px 18px;border-radius:10px;cursor:pointer;border:2.5px solid transparent;";
+    const togOn = togBase + "background:#B7D7EA;border-color:#1a1a1a;box-shadow:2px 2px 0 #1a1a1a;";
+    const togOff = togBase + "background:transparent;color:#5a5a5a;";
+    const listBtnStyle = listView ? togOn : togOff;
+    const calBtnStyle = calView ? togOn : togOff;
+    const setList = () => this.setState({ view: "List" });
+    const setCal = () => this.setState({ view: "Calendar" });
+
+    // ---- tasks ----
+    const star = (f) => '<svg width="15" height="15" viewBox="0 0 24 24" fill="' + (f ? "#1a1a1a" : "none") + '" stroke="#1a1a1a" stroke-width="1.6" stroke-linejoin="round"><path d="M12 2.5l2.9 6 6.6.6-5 4.4 1.5 6.5L12 17.6 6 20.5l1.5-6.5-5-4.4 6.6-.6z"/></svg>';
+    const starsHtml = (n) => { let s = ""; for (let i = 1; i <= 5; i++) s += star(i <= n); return s; };
+    const prioBg = { High: "#F58FB0", Medium: "#FFD84D", Low: "#C9E4CA" };
+    const badgeBase = "font-family:'Space Mono',monospace;font-size:10.5px;font-weight:700;letter-spacing:.3px;padding:3px 9px;border:2px solid #1a1a1a;border-radius:20px;";
+    const checkSvg = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>';
+    const rawTasks = [
+      { id: "t1", title: "Submit Data Structures Assignment", due: "Due today · Jul 6", priority: "High", diff: 4, source: "myITS Classroom" },
+      { id: "t2", title: "Weekly grocery budget review", due: "Tomorrow · Jul 7", priority: "Medium", diff: 2, source: "Finance Manager" },
+      { id: "t3", title: "Read Chapter 5 — Algorithms", due: "Wed · Jul 8", priority: "Medium", diff: 3, source: "myITS Classroom" },
+      { id: "t4", title: "Book dermatologist appointment", due: "Thu · Jul 9", priority: "Low", diff: 1, source: "Skincare Assistant" },
+      { id: "t5", title: "Prepare project presentation slides", due: "Fri · Jul 10", priority: "High", diff: 5, source: "Team Project" }
+    ];
+    const tasks = rawTasks.map((t) => {
+      const done = !!this.state.done[t.id];
+      return {
+        title: t.title,
+        due: t.due,
+        priorityLabel: t.priority.toUpperCase(),
+        badgeStyle: badgeBase + "background:" + prioBg[t.priority] + ";",
+        sourceStyle: badgeBase + "background:#FBF3E2;",
+        source: t.source,
+        stars: { __html: starsHtml(t.diff) },
+        diffLabel: t.diff + "/5",
+        accentStyle: "width:8px;align-self:stretch;border-radius:6px;border:2px solid #1a1a1a;background:" + prioBg[t.priority] + ";",
+        titleStyle: "margin:0;font-family:'Archivo Black',sans-serif;font-size:17px;letter-spacing:-.3px;" + (done ? "text-decoration:line-through;color:#9a9a9a;" : ""),
+        checkStyle: "flex-shrink:0;width:28px;height:28px;border:2.5px solid #1a1a1a;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:2px 2px 0 #1a1a1a;background:" + (done ? "#1a1a1a" : "#fff") + ";",
+        checkInner: { __html: done ? checkSvg : "" },
+        onToggle: () => this.setState((s) => ({ done: { ...s.done, [t.id]: !s.done[t.id] } }))
+      };
+    });
+    const openCount = tasks.filter((t) => !this.state.done[rawTasks.find((r) => r.title === t.title).id]).length;
+
+    // ---- calendar (July 2026, Jul 1 = Wed) ----
+    const deadlineColors = { 6: "#F58FB0", 7: "#FFD84D", 8: "#FFD84D", 9: "#C9E4CA", 10: "#F58FB0" };
+    const calCells = [];
+    for (let i = 0; i < 3; i++) calCells.push({ bigHtml: { __html: "" }, miniHtml: { __html: "" } });
+    for (let d = 1; d <= 31; d++) {
+      const isToday = d === 6;
+      const dc = deadlineColors[d];
+      const bigBg = isToday ? "background:#B7D7EA;" : "background:#fff;";
+      const bigDot = dc ? '<span style="display:block;margin-top:5px;height:6px;border-radius:6px;background:' + dc + ';border:1.5px solid #1a1a1a;"></span>' : "";
+      const big = '<div style="min-height:66px;border:2.5px solid #1a1a1a;border-radius:11px;padding:7px 9px;' + bigBg + '"><span style="font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:14px;">' + d + '</span>' + bigDot + '</div>';
+      const miniDot = dc ? '<span style="position:absolute;bottom:2px;left:50%;transform:translateX(-50%);width:5px;height:5px;border-radius:50%;background:' + dc + ';border:1px solid #1a1a1a;"></span>' : "";
+      const miniBg = isToday ? "background:#B7D7EA;border:2px solid #1a1a1a;" : "";
+      const mini = '<div style="position:relative;aspect-ratio:1;display:flex;align-items:center;justify-content:center;border-radius:8px;font-size:12px;font-weight:600;font-family:\'Space Grotesk\',sans-serif;' + miniBg + '">' + d + miniDot + '</div>';
+      calCells.push({ bigHtml: { __html: big }, miniHtml: { __html: mini } });
+    }
+    const upcoming = [
+      { day: "06", mon: "JUL", label: "Data Structures Assignment", color: "#F58FB0" },
+      { day: "07", mon: "JUL", label: "Grocery budget review", color: "#FFD84D" },
+      { day: "10", mon: "JUL", label: "Presentation slides", color: "#F58FB0" }
+    ];
+
+    // ---- finance ----
+    const chartRaw = [
+      { m: "Mon", v: 42 }, { m: "Tue", v: 68 }, { m: "Wed", v: 31 },
+      { m: "Thu", v: 90 }, { m: "Fri", v: 54 }, { m: "Sat", v: 76 }, { m: "Sun", v: 23 }
+    ];
+    const chartMax = 100;
+    const chartBars = chartRaw.map((b, i) => ({
+      label: b.m,
+      amount: "$" + b.v,
+      barStyle: "width:100%;height:" + Math.round((b.v / chartMax) * 150) + "px;border:2.5px solid #1a1a1a;border-radius:8px 8px 0 0;background:" + (i === 3 ? "#F58FB0" : "#FFD84D") + ";box-shadow:2px 2px 0 #1a1a1a;transition:height .2s;"
+    }));
+
+    const catRaw = [
+      { name: "Food & Drink", amount: "$118", pct: "41%", bg: "#FFD84D", icon: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 3v7a3 3 0 0 0 6 0V3M7 3v18M17 3c-1.5 0-3 1.5-3 5s1.5 4 3 4v9"/></svg>' },
+      { name: "Transport", amount: "$64", pct: "22%", bg: "#B7D7EA", icon: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17h14M6 17V9l2-4h8l2 4v8"/><circle cx="8" cy="17" r="1.6"/><circle cx="16" cy="17" r="1.6"/></svg>' },
+      { name: "Shopping", amount: "$71", pct: "25%", bg: "#F9C2D6", icon: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v13a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V6l-3-4z"/><path d="M3 6h18M16 10a4 4 0 0 1-8 0"/></svg>' },
+      { name: "Bills", amount: "$31", pct: "12%", bg: "#C9E4CA", icon: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3v18l2-1.5L9 21l2-1.5L13 21l2-1.5L17 21l2-1.5V3l-2 1.5L15 3l-2 1.5L11 3 9 4.5 7 3z"/><path d="M9 8h6M9 12h6"/></svg>' }
+    ];
+    const categories = catRaw.map((c) => ({ name: c.name, amount: c.amount, pct: c.pct, icon: { __html: c.icon }, iconWrap: "width:44px;height:44px;background:" + c.bg + ";border:2.5px solid #1a1a1a;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;" }));
+
+    const txRaw = [
+      { date: "Jul 05", desc: "Warung Bu Sri — lunch", cat: "Food & Drink", amt: "-$6.20", bg: "#FFD84D" },
+      { date: "Jul 05", desc: "GoRide to campus", cat: "Transport", amt: "-$2.10", bg: "#B7D7EA" },
+      { date: "Jul 04", desc: "Tokopedia — notebook", cat: "Shopping", amt: "-$14.90", bg: "#F9C2D6" },
+      { date: "Jul 04", desc: "Electricity top-up", cat: "Bills", amt: "-$9.00", bg: "#C9E4CA" },
+      { date: "Jul 03", desc: "Kopi Kenangan", cat: "Food & Drink", amt: "-$3.40", bg: "#FFD84D" },
+      { date: "Jul 03", desc: "GoPay cashback", cat: "Income", amt: "+$1.50", bg: "#C9E4CA" }
+    ];
+    const transactions = txRaw.map((t) => ({
+      date: t.date, desc: t.desc, cat: t.cat, amt: t.amt,
+      catStyle: "font-family:'Space Mono',monospace;font-size:10.5px;font-weight:700;padding:3px 9px;border:2px solid #1a1a1a;border-radius:20px;background:" + t.bg + ";white-space:nowrap;",
+      amtStyle: "font-family:'Archivo Black',sans-serif;font-size:15px;white-space:nowrap;color:" + (t.amt[0] === "+" ? "#1f7a3d" : "#1a1a1a") + ";"
+    }));
+
+    // ---- health trackers ----
+    const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
+    const bump = (key, delta, lo, hi) => () => this.setState((s) => ({ [key]: clamp(Math.round((s[key] + delta) * 10) / 10, lo, hi) }));
+    const health = {
+      sleep: this.state.sleep, sleepGoal: "Goal 8h",
+      water: this.state.water, waterGoal: "Goal 8",
+      exercise: this.state.exercise, exGoal: "Goal 45m",
+      sleepDec: bump("sleep", -0.5, 0, 14), sleepInc: bump("sleep", 0.5, 0, 14),
+      waterDec: bump("water", -1, 0, 12), waterInc: bump("water", 1, 0, 12),
+      exDec: bump("exercise", -5, 0, 180), exInc: bump("exercise", 5, 0, 180)
+    };
+    // water glasses row
+    const glasses = [];
+    for (let i = 1; i <= 8; i++) {
+      const on = i <= this.state.water;
+      glasses.push({ style: "width:14px;height:19px;border:2px solid #1a1a1a;border-radius:3px 3px 6px 6px;background:" + (on ? "#7FC8A9" : "#FBF3E2") + ";" });
+    }
+    // mood faces
+    const face = (d) => '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><circle cx="8.5" cy="10" r="1.1" fill="#1a1a1a"/><circle cx="15.5" cy="10" r="1.1" fill="#1a1a1a"/>' + d + '</svg>';
+    const moodDefs = [
+      { id: "bad", d: '<path d="M8 16.5c1.2-1.5 6.8-1.5 8 0"/>' },
+      { id: "meh", d: '<path d="M8.5 15.5h7"/>' },
+      { id: "good", d: '<path d="M8 14c1.2 1.5 6.8 1.5 8 0"/>' },
+      { id: "great", d: '<path d="M7.5 13.5c1.5 2.5 7.5 2.5 9 0"/>' }
+    ];
+    const moods = moodDefs.map((m) => {
+      const sel = this.state.mood === m.id;
+      return {
+        icon: { __html: face(m.d) },
+        style: "flex:1;display:flex;align-items:center;justify-content:center;padding:9px 0;border:2.5px solid #1a1a1a;border-radius:11px;cursor:pointer;background:" + (sel ? "#C9E4CA" : "#FBF3E2") + ";box-shadow:" + (sel ? "2px 2px 0 #1a1a1a" : "none") + ";",
+        onClick: () => this.setState({ mood: m.id })
+      };
+    });
+
+    // ---- weekly trend line chart (sketchy) ----
+    const sleepWk = [6.5, 7, 5.5, 8, 7, 6.5, this.state.sleep];
+    const dayLbl = ["M", "T", "W", "T", "F", "S", "S"];
+    const cw = 660, ch = 190, padL = 30, padR = 20, padT = 20, padB = 34;
+    const lo = 4, hi = 10;
+    const px = (i) => padL + i * ((cw - padL - padR) / 6);
+    const py = (v) => padT + (1 - (clamp(v, lo, hi) - lo) / (hi - lo)) * (ch - padT - padB);
+    let poly = "", area = "M" + px(0) + " " + py(sleepWk[0]);
+    let dots = "", axisLabels = "";
+    sleepWk.forEach((v, i) => {
+      poly += (i === 0 ? "M" : "L") + px(i).toFixed(1) + " " + py(v).toFixed(1) + " ";
+      if (i > 0) area += " L" + px(i).toFixed(1) + " " + py(v).toFixed(1);
+      dots += '<circle cx="' + px(i).toFixed(1) + '" cy="' + py(v).toFixed(1) + '" r="5" fill="#fff" stroke="#1a1a1a" stroke-width="2.5"/>';
+      axisLabels += '<text x="' + px(i).toFixed(1) + '" y="' + (ch - 10) + '" text-anchor="middle" font-family="Space Mono, monospace" font-size="12" fill="#8a8a8a">' + dayLbl[i] + '</text>';
+    });
+    area += " L" + px(6).toFixed(1) + " " + (ch - padB) + " L" + px(0).toFixed(1) + " " + (ch - padB) + " Z";
+    let grid = "";
+    [5, 7, 9].forEach((g) => { grid += '<line x1="' + padL + '" y1="' + py(g).toFixed(1) + '" x2="' + (cw - padR) + '" y2="' + py(g).toFixed(1) + '" stroke="#e6dcc2" stroke-width="1.5" stroke-dasharray="4 5"/><text x="6" y="' + (py(g) + 4).toFixed(1) + '" font-family="Space Mono, monospace" font-size="10" fill="#b0a58a">' + g + 'h</text>'; });
+    const trendSvg = { __html: '<svg viewBox="0 0 ' + cw + ' ' + ch + '" width="100%" style="display:block;overflow:visible;">' + grid + '<path d="' + area + '" fill="#C9E4CA" opacity="0.55"/><path d="' + poly + '" fill="none" stroke="#1a1a1a" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>' + dots + axisLabels + '</svg>' };
+
+    // ---- skincare ----
+    const consults = [
+      { date: "Jul 02", title: "Barrier repair check-in", tag: "Dryness", bg: "#F9C2D6", note: "Switched AM to cream cleanser. Redness improving." },
+      { date: "Jun 24", title: "Niacinamide introduced", tag: "Redness", bg: "#B7D7EA", note: "Added 5% niacinamide serum, PM only." },
+      { date: "Jun 15", title: "Routine reset", tag: "Breakouts", bg: "#FFD84D", note: "Cut back actives to 2×/week to calm skin." },
+      { date: "Jun 03", title: "First consultation", tag: "Baseline", bg: "#C9E4CA", note: "Combination skin, mild sensitivity noted." }
+    ].map((c) => ({
+      date: c.date, title: c.title, tag: c.tag, note: c.note,
+      tagStyle: "font-family:'Space Mono',monospace;font-size:9.5px;font-weight:700;padding:2px 8px;border:2px solid #1a1a1a;border-radius:20px;background:" + c.bg + ";"
+    }));
+
+    const chat = this.state.chat.map((m) => {
+      const isUser = m.role === "user";
+      return {
+        text: m.text,
+        rowStyle: "display:flex;" + (isUser ? "justify-content:flex-end;" : "justify-content:flex-start;"),
+        bubbleStyle: "max-width:74%;padding:13px 16px;border:3px solid #1a1a1a;border-radius:16px;box-shadow:4px 4px 0 #1a1a1a;font-size:14.5px;line-height:1.45;font-weight:500;background:" + (isUser ? "#F9C2D6" : "#ffffff") + ";" + (isUser ? "border-bottom-right-radius:5px;" : "border-bottom-left-radius:5px;"),
+        who: isUser ? "YOU" : "KARSA AI",
+        whoStyle: "font-family:'Space Mono',monospace;font-size:9.5px;font-weight:700;margin-bottom:5px;color:" + (isUser ? "#8a4a62" : "#7a7a7a") + ";text-align:" + (isUser ? "right" : "left") + ";"
+      };
+    });
+
+    return {
+      navItems, quickLinks,
+      showDashboard, showTasks, showFinance, showHealth, showSkin, showOther, otherTitle,
+      listView, calView, listBtnStyle, calBtnStyle, setList, setCal,
+      tasks, openCount, calCells, upcoming,
+      chartBars, categories, transactions,
+      health, glasses, moods, trendSvg,
+      consults, chat, draft: this.state.draft,
+      sendMsg: this.sendMsg, onDraft: this.onDraft, onKey: this.onKey
+    };
+  }
+}
+</script>
+</body>
+</html>

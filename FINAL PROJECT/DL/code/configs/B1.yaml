@@ -1,0 +1,18 @@
+# B1 — in-domain UIEB ablation: train on UIEB-800, validate/test on Test-U90.
+# Recipe = A5 (best so far: reference-anchored physics + colour loss). The point is a
+# like-for-like comparison with published baselines, which all train on UIEB-800 and
+# report on the same 90-image split — unlike A1-A5 which train cross-domain on LSUI.
+#
+# NOTE: eval MUST use --u90 (the other 800 are training images; full-890 would leak).
+# 300 epochs: at 150 the best val_psnr landed on the final epoch with LR already at the
+# cosine floor — undertrained. Baselines train 200-800 epochs (from scratch); we fine-tune
+# pretrained so 300 sits in between. ~15s/epoch -> ~75 min total.
+variant: B1
+use_pinn: true
+use_dino: true
+train_data: uieb
+train:
+  num_epochs: 300
+loss:
+  w_color: 0.2
+  phys_anchor: true

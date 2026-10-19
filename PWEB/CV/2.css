@@ -1,0 +1,218 @@
+@import url('https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fjalla+One&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fjalla+One&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Rye&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Erica+One&family=Fjalla+One&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Rye&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Chango&family=Erica+One&family=Fjalla+One&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Rubik+Spray+Paint&family=Rye&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Chango&family=Erica+One&family=Fjalla+One&family=Limelight&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Rubik+Spray+Paint&family=Rye&display=swap');
+
+:root {
+    --base-color: #ffffff;
+    --text-color:#000000;
+    --primary-color: #E8E2DB;
+    --secondary-color: #F7F8F0;
+    --accent-color: #E3DBBB;
+    --nav-background: #DBCEA5;
+    --color-1: #FAF3E1;
+    --color-2: #87B6BC;
+    --color-3: #F5F2F2;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    color: var(--text-color)
+}
+
+body {
+    padding: 1em;
+    background-color: var(--primary-color);
+    font-family: 'Poppins', 'fjalla one';
+}
+
+nav {
+    padding: min(1.5em, 5%) min(2em, 5%) 1.5em min(2em, 5%);
+    margin-bottom: 0;
+    background-color: var(--nav-background);
+}
+
+nav ul {
+    display: flex;
+    align-items: center;
+    list-style-type: none;
+    gap: 2em;
+}
+
+nav li:first-child {
+    margin-right: auto;
+    font-family: "Limelight", sans-serif;
+    font-weight: 600;
+    font-size: 40px;
+}
+
+.nav-socials {
+    margin-left: auto;
+}
+
+nav .fa-brands {
+    font-size: 30px;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--text-color);
+}
+
+/* Satu card besar untuk hero + projects */
+.main-card {
+    margin: 2em auto;
+    width: min(100%, 75em);
+    background-color: var(--secondary-color);
+    border-radius: 1em;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+    overflow: hidden;
+}
+
+.hero-section {
+    padding: min(2em, 5%);
+}
+
+/* Garis pemisah antar section */
+.section-divider {
+    border: none;
+    border-top: 3px solid var(--nav-background);
+    margin: 0 min(2em, 5%);
+}
+
+.projects-section {
+    padding: 2.5em min(3em, 5%);
+}
+
+.projects-section > h2 {
+    font-size: 2rem;
+    margin-bottom: .3em;
+}
+
+.section-subtitle {
+    font-size: 1rem;
+    color: #888;
+    margin-bottom: 1.75em;
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.25em;
+}
+
+.project-card {
+    background-color: var(--color-1);
+    border-radius: .75em;
+    padding: 1.5em;
+    border: 1px solid var(--accent-color);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* .project-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+} */
+
+.project-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1em;
+}
+
+.project-tag {
+    font-size: .75rem;
+    font-weight: 600;
+    background-color: var(--accent-color);
+    color: #fff;
+    padding: .25em .75em;
+    border-radius: 2em;
+}
+
+/* .project-icon {
+    font-size: 1.4rem;
+    color: var(--accent-color);
+    opacity: 0.7;
+} */
+
+.project-card h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: .5em;
+}
+
+.project-card p {
+    font-size: .95rem;
+    color: #555;
+    line-height: 1.6;
+}
+
+.flex-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 3em;
+}
+
+.main-card img:not([src$=".svg"]) {
+    max-width: 100%;
+    border-radius: 1em;
+    object-fit: cover;
+    object-position: bottom;
+}
+
+.text-container {
+    flex: 0 1 34em;
+}
+
+h1 {
+    font-size: 2.5rem;
+}
+
+.text-container p {
+    margin: .75em 0 1em 0;
+    font-size: 1.25rem;
+}
+
+.cta-button {
+    display: inline-block;
+    text-decoration: none;
+    padding: .75em 1.5em;
+    background-color: var(--accent-color);
+    color: var(--base-color);
+    border-radius: .5em;
+    font-weight: 600;
+}
+
+h2 {
+    font-size: 2rem;
+    margin-bottom: .5em;
+}
+
+.projects-section p {
+    font-size: 1.25rem;
+    margin-top: 1em;
+}
+
+.projects-section ul {
+    margin-top: .75em;
+    padding-left: 1.25em;
+}
+
+.projects-section ul li {
+    font-size: 1.1rem;
+    margin-bottom: .4em;
+}
+
+.projects-section img {
+    max-width: 100%;
+}

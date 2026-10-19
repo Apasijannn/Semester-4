@@ -1,0 +1,327 @@
+@import url('https://fonts.googleapis.com/css2?family=Limelight&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
+
+:root {
+    --base-color: #ffffff;
+    --text-color: #1a1a1a;
+    --primary-color: #E8E2DB;
+    --secondary-color: #F7F8F0;
+    --accent-color: #C9B97A;
+    --nav-background: #DBCEA5;
+    --card-background: #FAF3E1;
+    --divider-color: #D5CEBC;
+    --subtle-text: #777;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    padding: 1.5em;
+    background-color: var(--primary-color);
+    font-family: 'Poppins', sans-serif;
+    color: var(--text-color);
+}
+
+/* ── Main Card ── */
+.main-card {
+    margin: 0 auto;
+    width: min(100%, 75em);
+    background-color: var(--secondary-color);
+    border-radius: 1em;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+}
+
+/* ── Nav ── */
+nav {
+    background-color: var(--nav-background);
+    padding: 1.25em 2em;
+}
+
+nav ul {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    gap: 1.5em;
+}
+
+nav li:first-child {
+    margin-right: auto;
+    font-family: 'Limelight', cursive;
+    font-size: 1.75rem;
+}
+
+.nav-socials {
+    margin-left: auto;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--text-color);
+    transition: opacity 0.2s;
+}
+
+nav a:hover {
+    opacity: 0.6;
+}
+
+nav .fa-brands {
+    font-size: 1.5rem;
+}
+
+/* ── Hero ── */
+.hero-section {
+    padding: 3em 2em;
+}
+
+.flex-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 3em;
+}
+
+.main-card img:not([src$=".svg"]) {
+    max-width: 100%;
+    border-radius: 1em;
+    object-fit: cover;
+    object-position: top;
+}
+
+.text-container {
+    flex: 0 1 34em;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5em;
+}
+
+.text-container p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #444;
+    margin-bottom: 1.5em;
+}
+
+.cta-button {
+    display: inline-block;
+    text-decoration: none;
+    padding: 0.75em 1.75em;
+    background-color: var(--accent-color);
+    color: var(--base-color);
+    border-radius: 0.5em;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: background-color 0.2s;
+}
+
+.cta-button:hover {
+    background-color: #b8a45e;
+}
+
+/* ── Divider ── */
+.section-divider {
+    border: none;
+    border-top: 2px solid var(--divider-color);
+    margin: 0 2em;
+}
+
+/* ── Projects ── */
+.projects-section {
+    padding: 2.5em 2em;
+}
+
+/* ── Plans ── */
+.plans-section {
+    padding: 2.5em 2em;
+}
+
+/* ── Shared section styles ── */
+h2 {
+    font-size: 1.75rem;
+    margin-bottom: 0.25em;
+}
+
+.section-subtitle {
+    font-size: 0.95rem;
+    color: var(--subtle-text);
+    margin-bottom: 1.5em;
+}
+
+/* ── Timeline ── */
+.timeline {
+    position: relative;
+    padding: 1em 0 1em 0;
+    margin-top: 0.5em;
+}
+
+/* Vertical line */
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 7.5em;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, transparent, var(--accent-color) 5%, var(--accent-color) 95%, transparent);
+}
+
+.timeline-item {
+    display: flex;
+    gap: 2em;
+    align-items: flex-start;
+    margin-bottom: 2.5em;
+    position: relative;
+    animation: fadeSlideIn 0.5s ease both;
+}
+
+.timeline-item:nth-child(1) { animation-delay: 0.05s; }
+.timeline-item:nth-child(2) { animation-delay: 0.15s; }
+.timeline-item:nth-child(3) { animation-delay: 0.25s; }
+
+@keyframes fadeSlideIn {
+    from { opacity: 0; transform: translateX(-18px); }
+    to   { opacity: 1; transform: translateX(0); }
+}
+
+.timeline-item:last-child {
+    margin-bottom: 0;
+}
+
+.timeline-label {
+    flex: 0 0 7.5em;
+    text-align: right;
+    padding-right: 0;
+    padding-top: 0.85em;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--accent-color);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    line-height: 1.3;
+}
+
+/* Dot on the line */
+.timeline-dot {
+    position: absolute;
+    left: calc(7.5em + 1px);
+    transform: translateX(-50%);
+    top: 1em;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background-color: var(--accent-color);
+    border: 3px solid var(--secondary-color);
+    box-shadow: 0 0 0 2px var(--accent-color);
+    transition: transform 0.2s;
+    flex-shrink: 0;
+}
+
+.timeline-item:hover .timeline-dot {
+    transform: translateX(-50%) scale(1.25);
+}
+
+.timeline-content {
+    flex: 1;
+    margin-left: 2em;
+    background-color: var(--card-background);
+    border-radius: 0.75em;
+    padding: 1.25em 1.5em;
+    border: 1px solid var(--divider-color);
+    transition: transform 0.2s, box-shadow 0.2s;
+    position: relative;
+}
+
+/* Little arrow pointing left toward the line */
+.timeline-content::before {
+    content: '';
+    position: absolute;
+    left: -8px;
+    top: 1.1em;
+    width: 0;
+    height: 0;
+    border-top: 7px solid transparent;
+    border-bottom: 7px solid transparent;
+    border-right: 8px solid var(--divider-color);
+}
+
+.timeline-content::after {
+    content: '';
+    position: absolute;
+    left: -6px;
+    top: 1.1em;
+    width: 0;
+    height: 0;
+    border-top: 7px solid transparent;
+    border-bottom: 7px solid transparent;
+    border-right: 8px solid var(--card-background);
+}
+
+.timeline-item:hover .timeline-content {
+    transform: translateX(4px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+
+.timeline-content-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75em;
+    margin-bottom: 0.5em;
+}
+
+.timeline-icon {
+    font-size: 1.1rem;
+    color: var(--accent-color);
+}
+
+.timeline-content h3 {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.timeline-content p {
+    font-size: 0.88rem;
+    color: var(--subtle-text);
+    line-height: 1.65;
+    margin-top: 0.15em;
+}
+
+/* ── Plan Cards ── */
+.plans-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.25em;
+}
+
+.plan-card {
+    background-color: var(--card-background);
+    border-radius: 0.75em;
+    padding: 1.5em;
+    border: 1px solid var(--divider-color);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75em;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.plan-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.07);
+}
+
+.plan-icon {
+    font-size: 1.5rem;
+    color: var(--accent-color);
+}
+
+.plan-card p {
+    font-size: 0.9rem;
+    color: var(--subtle-text);
+    line-height: 1.6;
+}

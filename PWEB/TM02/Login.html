@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<style>
+    h2 {
+        text-align: center;
+    }
+
+    form {
+        border: 3px solid #f1f1f1;
+        width: 300px;
+        margin: auto;
+        padding: 16px;
+    }
+    
+    input[type=text], input[type=password] {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+    }
+
+    legend {
+        font-size: 24px;
+        font-weight: bold;
+        text-align: center;
+    }
+
+</style>
+
+<title>Login Form</title>
+
+<body>
+    
+    <form action="/action_page.php">
+        <fieldset>
+            <legend>Login</legend>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username"><br><br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password"><br><br>
+            <input type="checkbox" id="remember" name="remember" value="Remember me">
+            <label for="remember">Remember me</label><br><br>
+            <input type="submit" value="Login">
+        </fieldset>
+    </form>
+
+</body>
+
+</html>

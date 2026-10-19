@@ -1,0 +1,45 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Pasar Cuan"
+run/main_scene="uid://wyt30y2mntw6"
+config/features=PackedStringArray("4.6", "Forward Plus")
+boot_splash/stretch_mode=4
+boot_splash/use_filter=false
+boot_splash/image="uid://chm0l81tcxr54"
+boot_splash/minimum_display_time=1000
+
+[audio]
+
+buses/default_bus_layout=""
+
+[autoload]
+
+EconomyManager="*uid://b3meeg6aalx0d"
+TimeManager="*uid://royl13p4grc3"
+BackgroundMusic="*uid://cy62ikxabjhp1"
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+mouse_cursor/custom_image="uid://bj1ewothscdrp"
+
+[physics]
+
+3d/physics_engine="Jolt Physics"
+
+[rendering]
+
+rendering_device/driver.windows="d3d12"
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"

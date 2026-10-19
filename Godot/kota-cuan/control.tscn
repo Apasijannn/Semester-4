@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://c8btosydshj0d"]
+
+[node name="Control" type="Control" unique_id=75784871]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="OptionButton" type="OptionButton" parent="." unique_id=455353919]
+layout_mode = 0
+offset_right = 463.0
+offset_bottom = 39.0
+
+[node name="MenuBar" type="MenuBar" parent="." unique_id=504363569]
+layout_mode = 0
+offset_left = 1.0
+offset_top = -2.0
+offset_right = 493.0
+offset_bottom = 398.0

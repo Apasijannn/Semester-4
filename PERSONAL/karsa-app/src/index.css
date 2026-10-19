@@ -1,0 +1,202 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background-color: theme('colors.background');
+  color: theme('colors.on-background');
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24;
+}
+
+/* ---- Retro hand-drawn bento shared utilities (ported from all 5 Stitch mockups) ---- */
+
+.wobbly-border {
+  border: 2px solid theme('colors.primary');
+  border-radius: 2px 255px 3px 25px / 255px 5px 225px 3px;
+}
+
+.wobbly-border-alt {
+  border: 2px solid theme('colors.primary');
+  border-radius: 255px 3px 25px 2px / 5px 225px 3px 255px;
+}
+
+.brutal-border {
+  border: 3px solid theme('colors.primary');
+  border-radius: 4px;
+}
+
+.hard-shadow {
+  box-shadow: 4px 4px 0px 0px theme('colors.primary');
+  transition: all 0.1s ease-in-out;
+}
+
+.hard-shadow-hover:hover {
+  box-shadow: 6px 6px 0px 0px theme('colors.primary');
+  transform: translate(-2px, -2px);
+}
+
+.hard-shadow-active:active {
+  box-shadow: 0px 0px 0px 0px theme('colors.primary');
+  transform: translate(4px, 4px);
+}
+
+.btn-retro {
+  border: 2px solid theme('colors.primary');
+  box-shadow: 4px 4px 0px 0px theme('colors.primary');
+  transition: all 0.1s ease;
+}
+
+.btn-retro:hover {
+  box-shadow: 6px 6px 0px 0px theme('colors.primary');
+  transform: translate(-2px, -2px);
+}
+
+.btn-retro:active {
+  box-shadow: 0px 0px 0px 0px theme('colors.primary');
+  transform: translate(4px, 4px);
+}
+
+.paper-grain {
+  position: relative;
+}
+
+.paper-grain::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+}
+
+.bento-card {
+  background-color: theme('colors.surface');
+  border: 2px solid theme('colors.primary');
+  box-shadow: 4px 4px 0px 0px theme('colors.primary');
+  border-radius: theme('borderRadius.DEFAULT');
+  transition: all 0.1s ease;
+}
+
+.bento-card.interactive:hover {
+  box-shadow: 6px 6px 0px 0px theme('colors.primary');
+  transform: translate(-2px, -2px);
+}
+
+.bento-card.interactive:active {
+  box-shadow: 0px 0px 0px 0px theme('colors.primary');
+  transform: translate(4px, 4px);
+}
+
+.washi-tape {
+  background-color: theme('colors.secondary-container');
+  color: theme('colors.on-secondary-container');
+  transform: rotate(-2deg);
+  clip-path: polygon(2% 0, 98% 2%, 100% 98%, 0 100%);
+}
+
+.washi-tape-green {
+  background-color: theme('colors.tertiary-container');
+  color: theme('colors.on-tertiary-container');
+  transform: rotate(1deg);
+  clip-path: polygon(0 2%, 100% 0, 98% 100%, 2% 98%);
+}
+
+.sticky-note {
+  background-color: #fef08a;
+  border: 1px solid theme('colors.primary');
+  box-shadow: 3px 3px 0px 0px theme('colors.primary');
+  transform: rotate(-2deg);
+}
+
+.terminal-input {
+  border: none;
+  border-bottom: 2px solid theme('colors.primary');
+  border-radius: 0;
+  background: transparent;
+}
+
+.terminal-input:focus {
+  outline: none;
+  box-shadow: none;
+  border-bottom: 3px solid theme('colors.secondary');
+}
+
+.blinking-cursor::after {
+  content: '█';
+  animation: blink 1s step-end infinite;
+  color: theme('colors.secondary');
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+.hand-drawn-bar {
+  border: 2px solid theme('colors.primary');
+  border-radius: 4px 4px 0 0;
+}
+
+.scribble-bg-secondary {
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 10px,
+    rgba(183, 24, 73, 0.1) 10px,
+    rgba(183, 24, 73, 0.1) 11px
+  );
+}
+
+.scribble-bg-tertiary {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 10px,
+    rgba(0, 58, 41, 0.1) 10px,
+    rgba(0, 58, 41, 0.1) 11px
+  );
+}
+
+.stamp-effect {
+  border-radius: 10% 90% 20% 80% / 80% 20% 90% 10%;
+  border: 3px solid;
+  transform: rotate(-15deg);
+}
+
+.doodle-bg {
+  background-image:
+    radial-gradient(circle at 10% 20%, theme('colors.secondary') 1px, transparent 1px),
+    radial-gradient(circle at 90% 80%, theme('colors.tertiary-fixed-dim') 1.5px, transparent 1.5px);
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

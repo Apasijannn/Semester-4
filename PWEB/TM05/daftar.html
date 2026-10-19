@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ruang Sintaks | Daftar Akun</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Navigasi -->
+    <nav>
+        <div class="nav-inner">
+            <a href="index.html" class="logo">
+                <span class="logo-text">Ruang<span>Sintaks</span></span>
+            </a>
+            <ul class="navbar">
+                <li><a href="index.html" class="nav-active">Beranda</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Form Pendaftaran -->
+        <div class="auth-wrapper">
+            <div class="auth-panel">
+                <div class="auth-header">
+                    <h2>Mulai Perjalananmu</h2>
+                    <p>Buat akun Ruang Sintaks dan akses semua materi web programming dari nol hingga mahir.</p>
+                </div>
+
+                <form action="dashboard.html" class="auth-form">
+                    <div class="form-group">
+                        <label for="nama">Nama Lengkap</label>
+                        <input type="text" id="nama" placeholder="Contoh: Budi Santoso" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Alamat Email</label>
+                        <input type="email" id="email" placeholder="nama@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="role">Latar Belakang Saat Ini</label>
+                        <select id="role" required>
+                            <option value="" disabled selected>Pilih latar belakangmu...</option>
+                            <option value="siswa">🎓 Siswa / Mahasiswa</option>
+                            <option value="pemula">🌱 Pemula Absolut (Baru Mulai)</option>
+                            <option value="profesional">💼 Profesional (Upgrade Skill)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Kata Sandi</label>
+                        <input type="password" id="password" placeholder="Minimal 8 karakter" required>
+                    </div>
+
+                    <button type="submit" class="btn-primary btn-full" style="margin-top: 4px;">
+                        Buat Akun Sekarang
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </button>
+                </form>
+
+                <div class="auth-footer">
+                    Sudah punya akun? <a href="#">Masuk di sini</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-inner">
+            <p>&copy; 2026 Ruang Sintaks. Hak Cipta Dilindungi.</p>
+            <div class="footer-links">
+                <a href="index.html">Beranda</a>
+                <a href="daftar.html">Daftar</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

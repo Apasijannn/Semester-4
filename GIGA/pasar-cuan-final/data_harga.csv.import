@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://dpk4didyrfrne"
+
+[deps]
+
+files=["res://data_harga.jenis.translation", "res://data_harga.level.translation", "res://data_harga.harga.translation", "res://data_harga.budget.translation", "res://data_harga.panjang.translation", "res://data_harga.rating.translation", "res://data_harga.keputusan.translation"]
+
+source_file="res://data_harga.csv"
+dest_files=["res://data_harga.jenis.translation", "res://data_harga.level.translation", "res://data_harga.harga.translation", "res://data_harga.budget.translation", "res://data_harga.panjang.translation", "res://data_harga.rating.translation", "res://data_harga.keputusan.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

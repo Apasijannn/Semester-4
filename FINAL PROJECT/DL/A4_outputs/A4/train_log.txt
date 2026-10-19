@@ -1,0 +1,79 @@
+=== Variant A4 | pinn=True dino=True | epochs=1 | device=cuda ===
+[pretrained] 664/664 checkpoint tensors loaded
+[pretrained] 8 missing in model (8 are PINN branch, expected)
+[pretrained] 0 unexpected (skipped)
+[dino] DINOv2-S/14 loaded (frozen)
+=== Variant A4 | pinn=True dino=True | epochs=50 | device=cuda ===
+[pretrained] 664/664 checkpoint tensors loaded
+[pretrained] 8 missing in model (8 are PINN branch, expected)
+[pretrained] 0 unexpected (skipped)
+[dino] DINOv2-S/14 loaded (frozen)
+[stage] /vol/data/lsui/input -> /tmp/data/lsui/input (4279 files, 122s)
+[stage] /vol/data/lsui/GT -> /tmp/data/lsui/GT (4279 files, 125s)
+[stage] /vol/data/uieb/raw -> /tmp/data/uieb/raw (890 files, 32s)
+[stage] /vol/data/uieb/ref -> /tmp/data/uieb/ref (890 files, 33s)
+[data] train=4279 pairs  val=890 pairs
+[freeze] encoder frozen for first 2 epoch(s)
+[  1/50] loss=0.1466 (char=0.0812 phys=0.0710 percep=1.2799) lr=1.33e-04 69s  vram=9.2/42GB
+[  2/50] loss=0.1235 (char=0.0680 phys=0.0863 percep=1.0421) lr=2.00e-04 63s  vram=9.2/42GB
+[freeze] encoder unfrozen at epoch 3 — full fine-tune
+[  3/50] loss=0.1129 (char=0.0607 phys=0.0834 percep=0.9452) lr=2.00e-04 82s  vram=17.2/42GB
+[  4/50] loss=0.1012 (char=0.0528 phys=0.0817 percep=0.8375) lr=2.00e-04 80s  vram=17.2/42GB
+=== Variant A4 | pinn=True dino=True | epochs=50 | device=cuda ===
+[pretrained] 664/664 checkpoint tensors loaded
+[pretrained] 8 missing in model (8 are PINN branch, expected)
+[pretrained] 0 unexpected (skipped)
+[dino] DINOv2-S/14 loaded (frozen)
+[resume] from epoch 4, best_psnr=0.00
+[stage] /vol/data/lsui/input -> /tmp/data/lsui/input (4279 files, 170s)
+[stage] /vol/data/lsui/GT -> /tmp/data/lsui/GT (4279 files, 206s)
+[stage] /vol/data/uieb/raw -> /tmp/data/uieb/raw (890 files, 95s)
+[stage] /vol/data/uieb/ref -> /tmp/data/uieb/ref (890 files, 100s)
+[data] train=4279 pairs  val=890 pairs
+[  5/50] loss=0.0955 (char=0.0491 phys=0.0804 percep=0.7671) lr=1.99e-04 81s  val_psnr=15.9411 val_ssim=0.7018  <<BEST  vram=17.6/42GB
+[  6/50] loss=0.0906 (char=0.0459 phys=0.0822 percep=0.7285) lr=1.98e-04 77s  vram=17.6/42GB
+[  7/50] loss=0.0874 (char=0.0441 phys=0.0833 percep=0.6989) lr=1.96e-04 77s  vram=17.6/42GB
+[  8/50] loss=0.0842 (char=0.0423 phys=0.0840 percep=0.6686) lr=1.94e-04 77s  vram=17.6/42GB
+[  9/50] loss=0.0816 (char=0.0409 phys=0.0845 percep=0.6465) lr=1.92e-04 76s  vram=17.6/42GB
+[ 10/50] loss=0.0802 (char=0.0402 phys=0.0843 percep=0.6310) lr=1.89e-04 77s  val_psnr=16.2148 val_ssim=0.7313  vram=17.6/42GB
+[ 11/50] loss=0.0783 (char=0.0390 phys=0.0854 percep=0.6144) lr=1.86e-04 76s  vram=17.6/42GB
+[ 12/50] loss=0.0766 (char=0.0383 phys=0.0851 percep=0.5965) lr=1.83e-04 77s  vram=17.6/42GB
+[ 13/50] loss=0.0757 (char=0.0377 phys=0.0854 percep=0.5900) lr=1.79e-04 77s  vram=17.6/42GB
+[ 14/50] loss=0.0743 (char=0.0368 phys=0.0859 percep=0.5777) lr=1.74e-04 77s  vram=17.6/42GB
+[ 15/50] loss=0.0724 (char=0.0357 phys=0.0858 percep=0.5621) lr=1.70e-04 77s  val_psnr=16.5026 val_ssim=0.7563  vram=17.6/42GB
+[ 16/50] loss=0.0718 (char=0.0355 phys=0.0858 percep=0.5557) lr=1.65e-04 77s  vram=17.6/42GB
+[ 17/50] loss=0.0708 (char=0.0348 phys=0.0852 percep=0.5482) lr=1.60e-04 76s  vram=17.6/42GB
+[ 18/50] loss=0.0691 (char=0.0339 phys=0.0859 percep=0.5317) lr=1.54e-04 83s  vram=17.6/42GB
+[ 19/50] loss=0.0681 (char=0.0331 phys=0.0860 percep=0.5268) lr=1.48e-04 77s  vram=17.6/42GB
+[ 20/50] loss=0.0676 (char=0.0328 phys=0.0862 percep=0.5246) lr=1.42e-04 77s  val_psnr=16.8033 val_ssim=0.7782  vram=17.6/42GB
+[ 21/50] loss=0.0665 (char=0.0323 phys=0.0861 percep=0.5133) lr=1.36e-04 77s  vram=17.6/42GB
+[ 22/50] loss=0.0661 (char=0.0321 phys=0.0859 percep=0.5086) lr=1.30e-04 77s  vram=17.6/42GB
+[ 23/50] loss=0.0649 (char=0.0315 phys=0.0860 percep=0.4958) lr=1.24e-04 78s  vram=17.6/42GB
+[ 24/50] loss=0.0644 (char=0.0311 phys=0.0861 percep=0.4931) lr=1.17e-04 77s  vram=17.6/42GB
+[ 25/50] loss=0.0629 (char=0.0302 phys=0.0859 percep=0.4811) lr=1.10e-04 78s  val_psnr=17.1117 val_ssim=0.7966  <<BEST  vram=17.6/42GB
+[ 26/50] loss=0.0625 (char=0.0301 phys=0.0859 percep=0.4770) lr=1.04e-04 77s  vram=17.6/42GB
+[ 27/50] loss=0.0618 (char=0.0297 phys=0.0857 percep=0.4711) lr=9.72e-05 77s  vram=17.6/42GB
+[ 28/50] loss=0.0608 (char=0.0289 phys=0.0856 percep=0.4678) lr=9.05e-05 77s  vram=17.6/42GB
+[ 29/50] loss=0.0604 (char=0.0288 phys=0.0856 percep=0.4618) lr=8.40e-05 77s  vram=17.6/42GB
+[ 30/50] loss=0.0597 (char=0.0285 phys=0.0851 percep=0.4543) lr=7.74e-05 77s  val_psnr=17.4229 val_ssim=0.8121  vram=17.6/42GB
+[ 31/50] loss=0.0587 (char=0.0278 phys=0.0859 percep=0.4474) lr=7.10e-05 77s  vram=17.6/42GB
+[ 32/50] loss=0.0579 (char=0.0274 phys=0.0848 percep=0.4403) lr=6.47e-05 77s  vram=17.6/42GB
+[ 33/50] loss=0.0577 (char=0.0273 phys=0.0849 percep=0.4373) lr=5.86e-05 77s  vram=17.6/42GB
+[ 34/50] loss=0.0569 (char=0.0268 phys=0.0845 percep=0.4341) lr=5.27e-05 77s  vram=17.6/42GB
+[ 35/50] loss=0.0563 (char=0.0264 phys=0.0851 percep=0.4266) lr=4.70e-05 77s  val_psnr=17.7178 val_ssim=0.8248  <<BEST  vram=17.6/42GB
+[ 36/50] loss=0.0555 (char=0.0258 phys=0.0846 percep=0.4239) lr=4.15e-05 77s  vram=17.6/42GB
+[ 37/50] loss=0.0551 (char=0.0256 phys=0.0842 percep=0.4215) lr=3.63e-05 77s  vram=17.6/42GB
+[ 38/50] loss=0.0549 (char=0.0255 phys=0.0844 percep=0.4182) lr=3.13e-05 95s  vram=17.6/42GB
+[ 39/50] loss=0.0542 (char=0.0250 phys=0.0844 percep=0.4152) lr=2.67e-05 79s  vram=17.6/42GB
+[ 40/50] loss=0.0537 (char=0.0247 phys=0.0843 percep=0.4100) lr=2.24e-05 77s  val_psnr=18.0059 val_ssim=0.8349  vram=17.6/42GB
+[ 41/50] loss=0.0532 (char=0.0244 phys=0.0842 percep=0.4086) lr=1.85e-05 77s  vram=17.6/42GB
+[ 42/50] loss=0.0530 (char=0.0243 phys=0.0843 percep=0.4051) lr=1.49e-05 77s  vram=17.6/42GB
+[ 43/50] loss=0.0527 (char=0.0241 phys=0.0841 percep=0.4043) lr=1.17e-05 77s  vram=17.6/42GB
+[ 44/50] loss=0.0525 (char=0.0240 phys=0.0838 percep=0.4032) lr=8.90e-06 77s  vram=17.6/42GB
+[ 45/50] loss=0.0522 (char=0.0238 phys=0.0839 percep=0.4013) lr=6.51e-06 77s  val_psnr=18.2709 val_ssim=0.8433  vram=17.6/42GB
+[ 46/50] loss=0.0522 (char=0.0238 phys=0.0837 percep=0.4013) lr=4.54e-06 77s  vram=17.6/42GB
+[ 47/50] loss=0.0521 (char=0.0236 phys=0.0836 percep=0.4014) lr=2.99e-06 77s  vram=17.6/42GB
+[ 48/50] loss=0.0520 (char=0.0235 phys=0.0836 percep=0.4013) lr=1.89e-06 76s  vram=17.6/42GB
+[ 49/50] loss=0.0515 (char=0.0232 phys=0.0836 percep=0.3985) lr=1.22e-06 77s  vram=17.6/42GB
+[ 50/50] loss=0.0517 (char=0.0234 phys=0.0838 percep=0.3987) lr=1.00e-06 77s  val_psnr=18.5056 val_ssim=0.8497  vram=17.6/42GB
+=== A4 done. best_psnr=18.51 ===

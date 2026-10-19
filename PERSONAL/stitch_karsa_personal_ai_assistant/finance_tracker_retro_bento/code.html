@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Karsa Finance Tracker</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&amp;family=JetBrains+Mono:wght@400&amp;family=Space+Mono:wght@700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container": "#f2eee3",
+                        "tertiary": "#002217",
+                        "error-container": "#ffdad6",
+                        "surface-variant": "#e6e2d8",
+                        "background": "#fdf9ee",
+                        "tertiary-fixed-dim": "#27e0a9",
+                        "surface": "#fdf9ee",
+                        "outline": "#77767d",
+                        "on-primary-fixed-variant": "#424658",
+                        "tertiary-fixed": "#54fdc4",
+                        "outline-variant": "#c7c6cd",
+                        "on-error": "#ffffff",
+                        "inverse-primary": "#c2c5db",
+                        "on-secondary-container": "#5a001e",
+                        "secondary": "#b71849",
+                        "on-error-container": "#93000a",
+                        "surface-dim": "#dddacf",
+                        "on-surface": "#1c1c15",
+                        "surface-bright": "#fdf9ee",
+                        "surface-container-low": "#f7f3e8",
+                        "error": "#ba1a1a",
+                        "on-primary": "#ffffff",
+                        "surface-container-high": "#ece8dd",
+                        "on-primary-container": "#9599ad",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-container": "#003a29",
+                        "on-tertiary-fixed-variant": "#00513b",
+                        "primary-container": "#2d3142",
+                        "secondary-fixed-dim": "#ffb2bc",
+                        "on-surface-variant": "#46464c",
+                        "primary-fixed-dim": "#c2c5db",
+                        "on-tertiary-container": "#00af82",
+                        "surface-tint": "#5a5d70",
+                        "on-secondary": "#ffffff",
+                        "inverse-surface": "#313129",
+                        "secondary-fixed": "#ffd9dd",
+                        "inverse-on-surface": "#f4f1e6",
+                        "primary": "#181c2c",
+                        "secondary-container": "#fd5179",
+                        "surface-container-highest": "#e6e2d8",
+                        "primary-fixed": "#dee1f8",
+                        "on-primary-fixed": "#171b2b",
+                        "on-tertiary-fixed": "#002116",
+                        "on-secondary-fixed": "#400013",
+                        "on-background": "#1c1c15",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-fixed-variant": "#910034"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "bento-padding": "1.5rem",
+                        "stack-sm": "0.5rem",
+                        "grid-margin": "2rem",
+                        "grid-gutter": "1.5rem",
+                        "stack-lg": "2rem",
+                        "stack-xs": "0.25rem",
+                        "stack-md": "1rem"
+                    },
+                    "fontFamily": {
+                        "label-caps": ["Space Mono"],
+                        "body-sm": ["JetBrains Mono"],
+                        "headline-xl": ["Bricolage Grotesque"],
+                        "body-md": ["JetBrains Mono"],
+                        "headline-lg-mobile": ["Bricolage Grotesque"],
+                        "headline-lg": ["Bricolage Grotesque"]
+                    },
+                    "fontSize": {
+                        "label-caps": ["12px", { "lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "700" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "headline-xl": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-image: url('data:image/svg+xml;utf8,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noiseFilter)" opacity="0.05"/></svg>');
+        }
+        
+        .bento-card {
+            border: 2px solid theme('colors.primary');
+            box-shadow: 4px 4px 0px 0px theme('colors.primary');
+            background-color: theme('colors.surface-container-highest');
+            border-radius: theme('borderRadius.DEFAULT');
+            /* Wobbly border simulation */
+            mask-image: url('data:image/svg+xml;utf8,<svg width="100%" height="100%" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><rect width="100%" height="100%" fill="black" rx="4" ry="4" stroke="black" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="round" transform="translate(0.5, 0.5) scale(0.99, 0.99)" style="filter: url(%23wobble);"/><filter id="wobble"><feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="2" result="noise"/><feDisplacementMap in="SourceGraphic" in2="noise" scale="3" xChannelSelector="R" yChannelSelector="G"/></filter></svg>');
+            -webkit-mask-image: url('data:image/svg+xml;utf8,<svg width="100%" height="100%" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><rect width="100%" height="100%" fill="black" rx="4" ry="4" stroke="black" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="round" transform="translate(0.5, 0.5) scale(0.99, 0.99)" style="filter: url(%23wobble);"/><filter id="wobble"><feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="2" result="noise"/><feDisplacementMap in="SourceGraphic" in2="noise" scale="3" xChannelSelector="R" yChannelSelector="G"/></filter></svg>');
+            mask-border: 10px;
+        }
+
+        .btn-retro {
+            border: 2px solid theme('colors.primary');
+            box-shadow: 4px 4px 0px 0px theme('colors.primary');
+            transition: all 0.1s ease;
+        }
+        
+        .btn-retro:hover {
+            box-shadow: 6px 6px 0px 0px theme('colors.primary');
+            transform: translate(-2px, -2px);
+        }
+
+        .btn-retro:active {
+            box-shadow: 0px 0px 0px 0px theme('colors.primary');
+            transform: translate(4px, 4px);
+        }
+
+        .washi-tape {
+            background-color: theme('colors.secondary-container');
+            color: theme('colors.on-secondary-container');
+            transform: rotate(-2deg);
+            clip-path: polygon(2% 0, 98% 2%, 100% 98%, 0 100%);
+        }
+        
+        .washi-tape-green {
+            background-color: theme('colors.tertiary-container');
+            color: theme('colors.on-tertiary-container');
+            transform: rotate(1deg);
+            clip-path: polygon(0 2%, 100% 0, 98% 100%, 2% 98%);
+        }
+
+        .rough-donut {
+            stroke-dasharray: 250;
+            stroke-dashoffset: 50;
+            stroke-linecap: round;
+            filter: drop-shadow(2px 2px 0px theme('colors.primary'));
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex overflow-hidden">
+<!-- SideNavBar -->
+<nav class="hidden md:flex flex-col h-screen w-64 border-r-4 border-primary bg-surface-container shadow-[4px_4px_0px_0px_rgba(24,28,44,1)] p-stack-md shrink-0 z-20 relative">
+<div class="mb-stack-lg">
+<h1 class="font-headline-lg text-headline-lg font-black text-primary uppercase tracking-tighter">KARSA_V1.0</h1>
+<p class="font-label-caps text-label-caps text-on-surface-variant mt-stack-xs">SYSTEM_ONLINE</p>
+</div>
+<button class="btn-retro bg-primary text-on-primary font-label-caps text-label-caps py-stack-sm px-stack-md rounded mb-stack-lg flex items-center justify-center gap-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">add</span>
+            New Entry
+        </button>
+<ul class="flex-1 space-y-stack-sm">
+<li>
+<a class="flex items-center gap-3 p-stack-sm font-label-caps text-label-caps text-on-surface-variant hover:translate-x-[-2px] hover:translate-y-[-2px] hover:bg-surface-container-high transition-all duration-75" href="#">
+<span class="material-symbols-outlined">grid_view</span>
+                    Dashboard
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 p-stack-sm font-label-caps text-label-caps text-on-surface-variant hover:translate-x-[-2px] hover:translate-y-[-2px] hover:bg-surface-container-high transition-all duration-75" href="#">
+<span class="material-symbols-outlined">checklist</span>
+                    Tasks
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 p-stack-sm font-label-caps text-label-caps text-on-surface-variant hover:translate-x-[-2px] hover:translate-y-[-2px] hover:bg-surface-container-high transition-all duration-75" href="#">
+<span class="material-symbols-outlined">monitor_heart</span>
+                    Health
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 p-stack-sm font-label-caps text-label-caps text-primary font-bold border-2 border-primary bg-secondary-container translate-x-1 translate-y-1 shadow-none transition-transform" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">payments</span>
+                    Finance
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 p-stack-sm font-label-caps text-label-caps text-on-surface-variant hover:translate-x-[-2px] hover:translate-y-[-2px] hover:bg-surface-container-high transition-all duration-75" href="#">
+<span class="material-symbols-outlined">smart_toy</span>
+                    Chat
+                </a>
+</li>
+</ul>
+<ul class="space-y-stack-sm mt-auto pt-stack-lg border-t-2 border-primary border-dashed">
+<li>
+<a class="flex items-center gap-3 p-stack-sm font-label-caps text-label-caps text-on-surface-variant hover:translate-x-[-2px] hover:translate-y-[-2px] hover:bg-surface-container-high transition-all duration-75" href="#">
+<span class="material-symbols-outlined">settings</span>
+                    Settings
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 p-stack-sm font-label-caps text-label-caps text-on-surface-variant hover:translate-x-[-2px] hover:translate-y-[-2px] hover:bg-surface-container-high transition-all duration-75" href="#">
+<span class="material-symbols-outlined">logout</span>
+                    Log Out
+                </a>
+</li>
+</ul>
+<!-- Decorative doodle -->
+<div class="absolute bottom-4 right-4 opacity-50 pointer-events-none">
+<svg fill="none" height="40" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="4" viewbox="0 0 100 100" width="40">
+<path d="M20,80 Q50,20 80,80 M30,60 L70,60"></path>
+</svg>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-1 h-screen overflow-y-auto p-grid-margin bg-surface relative">
+<!-- Top App Bar (Mobile Only for visual context if viewed small) -->
+<header class="md:hidden flex justify-between items-center w-full pb-stack-md mb-stack-md border-b-4 border-primary">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-primary">KARSA_OS</h1>
+<button class="material-symbols-outlined text-primary">menu</button>
+</header>
+<div class="max-w-6xl mx-auto">
+<!-- Header Section -->
+<div class="flex justify-between items-end mb-grid-gutter">
+<div>
+<h2 class="font-headline-xl text-headline-xl text-primary relative inline-block">
+                        Finance Ledger
+                        <span class="absolute -bottom-2 left-0 w-full h-2 bg-secondary-container -z-10 transform -rotate-1"></span>
+</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2">Fiscal Cycle: Q3_2024</p>
+</div>
+<!-- Vintage Toggle -->
+<div class="flex items-center gap-2 border-2 border-primary p-1 bg-surface-container shadow-[2px_2px_0px_0px_rgba(24,28,44,1)] rounded-sm">
+<button class="px-3 py-1 font-label-caps text-label-caps bg-primary text-on-primary">EXP</button>
+<button class="px-3 py-1 font-label-caps text-label-caps text-on-surface hover:bg-surface-variant">INC</button>
+</div>
+</div>
+<!-- Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-grid-gutter">
+<!-- Balance Card (Spans 8 cols) -->
+<div class="bento-card col-span-1 md:col-span-8 p-bento-padding relative overflow-hidden flex flex-col justify-between min-h-[300px]">
+<div class="flex justify-between items-start z-10">
+<span class="font-label-caps text-label-caps text-on-surface-variant px-2 py-1 border border-outline rounded-sm uppercase bg-surface">Current_Balance</span>
+<div class="washi-tape px-3 py-1 font-label-caps text-label-caps font-bold">
+                            +12.4% THIS_MO
+                        </div>
+</div>
+<div class="mt-stack-lg z-10">
+<div class="flex items-baseline gap-2">
+<span class="font-headline-xl text-[80px] font-black text-primary leading-none tracking-tighter">$</span>
+<span class="font-headline-xl text-[120px] font-black text-primary leading-none tracking-tighter relative">
+                                4,206
+                                <!-- Hand drawn underline -->
+<svg class="absolute -bottom-4 left-0 w-full h-6 text-tertiary-container" preserveaspectratio="none" viewbox="0 0 100 20">
+<path d="M0,10 Q50,20 100,5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="4"></path>
+</svg>
+</span>
+<span class="font-headline-lg text-headline-lg text-on-surface-variant mb-4">.99</span>
+</div>
+</div>
+<!-- Decorative background grid -->
+<div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: linear-gradient(theme('colors.primary') 1px, transparent 1px), linear-gradient(90deg, theme('colors.primary') 1px, transparent 1px); background-size: 20px 20px;"></div>
+</div>
+<!-- Spending Chart (Spans 4 cols) -->
+<div class="bento-card col-span-1 md:col-span-4 p-bento-padding flex flex-col items-center justify-center relative min-h-[300px]">
+<span class="absolute top-bento-padding left-bento-padding font-label-caps text-label-caps text-on-surface-variant px-2 py-1 border border-outline rounded-sm bg-surface z-10">Allocation</span>
+<div class="relative w-48 h-48 mt-8">
+<!-- SVG Rough Donut -->
+<svg class="w-full h-full transform -rotate-90" viewbox="0 0 100 100">
+<!-- Background track -->
+<circle class="opacity-50" cx="50" cy="50" fill="none" r="40" stroke="theme('colors.surface-variant')" stroke-width="12"></circle>
+<!-- Segment 1 (Food) -->
+<circle class="rough-donut" cx="50" cy="50" fill="none" r="40" stroke="theme('colors.secondary-container')" stroke-dasharray="140 251" stroke-dashoffset="0" stroke-width="14" style="filter: drop-shadow(2px 2px 0px theme('colors.primary'));"></circle>
+<!-- Segment 2 (Bills) -->
+<circle class="rough-donut" cx="50" cy="50" fill="none" r="40" stroke="theme('colors.tertiary-container')" stroke-dasharray="60 251" stroke-dashoffset="-140" stroke-width="12" style="filter: drop-shadow(2px 2px 0px theme('colors.primary'));"></circle>
+<!-- Segment 3 (Fun) -->
+<circle class="rough-donut" cx="50" cy="50" fill="none" r="40" stroke="theme('colors.primary-fixed-dim')" stroke-dasharray="30 251" stroke-dashoffset="-200" stroke-width="16" style="filter: drop-shadow(2px 2px 0px theme('colors.primary'));"></circle>
+</svg>
+<!-- Center text -->
+<div class="absolute inset-0 flex flex-col items-center justify-center mt-2">
+<span class="font-headline-lg text-headline-lg font-bold text-primary">78%</span>
+<span class="font-label-caps text-[10px] text-on-surface-variant">SPENT</span>
+</div>
+</div>
+</div>
+<!-- Transaction List (Spans 12 cols) -->
+<div class="bento-card col-span-1 md:col-span-12 p-bento-padding">
+<div class="flex justify-between items-center border-b-2 border-primary pb-stack-md mb-stack-md border-dashed">
+<span class="font-label-caps text-label-caps text-on-surface-variant px-2 py-1 border border-outline rounded-sm bg-surface">Recent_Ledger</span>
+<button class="font-label-caps text-label-caps text-primary underline underline-offset-4 hover:text-secondary transition-colors">VIEW_ALL</button>
+</div>
+<div class="space-y-4">
+<!-- Item 1 -->
+<div class="flex items-center justify-between p-stack-sm hover:bg-surface-variant transition-colors border-2 border-transparent hover:border-primary border-dashed rounded-sm group cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 border-2 border-primary bg-secondary-container flex items-center justify-center shadow-[2px_2px_0px_0px_rgba(24,28,44,1)] transform -rotate-3 group-hover:rotate-0 transition-transform">
+<span class="material-symbols-outlined text-on-secondary-container">local_pizza</span>
+</div>
+<div>
+<p class="font-body-md text-body-md font-bold text-primary">Cyber Slice</p>
+<p class="font-label-caps text-[10px] text-on-surface-variant">DINING / OCT_12</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-body-md text-body-md font-bold text-primary">-$24.50</p>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="flex items-center justify-between p-stack-sm hover:bg-surface-variant transition-colors border-2 border-transparent hover:border-primary border-dashed rounded-sm group cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 border-2 border-primary bg-primary-fixed flex items-center justify-center shadow-[2px_2px_0px_0px_rgba(24,28,44,1)] transform rotate-2 group-hover:rotate-0 transition-transform">
+<span class="material-symbols-outlined text-on-primary-fixed">subway</span>
+</div>
+<div>
+<p class="font-body-md text-body-md font-bold text-primary">Metro Pass</p>
+<p class="font-label-caps text-[10px] text-on-surface-variant">TRANSIT / OCT_11</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-body-md text-body-md font-bold text-primary">-$85.00</p>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="flex items-center justify-between p-stack-sm hover:bg-surface-variant transition-colors border-2 border-transparent hover:border-primary border-dashed rounded-sm group cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 border-2 border-primary bg-tertiary-container flex items-center justify-center shadow-[2px_2px_0px_0px_rgba(24,28,44,1)] transform -rotate-1 group-hover:rotate-0 transition-transform">
+<span class="material-symbols-outlined text-on-tertiary-container">work</span>
+</div>
+<div>
+<p class="font-body-md text-body-md font-bold text-primary">Freelance Inv #042</p>
+<p class="font-label-caps text-[10px] text-on-surface-variant">INCOME / OCT_10</p>
+</div>
+</div>
+<div class="text-right flex items-center gap-2">
+<span class="washi-tape-green px-2 py-0.5 font-label-caps text-[10px]">CLEARED</span>
+<p class="font-body-md text-body-md font-bold text-tertiary-container">+$1,250.00</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Distribusi Semua Poli</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+
+<style>
+
+:root{
+    --bg:#fbf6f1;
+
+    --teal-dark:#1A6B6A;
+    --teal-primary:#2D918F;
+    --teal-light:#7BC8C8;
+
+    --text-dark:#1A3C3C;
+    --text-light:#7A9B9B;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Poppins', sans-serif;
+    background:#C8C0B8;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    padding:40px;
+}
+
+.slide{
+
+    width:1400px;
+    height:900px;
+
+    background:var(--bg);
+
+    border-radius:24px;
+
+    padding:40px;
+
+    overflow:hidden;
+
+    position:relative;
+}
+
+/* background blobs */
+
+.slide::before{
+    content:'';
+
+    position:absolute;
+
+    width:420px;
+    height:420px;
+
+    border-radius:50%;
+
+    top:-140px;
+    right:-120px;
+
+    background:
+    radial-gradient(circle,
+    rgba(45,145,143,0.08) 0%,
+    transparent 70%);
+}
+
+.slide::after{
+    content:'';
+
+    position:absolute;
+
+    width:340px;
+    height:340px;
+
+    border-radius:50%;
+
+    bottom:-120px;
+    left:-100px;
+
+    background:
+    radial-gradient(circle,
+    rgba(123,200,200,0.08) 0%,
+    transparent 70%);
+}
+
+.header{
+    position:relative;
+    z-index:2;
+    margin-bottom:25px;
+}
+
+.badge{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    padding:8px 14px;
+
+    border-radius:999px;
+
+    background:rgba(45,145,143,0.08);
+
+    color:var(--teal-dark);
+
+    font-size:12px;
+    font-weight:600;
+
+    margin-bottom:18px;
+}
+
+.title{
+
+    font-size:42px;
+    font-weight:800;
+
+    color:var(--text-dark);
+
+    margin-bottom:10px;
+}
+
+.subtitle{
+
+    color:var(--text-light);
+
+    font-size:15px;
+
+    font-weight:500;
+}
+
+.chart-container{
+
+    position:relative;
+
+    z-index:2;
+
+    background:white;
+
+    border-radius:24px;
+
+    padding:24px;
+
+    height:700px;
+
+    overflow-y:auto;
+
+    box-shadow:
+    0 10px 40px rgba(26,107,106,0.08);
+}
+
+/* custom scrollbar */
+
+.chart-container::-webkit-scrollbar{
+    width:10px;
+}
+
+.chart-container::-webkit-scrollbar-thumb{
+    background:#B5DEDE;
+    border-radius:20px;
+}
+
+canvas{
+    min-height:2500px;
+}
+
+.footer{
+
+    position:absolute;
+
+    bottom:18px;
+    right:28px;
+
+    color:var(--text-light);
+
+    font-size:11px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="slide">
+
+    <div class="header">
+
+        <div class="badge">
+            📊 Exploratory Data Analysis
+        </div>
+
+        <div class="title">
+            Distribusi Semua Kategori Poli
+        </div>
+
+        <div class="subtitle">
+            Jumlah pertanyaan pada masing-masing kategori poli
+        </div>
+
+    </div>
+
+    <div class="chart-container">
+        <canvas id="chart"></canvas>
+    </div>
+
+    <div class="footer">
+        Dataset Pertanyaan Medis
+    </div>
+
+</div>
+
+<script>
+
+/*
+=========================================================
+LOAD CSV
+=========================================================
+*/
+
+Papa.parse("2_daftar_semua_pertanyaan_gabungan.csv", {
+
+    download: true,
+    header: true,
+
+    complete: function(results){
+
+        const data = results.data;
+
+        /*
+        =========================================
+        HITUNG JUMLAH MASING-MASING POLI
+        =========================================
+        */
+
+        const counts = {};
+
+        data.forEach(row => {
+
+            const poli = row["Kategori_Poli"];
+
+            if(poli){
+
+                counts[poli] = (counts[poli] || 0) + 1;
+            }
+        });
+
+        /*
+        =========================================
+        SORT DESCENDING
+        =========================================
+        */
+
+        const sorted = Object.entries(counts)
+            .sort((a,b) => b[1] - a[1]);
+
+        const labels = sorted.map(item => item[0]);
+        const values = sorted.map(item => item[1]);
+
+        /*
+        =========================================
+        CREATE CHART
+        =========================================
+        */
+
+        createChart(labels, values);
+    }
+});
+
+function createChart(labels, values){
+
+    const ctx = document.getElementById('chart');
+
+    new Chart(ctx, {
+
+        type:'bar',
+
+        data:{
+
+            labels:labels,
+
+            datasets:[{
+
+                label:'Jumlah Pertanyaan',
+
+                data:values,
+
+                borderRadius:8,
+
+                borderSkipped:false,
+
+                backgroundColor:(context)=>{
+
+                    const chart = context.chart;
+                    const {ctx, chartArea} = chart;
+
+                    if(!chartArea) return;
+
+                    const gradient =
+                    ctx.createLinearGradient(
+                        chartArea.left,
+                        0,
+                        chartArea.right,
+                        0
+                    );
+
+                    gradient.addColorStop(0, '#1A6B6A');
+                    gradient.addColorStop(0.5, '#2D918F');
+                    gradient.addColorStop(1, '#7BC8C8');
+
+                    return gradient;
+                },
+
+                hoverBackgroundColor:'#2D918F',
+
+                barThickness:22
+            }]
+        },
+
+        options:{
+
+            indexAxis:'y',
+
+            responsive:true,
+
+            maintainAspectRatio:false,
+
+            animation:{
+                duration:1800,
+                easing:'easeOutQuart'
+            },
+
+            plugins:{
+
+                legend:{
+                    display:false
+                },
+
+                tooltip:{
+
+                    backgroundColor:'#1A3C3C',
+
+                    titleColor:'#fff',
+
+                    bodyColor:'#fff',
+
+                    borderColor:'#2D918F',
+
+                    borderWidth:1,
+
+                    padding:14,
+
+                    cornerRadius:12,
+
+                    callbacks:{
+                        label:function(context){
+
+                            return (
+                                ' ' +
+                                context.raw.toLocaleString() +
+                                ' pertanyaan'
+                            );
+                        }
+                    }
+                }
+
+            },
+
+            scales:{
+
+                x:{
+
+                    beginAtZero:true,
+
+                    grid:{
+                        color:'rgba(45,145,143,0.08)'
+                    },
+
+                    ticks:{
+                        color:'#7A9B9B',
+
+                        font:{
+                            family:'Poppins',
+                            size:11,
+                            weight:'500'
+                        }
+                    }
+                },
+
+                y:{
+
+                    grid:{
+                        display:false
+                    },
+
+                    ticks:{
+
+                        color:'#1A3C3C',
+
+                        font:{
+                            family:'Poppins',
+                            size:11,
+                            weight:'600'
+                        }
+                    }
+                }
+            }
+        }
+    });
+}
+
+</script>
+
+</body>
+</html>

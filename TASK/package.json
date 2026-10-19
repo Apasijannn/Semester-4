@@ -1,0 +1,14 @@
+{
+  "name": "karsa-ai-planner",
+  "version": "1.0.0",
+  "description": "Karsa — modul AI Planner (Fase 1)",
+  "private": true,
+  "scripts": {
+    "db:link": "supabase link --project-ref ucxqcvjlnfmdxlbcdbxp",
+    "db:push": "supabase db push",
+    "db:new": "supabase migration new"
+  },
+  "devDependencies": {
+    "supabase": "^2.109.1"
+  }
+}

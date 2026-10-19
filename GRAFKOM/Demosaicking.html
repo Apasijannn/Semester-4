@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demosaicking dalam Grafika Komputer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* UI Estetika Retro-Profesional (Tajam, High Contrast) */
+        :root {
+            --bg-base: #09090b;
+            --bg-panel: #18181b;
+            --accent: #f59e0b; /* Mengubah aksen menjadi amber/oranye untuk diferensiasi visual */
+            --accent-dim: rgba(245, 158, 11, 0.2);
+            --text-main: #f4f4f5;
+            --text-muted: #a1a1aa;
+            --border: #27272a;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: #000;
+            display: grid;
+            gap: 40px;
+            grid-template-columns: 1fr;
+            padding: 40px 0;
+            place-items: center;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .slide {
+            background-color: var(--bg-base);
+            border: 2px solid var(--border);
+            box-shadow: 8px 8px 0px var(--accent-dim);
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            height: 720px;
+            width: 1280px;
+            padding: 60px 80px;
+            position: relative;
+        }
+
+        /* Scanline Effect */
+        .slide::after {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 2;
+            background-size: 100% 2px, 3px 100%;
+            pointer-events: none;
+        }
+
+        h1, h2, h3 { font-family: 'JetBrains Mono', monospace; text-transform: uppercase; }
+        
+        h1 { font-size: 64px; color: var(--accent); line-height: 1.1; margin-bottom: 20px; text-shadow: 2px 2px 0px rgba(245, 158, 11, 0.4); }
+        h2 { font-size: 40px; border-bottom: 4px solid var(--accent); padding-bottom: 15px; margin-bottom: 40px; display: inline-block; }
+        h3 { font-size: 24px; color: var(--accent); margin-bottom: 15px; }
+        
+        p, li { font-size: 22px; line-height: 1.6; color: var(--text-muted); }
+        
+        .content { display: flex; flex-direction: column; flex-grow: 1; justify-content: center; z-index: 10; position: relative; }
+        
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+        
+        .panel { background: var(--bg-panel); border: 1px solid var(--border); padding: 30px; border-left: 4px solid var(--accent); }
+        
+        ul { list-style-type: square; padding-left: 30px; }
+        li { margin-bottom: 15px; }
+        li::marker { color: var(--accent); }
+
+        .metric-box { background: var(--bg-panel); border: 2px solid var(--accent); padding: 20px; text-align: center; }
+        .metric-value { font-family: 'JetBrains Mono', monospace; font-size: 48px; color: var(--accent); font-weight: bold; }
+        .metric-label { font-size: 18px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px; }
+
+        .code-block { background: #000; border: 1px solid var(--border); padding: 20px; font-family: 'JetBrains Mono', monospace; color: var(--accent); font-size: 18px; margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+    <div class="slide">
+        <div class="content" style="align-items: center; text-align: center;">
+            <p style="font-family: 'JetBrains Mono', monospace; color: var(--accent); margin-bottom: 20px; letter-spacing: 4px;">// TAHAP 2: REKONSTRUKSI WARNA</p>
+            <h1>Neural Demosaicking</h1>
+            <p style="font-size: 28px; color: var(--text-main); max-width: 800px;">Memulihkan informasi RGB absolut dari sensor kamera dengan pendekatan <i>Differentiable Image Processing</i></p>
+        </div>
+    </div>
+
+    <div class="slide">
+        <h2>Masalah Fundamental</h2>
+        <div class="content grid-2">
+            <div>
+                <h3>Keterbatasan Sensor</h3>
+                <p>Sensor kamera modern hanya mampu menangkap satu saluran warna per piksel (umumnya menggunakan pola Bayer merah-hijau-biru)[cite: 210].</p>
+                <ul>
+                    <li>Setiap piksel kehilangan dua pertiga data warna yang sebenarnya[cite: 210].</li>
+                    <li>Proses menebak piksel yang kosong secara klasik (interpolasi) sering kali menciptakan artefak *moiré* pada tepian atau pola halus.</li>
+                </ul>
+            </div>
+            <div class="panel">
+                <h3>Definisi Demosaicking</h3>
+                <p>Algoritma rekonstruksi yang mengubah larik (*array*) gambar mosaik yang belum lengkap menjadi gambar berekstensi RGB penuh[cite: 212].</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide">
+        <h2>Paradigma Berbasis Data</h2>
+        <div class="content grid-2">
+            <div>
+                <h3>Solusi Neural Networks</h3>
+                <p>Ide intinya adalah melatih *neural networks* pada pasangan gambar yang disiapkan secara khusus: gambar mosaik mentah dan gambar RGB yang utuh (penuh)[cite: 212].</p>
+                <p style="margin-top: 15px;">Model ini memaksa jaringan untuk mempelajari pola rekonstruksi struktural secara mandiri dari data besar, bukan dari interpolasi matematis manual[cite: 212].</p>
+            </div>
+            <div class="code-block">
+                // Referensi Riset Kunci:<br>
+                "Deep Joint Demosaicking and Denoising"<br>
+                Oleh: Michaël Gharbi, Gaurav Chaurasia,<br>
+                Sylvain Paris, Frédo Durand[cite: 218, 219, 221, 223, 224].<br>
+                <br>
+                // Fokus:<br>
+                Integrasi dua tahap (pemulihan warna dan reduksi noise) secara simultan.
+            </div>
+        </div>
+    </div>
+
+    <div class="slide">
+        <h2>Differentiable Image Processing</h2>
+        <div class="content">
+            <p style="margin-bottom: 30px;">Tujuan riset ini adalah mendesain algoritma pemrosesan gambar berbasis data secara struktural[cite: 476].</p>
+            
+            <div class="grid-2">
+                <div class="panel">
+                    <h3>Optimalisasi Arsitektur</h3>
+                    <p>Merancang metode yang bisa dieksekusi jauh lebih cepat daripada *neural networks* konvensional[cite: 476].</p>
+                </div>
+                <div class="panel">
+                    <h3>Batas Kualitas</h3>
+                    <p>Secara bersamaan, metode ini secara sistematis menghasilkan *output* gambar dengan kualitas visual yang lebih tinggi daripada metode algoritma klasik (seperti AHD atau LMMSE)[cite: 476, 477, 478].</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide">
+        <h2>Benchmark Kecepatan & Kualitas</h2>
+        <div class="content">
+            <p style="margin-bottom: 40px;">Pengujian efisiensi pemrosesan piksel per detik (*Mpix/sec*) dengan metrik kualitas berorientasi rasio PSNR.</p>
+            
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+                <div class="metric-box" style="border-color: var(--border);">
+                    <div class="metric-label">LMMSE (Klasik)</div>
+                    <div class="metric-value" style="color: var(--text-muted);">24.3</div>
+                    <div class="metric-label">Mpix/sec [cite: 478, 481]</div>
+                </div>
+                <div class="metric-box" style="border-color: #ef4444;">
+                    <div class="metric-label">Demosaicknet (NN)</div>
+                    <div class="metric-value" style="color: #ef4444;">0.12</div>
+                    <div class="metric-label">Mpix/sec [cite: 480, 481]</div>
+                </div>
+                <div class="metric-box">
+                    <div class="metric-label">Riset Baru (Ours)</div>
+                    <div class="metric-value">7.6</div>
+                    <div class="metric-label">Mpix/sec [cite: 479, 481]</div>
+                </div>
+            </div>
+            
+            <div class="panel" style="margin-top: 40px;">
+                <p><strong>Kesimpulan:</strong> Model *Differentiable Image Processing* yang baru mampu beroperasi hingga 5x lebih cepat dari target jaringan kompleks, sembari memberikan peningkatan kualitas signifikan sekitar 1.5 dB[cite: 492, 493].</p>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

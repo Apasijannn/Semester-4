@@ -1,0 +1,107 @@
+[gd_scene format=3 uid="uid://bu07lmeimv147"]
+
+[ext_resource type="Script" uid="uid://bov0fid2vnewr" path="res://scripts/main_menu.gd" id="1_06t4h"]
+[ext_resource type="FontFile" uid="uid://by2iy1yrccpqq" path="res://assets/MainMenu/GrapeSoda.ttf" id="2_glbon"]
+[ext_resource type="Texture2D" uid="uid://bfl4dfasmn6nf" path="res://assets/MainMenu/Start.png" id="3_nlkkf"]
+[ext_resource type="Texture2D" uid="uid://cfrqudkoff8h" path="res://assets/MainMenu/Credits.png" id="4_qe12f"]
+[ext_resource type="Texture2D" uid="uid://t5htd6h1l5hu" path="res://assets/MainMenu/Exit.png" id="5_8qtwp"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dy7ct"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0o4t1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_j5v2v"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_glbon"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nlkkf"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qe12f"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8qtwp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dy7ct"]
+
+[node name="MainMenu" type="Control" unique_id=562090966]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_06t4h")
+
+[node name="Panel" type="Panel" parent="." unique_id=1294525720]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_dy7ct")
+
+[node name="Label" type="Label" parent="." unique_id=1316915746]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.2953125
+anchor_top = 0.07777778
+anchor_right = 0.70390624
+anchor_bottom = 0.2125
+offset_left = -49.0
+offset_right = 51.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 10
+theme_override_fonts/font = ExtResource("2_glbon")
+theme_override_font_sizes/font_size = 120
+text = "PASAR CUAN"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1581473937]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.50078124
+anchor_top = 0.5972222
+anchor_right = 0.50078124
+anchor_bottom = 0.5972222
+offset_left = -206.0
+offset_top = -198.0
+offset_right = 206.0
+offset_bottom = 198.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+metadata/_edit_use_anchors_ = true
+
+[node name="Start" type="Button" parent="VBoxContainer" unique_id=1819877389]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 45
+theme_override_styles/normal = SubResource("StyleBoxEmpty_0o4t1")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_j5v2v")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_j5v2v")
+icon = ExtResource("3_nlkkf")
+
+[node name="Credits" type="Button" parent="VBoxContainer" unique_id=1581869797]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/normal = SubResource("StyleBoxEmpty_glbon")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_nlkkf")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_qe12f")
+icon = ExtResource("4_qe12f")
+
+[node name="Exit" type="Button" parent="VBoxContainer" unique_id=1000940691]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 45
+theme_override_styles/normal = SubResource("StyleBoxEmpty_j5v2v")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_8qtwp")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_dy7ct")
+icon = ExtResource("5_8qtwp")
+
+[connection signal="pressed" from="VBoxContainer/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="VBoxContainer/Credits" to="." method="_on_credits_pressed"]
+[connection signal="pressed" from="VBoxContainer/Exit" to="." method="_on_exit_pressed"]

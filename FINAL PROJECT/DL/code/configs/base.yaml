@@ -1,0 +1,70 @@
+# Shared defaults for every ablation variant.
+# Per-variant files (A1-A4) override only use_pinn / use_dino — nothing else,
+# so the ablation is fair (identical training budget across variants).
+
+seed: 42
+
+paths:
+  vol:        /vol
+  lsui_raw:   /vol/data/lsui/input
+  lsui_ref:   /vol/data/lsui/GT
+  uieb_raw:   /vol/data/uieb/raw
+  uieb_ref:   /vol/data/uieb/ref
+  pretrained: /vol/pretrained/NAFNet-SIDD-width32.pth
+  cache:      /vol/cache
+  outputs:    /vol/outputs
+  u90_split:  /root/configs/test_u90.txt   # UIEB official Test-U90 split (in-domain ablation)
+
+# Training data source: "lsui" (default, cross-domain) or "uieb" (in-domain: train
+# on UIEB-800 = 890 minus Test-U90, validate on U90). B-series uses uieb.
+train_data: lsui
+
+# Asset sources — used by download.py only.
+assets:
+  kaggle:
+    lsui:     cbhavik/lsui-dataset
+    uieb_raw: larjeck/uieb-dataset-raw
+    uieb_ref: larjeck/uieb-dataset-reference
+  pretrained_url:      "https://huggingface.co/nyanko7/nafnet-models/resolve/main/NAFNet-SIDD-width32.pth"
+  pretrained_filename: NAFNet-SIDD-width32.pth
+
+# Backbone = official NAFNet SIDD-width32 config. These four numbers MUST match the
+# checkpoint, otherwise the weights will not load (see pretrained.py).
+model:
+  width: 32
+  enc_blk_nums: [2, 2, 4, 8]
+  middle_blk_num: 12
+  dec_blk_nums: [2, 2, 2, 2]
+  use_grad_ckpt: false     # NAFNet is light (~16 GMACs@256); off is faster, fits 40GB at bs16/256
+
+train:
+  num_epochs: 50           # identical for all variants (fairness). NAFNet is cheap so 50 is comfortable.
+  batch_size: 16           # compute-bound: batch doesn't change wall-time, only #updates.
+  accum_steps: 1           #   small batch = more gradient updates = better convergence
+  patch_size: 256          # NAFNet cheap enough to train at full 256 (divisible by padder_size=16)
+  lr: 2.0e-4               # backbone fine-tune LR (NAFNet paper uses 1e-3 scratch; lower for FT)
+  pinn_lr: 1.0e-3          # PINN branch LR (random init, needs ~5x higher)
+  weight_decay: 1.0e-4
+  betas: [0.9, 0.9]        # NAFNet paper: beta2=0.9 (not 0.999) — more stable for restoration
+  warmup_epochs: 3
+  min_lr: 1.0e-6
+  grad_clip: 1.0
+  ema_decay: 0.9999
+  freeze_encoder_epochs: 2 # soft warmup: keep pretrained encoder frozen early so the random
+                           #   PINN/output heads don't corrupt its features, then unfreeze all
+  phys_warmup_epochs: 5    # ramp L_phys 0 -> full; protects pretrained decoder early
+  num_workers: 8
+  compile: false           # torch.compile conflicts w/ multi-tensor AdamW here
+
+loss:
+  w_char: 1.0
+  w_phys: 0.1
+  w_percep: 0.05
+  w_color: 0.0          # colour-cast term (A5+). 0 = off, keeps A1-A4 unchanged.
+  phys_anchor: false    # false = Beer-Lambert self-consistency; true = reference-anchored (A5+)
+
+eval:
+  num_samples: 8           # qualitative grids saved per variant
+  use_tta: true
+  save_every: 5            # checkpoint cadence (epochs)
+  eval_every: 5            # validation cadence (epochs)

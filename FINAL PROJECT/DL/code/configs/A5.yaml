@@ -1,0 +1,11 @@
+# A5 — A4 + reference-anchored physics + colour-cast loss (exploratory)
+# Attacks the two A4 failure modes seen in eval:
+#   1. depth collapse (t~=1) — physics never saw GT -> phys_anchor anchors t to GT
+#   2. uncorrected global colour cast — Charbonnier dilutes it -> w_color penalises it
+# NOT part of the clean A1-A4 ablation budget; everything else identical to A4.
+variant: A5
+use_pinn: true
+use_dino: true
+loss:
+  w_color: 0.2
+  phys_anchor: true

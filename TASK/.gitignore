@@ -1,0 +1,17 @@
+# Secrets — jangan pernah commit
+.env
+backend/.env
+
+# Node
+node_modules/
+dist/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Supabase CLI
+supabase/.temp/
+supabase/.branches/

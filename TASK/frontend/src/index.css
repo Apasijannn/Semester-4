@@ -1,0 +1,64 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+   Design tokens Karsa — diport 1:1 dari PERSONAL ASSISTANT/tailwind.config.js
+   + index.css supaya modul AI Planner konsisten dengan modul lain.
+   Gaya: sticker/retro — border tebal, hard shadow, pastel per modul.
+   Aksen modul AI Planner: lilac (dari palet yang sudah ada).
+--------------------------------------------------------------------------- */
+@theme {
+  --color-cream: #fbf3e2;
+  --color-ink: #1a1a1a;
+  --color-night: #17140f;
+  --color-bone: #f3ecd9;
+  --color-green: #c9e4ca;
+  --color-yellow: #ffd84d;
+  --color-blue: #b7d7ea;
+  --color-pink: #f9c2d6;
+  --color-lilac: #e4d5f7;
+  --color-sand: #eadfc4;
+  --color-paper: var(--paper);
+  --color-line: var(--line);
+
+  --font-display: "Archivo Black", sans-serif;
+  --font-sans: "Space Grotesk", sans-serif;
+  --font-mono: "Space Mono", monospace;
+
+  --shadow-sticker: 4px 4px 0 var(--line);
+  --shadow-sticker-sm: 2px 2px 0 var(--line);
+  --shadow-sticker-lg: 6px 6px 0 var(--line);
+}
+
+/* Setara `safelist` di project Karsa: primitives memakai kelas dinamis
+   bg-${color} / text-${color}, yang tidak terdeteksi scanner Tailwind. */
+@source inline("{bg,text}-{cream,ink,paper,line,green,yellow,blue,pink,lilac,sand}");
+
+:root {
+  --paper: #ffffff;
+  --line: #1a1a1a;
+  --grid-line: #e6dcc2;
+  --muted: #8a8a8a;
+}
+.dark {
+  --paper: #242019;
+  --line: #f3ecd9;
+  --grid-line: #3a352c;
+  --muted: #8f8672;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+body {
+  margin: 0;
+}
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--line);
+  border-radius: 10px;
+}

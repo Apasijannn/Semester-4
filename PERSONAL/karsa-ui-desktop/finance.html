@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Karsa — Finance Tracker (Desktop)</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+  .fin-layout{ display:flex; flex-direction:column; gap:22px; height:100%; }
+  .fin-top{ display:grid; grid-template-columns: 40% 60%; gap:22px; height:280px; }
+
+  /* balance card */
+  .balance-card{ display:flex; flex-direction:column; justify-content:space-between; }
+  .balance-amount{ font-family:'Archivo Black',sans-serif; font-size:40px; margin:4px 0 14px; }
+  .balance-sub-row{ display:flex; gap:14px; }
+  .balance-mini{ flex:1; border:2px solid var(--ink); border-radius:14px; padding:10px 12px; }
+  .balance-mini .bm-label{ font-size:11px; font-weight:700; display:flex; align-items:center; gap:6px; margin-bottom:4px; }
+  .balance-mini .bm-val{ font-family:'Archivo Black',sans-serif; font-size:17px; }
+
+  /* donut */
+  .donut-card{ display:flex; gap:24px; align-items:center; }
+  .donut{
+    width:150px; height:150px; border-radius:50%; flex-shrink:0;
+    border:2.5px solid var(--ink);
+    background:conic-gradient(var(--coral) 0 32%, var(--teal) 32% 55%, var(--mustard) 55% 76%, var(--navy) 76% 100%);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .donut-inner{ width:88px; height:88px; border-radius:50%; background:var(--white); border:2px solid var(--ink); display:flex; flex-direction:column; align-items:center; justify-content:center; }
+  .donut-inner .di-val{ font-family:'Archivo Black',sans-serif; font-size:16px; }
+  .donut-inner .di-label{ font-size:9.5px; opacity:.6; }
+  .cat-legend{ display:flex; flex-direction:column; gap:10px; flex:1; }
+  .cat-row{ display:flex; align-items:center; gap:10px; font-size:13px; }
+  .cat-dot{ width:13px; height:13px; border-radius:4px; border:1.5px solid var(--ink); flex-shrink:0; }
+  .cat-name{ flex:1; font-weight:600; }
+  .cat-amt{ font-weight:700; }
+
+  /* transactions table */
+  .table-card{ flex:1; display:flex; flex-direction:column; min-height:0; }
+  .tx-table{ width:100%; border-collapse:collapse; }
+  .tx-table thead th{ text-align:left; font-size:11px; text-transform:uppercase; letter-spacing:.5px; opacity:.55; padding:0 10px 10px; }
+  .tx-row td{ padding:10px; border-top:2px dashed #d8d0bd; }
+  .tx-icon{ width:34px; height:34px; border-radius:50%; border:2px solid var(--ink); display:flex; align-items:center; justify-content:center; }
+  .tx-name{ font-weight:700; font-size:13px; }
+  .tx-amt.pos{ color:var(--teal); font-weight:700; }
+  .tx-amt.neg{ color:#c94b3c; font-weight:700; }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <aside class="sidebar">
+    <div class="logo"><div class="logo-mark"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 12L10 18L20 6" stroke="#1A1A1A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="logo-word">Karsa</div></div>
+    <nav class="nav">
+      <div class="nav-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="8" height="8" rx="2" stroke="#1A1A1A" stroke-width="2"/><rect x="13" y="3" width="8" height="8" rx="2" stroke="#1A1A1A" stroke-width="2"/><rect x="3" y="13" width="8" height="8" rx="2" stroke="#1A1A1A" stroke-width="2"/><rect x="13" y="13" width="8" height="8" rx="2" stroke="#1A1A1A" stroke-width="2"/></svg>Dashboard</div>
+      <div class="nav-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12L10 17L19 6" stroke="#1A1A1A" stroke-width="2" stroke-linecap="round"/><rect x="3" y="3" width="18" height="18" rx="4" stroke="#1A1A1A" stroke-width="2"/></svg>Tasks</div>
+      <div class="nav-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-4.6-9.5-9.2C1 8.4 2.6 5 6 5c2 0 3.4 1.1 4 2.2C10.6 6.1 12 5 14 5c3.4 0 5 3.4 3.5 6.8C19 16.4 12 21 12 21z" stroke="#1A1A1A" stroke-width="2" stroke-linejoin="round"/></svg>Health</div>
+      <div class="nav-item active"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="6" width="18" height="13" rx="2" stroke="#1A1A1A" stroke-width="2"/><path d="M3 10H21" stroke="#1A1A1A" stroke-width="2"/><circle cx="16" cy="14.5" r="1.4" fill="#1A1A1A"/></svg>Finance</div>
+      <div class="nav-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 4H20V16H8L4 20V4Z" stroke="#1A1A1A" stroke-width="2" stroke-linejoin="round"/><circle cx="9" cy="10" r="1.2" fill="#1A1A1A"/><circle cx="12" cy="10" r="1.2" fill="#1A1A1A"/><circle cx="15" cy="10" r="1.2" fill="#1A1A1A"/></svg>AI Chat</div>
+    </nav>
+    <div class="profile-card">
+      <div class="profile-avatar">K</div>
+      <div><div class="profile-name" style="color:#1A1A1A">Karsa Putri</div><div class="profile-sub" style="color:#1A1A1A">Free plan</div></div>
+    </div>
+  </aside>
+
+  <div class="main">
+    <div class="topbar">
+      <div class="greeting">Good Morning, <span>Karsa</span> 👋</div>
+      <div class="search-bar">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="#1A1A1A" stroke-width="2"/><path d="M21 21L16.5 16.5" stroke="#1A1A1A" stroke-width="2" stroke-linecap="round"/></svg>
+        <input placeholder="Search tasks, notes, transactions…">
+      </div>
+      <div class="topbar-right">
+        <div class="icon-btn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 9a6 6 0 1 1 12 0c0 5 2 6 2 6H4s2-1 2-6" stroke="#1A1A1A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 20a2 2 0 0 0 4 0" stroke="#1A1A1A" stroke-width="2" stroke-linecap="round"/></svg><div class="dot"></div></div>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="fin-layout">
+
+        <div class="fin-top">
+          <!-- balance summary top-left -->
+          <div class="card tilt-l balance-card fill-navy">
+            <div class="card-corner tl"></div>
+            <div>
+              <div class="card-title" style="color:var(--cream);">💰 Total Balance</div>
+              <div class="balance-amount" style="color:var(--mustard);">$4,286.50</div>
+            </div>
+            <div class="balance-sub-row">
+              <div class="balance-mini" style="background:var(--cream); color:var(--ink);">
+                <div class="bm-label">⬆ Income</div>
+                <div class="bm-val">$6,120</div>
+              </div>
+              <div class="balance-mini" style="background:var(--cream); color:var(--ink);">
+                <div class="bm-label">⬇ Expenses</div>
+                <div class="bm-val">$1,833.50</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- category breakdown top-right -->
+          <div class="card tilt-r donut-card">
+            <div class="card-corner tr"></div>
+            <div class="donut">
+              <div class="donut-inner"><div class="di-val">$1,833</div><div class="di-label">this month</div></div>
+            </div>
+            <div class="cat-legend">
+              <div class="card-title" style="margin-bottom:2px;">📊 By Category</div>
+              <div class="cat-row"><div class="cat-dot" style="background:var(--coral)"></div><div class="cat-name">Food &amp; Dining</div><div class="cat-amt">$587</div></div>
+              <div class="cat-row"><div class="cat-dot" style="background:var(--teal)"></div><div class="cat-name">Transport</div><div class="cat-amt">$421</div></div>
+              <div class="cat-row"><div class="cat-dot" style="background:var(--mustard)"></div><div class="cat-name">Shopping</div><div class="cat-amt">$385</div></div>
+              <div class="cat-row"><div class="cat-dot" style="background:var(--navy)"></div><div class="cat-name">Bills &amp; Utilities</div><div class="cat-amt">$440</div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- transactions full width -->
+        <div class="card table-card tilt-l">
+          <div class="card-corner br"></div>
+          <div class="card-title" style="justify-content:space-between;">
+            <span>🧾 Recent Transactions</span>
+            <button class="btn sm ghost">View all</button>
+          </div>
+          <div class="scroll" style="overflow-y:auto;">
+            <table class="tx-table">
+              <thead><tr><th></th><th>Name</th><th>Category</th><th>Date</th><th style="text-align:right;">Amount</th></tr></thead>
+              <tbody>
+                <tr class="tx-row">
+                  <td><div class="tx-icon tint-coral">🍔</div></td>
+                  <td class="tx-name">Blue Bottle Coffee</td>
+                  <td><span class="tag tint-coral">Food</span></td>
+                  <td>Jul 4, 2026</td>
+                  <td class="tx-amt neg" style="text-align:right;">-$6.80</td>
+                </tr>
+                <tr class="tx-row">
+                  <td><div class="tx-icon tint-navy">💼</div></td>
+                  <td class="tx-name">Freelance Payment — Acme Co.</td>
+                  <td><span class="tag tint-navy">Income</span></td>
+                  <td>Jul 3, 2026</td>
+                  <td class="tx-amt pos" style="text-align:right;">+$1,200.00</td>
+                </tr>
+                <tr class="tx-row">
+                  <td><div class="tx-icon tint-teal">🚕</div></td>
+                  <td class="tx-name">Ride share — airport</td>
+                  <td><span class="tag tint-teal">Transport</span></td>
+                  <td>Jul 3, 2026</td>
+                  <td class="tx-amt neg" style="text-align:right;">-$24.30</td>
+                </tr>
+                <tr class="tx-row">
+                  <td><div class="tx-icon tint-mustard">🛍️</div></td>
+                  <td class="tx-name">Uniqlo — new jacket</td>
+                  <td><span class="tag tint-mustard">Shopping</span></td>
+                  <td>Jul 2, 2026</td>
+                  <td class="tx-amt neg" style="text-align:right;">-$89.00</td>
+                </tr>
+                <tr class="tx-row">
+                  <td><div class="tx-icon tint-navy">💡</div></td>
+                  <td class="tx-name">Electricity bill</td>
+                  <td><span class="tag tint-navy">Bills</span></td>
+                  <td>Jul 1, 2026</td>
+                  <td class="tx-amt neg" style="text-align:right;">-$64.20</td>
+                </tr>
+                <tr class="tx-row">
+                  <td><div class="tx-icon tint-coral">🍜</div></td>
+                  <td class="tx-name">Dinner with team</td>
+                  <td><span class="tag tint-coral">Food</span></td>
+                  <td>Jun 30, 2026</td>
+                  <td class="tx-amt neg" style="text-align:right;">-$42.10</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

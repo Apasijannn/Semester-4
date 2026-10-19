@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Domus</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app">
+
+    <!-- ═══════════════════════════════════════════════
+         DASHBOARD
+    ═══════════════════════════════════════════════════ -->
+    <div class="screen active" id="screen-dashboard">
+      <header>
+        <div class="header-left">
+          <i class="bi bi-house-door"></i>
+          <span>DOMUS</span>
+        </div>
+        <div class="header-right">
+          <span class="clock">10:30</span>
+          <i class="bi bi-wifi"></i>
+        </div>
+      </header>
+      <div class="grid g2x2">
+        <button class="card" id="card-ac" onclick="navigate('ac')">
+          <svg class="ring-svg" viewBox="0 0 36 36"><circle class="ring-track" cx="18" cy="18" r="14"/><circle class="ring-fill" cx="18" cy="18" r="14"/></svg>
+          <svg class="card-icon" width="1em" height="1em" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <rect x="1" y="3" width="22" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/>
+            <line x1="4" y1="9.5" x2="15" y2="9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="19.5" cy="7" r="1.2" fill="currentColor"/>
+            <path d="M3 18 Q4.5 16 6 18 Q7.5 20 9 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M9 18 Q10.5 16 12 18 Q13.5 20 15 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M15 18 Q16.5 16 18 18 Q19.5 20 21 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          <span class="card-label">AC</span>
+          <span class="card-status" id="status-ac">OFF</span>
+        </button>
+        <button class="card" id="card-lamp" onclick="navigate('lamp')">
+          <svg class="ring-svg" viewBox="0 0 36 36"><circle class="ring-track" cx="18" cy="18" r="14"/><circle class="ring-fill" cx="18" cy="18" r="14"/></svg>
+          <i class="bi bi-lightbulb card-icon"></i>
+          <span class="card-label">LAMP</span>
+          <span class="card-status" id="status-lamp">OFF</span>
+        </button>
+        <button class="card" id="card-door" onclick="navigate('door')">
+          <svg class="ring-svg" viewBox="0 0 36 36"><circle class="ring-track" cx="18" cy="18" r="14"/><circle class="ring-fill" cx="18" cy="18" r="14"/></svg>
+          <i class="bi bi-door-open card-icon"></i>
+          <span class="card-label">DOOR</span>
+          <span class="card-status" id="status-door">LOCKED</span>
+        </button>
+        <button class="card" id="card-tv" onclick="navigate('tv')">
+          <svg class="ring-svg" viewBox="0 0 36 36"><circle class="ring-track" cx="18" cy="18" r="14"/><circle class="ring-fill" cx="18" cy="18" r="14"/></svg>
+          <i class="bi bi-tv card-icon"></i>
+          <span class="card-label">TV</span>
+          <span class="card-status" id="status-tv">OFF</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════
+         AC CONTROLS
+    ═══════════════════════════════════════════════════ -->
+    <div class="screen" id="screen-ac">
+      <header>
+        <div class="header-left">
+          <i class="bi bi-house-door"></i>
+          <span>AC CONTROLS</span>
+        </div>
+        <div class="header-right">
+          <span class="clock">10:30</span>
+          <i class="bi bi-wifi"></i>
+        </div>
+      </header>
+      <div class="grid g2x2">
+        <button class="card action-btn" id="btn-ac-power" onclick="toggleAC(this)">
+          <svg class="ring-svg" viewBox="0 0 36 36"><circle class="ring-track" cx="18" cy="18" r="14"/><circle class="ring-fill" cx="18" cy="18" r="14"/></svg>
+          <i class="bi bi-power card-icon"></i>
+          <span class="card-label">ON / OFF</span>
+        </button>
+        <button class="card action-btn" onclick="tempUp(this)">
+          <svg class="ring-svg" viewBox="0 0 36 36"><circle class="ring-track" cx="18" cy="18" r="14"/><circle class="ring-fill" cx="18" cy="18" r="14"/></svg>
+          <i class="bi bi-arrow-up-circle card-icon"></i>
+          <span class="card-label">TEMP UP</span>
+        </button>
+        <button class="card action-btn" onclick="tempDown(this)">
+          <svg class="ring-svg" viewBox="0 0 36 36"><circle class="ring-track" cx="18" cy="18" r="14"/><circle class="ring-fill" cx="18" cy="18" r="14"/></svg>
+          <i class="bi bi-arrow-down-circle card-icon"></i>
+          <span class="card-label">TEMP DOWN</span>
+        </button>
+        <button class="card back-btn" onclick="navigate('dashboard')">
+          <i class="bi bi-arrow-return-left card-icon"></i>
+          <span class="card-label">BACK</span>
+        </button>
+      </div>
+      <div class="info-bar">
+        <span>TEMP: <strong id="temp-display">24</strong>°C</span>
+        <span>STATUS: <strong id="ac-status-label">OFF</strong></span>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════
+         LAMP CONTROLS
+    ═══════════════════════════════════════════════════ -->
+    <div class="screen" id="screen-lamp">
+      <header>
+        <div class="header-left">
+          <i class="bi bi-house-door"></i>
+          <span>LAMP CONTROLS</span>
+        </div>
+        <div class="header-right">
+          <span class="clock">10:30</span>
+          <i class="bi bi-wifi"></i>
+        </div>
+      </header>
+      <div class="grid g1x2-center">
+        <button class="card action-btn" id="btn-lamp-power" onclick="toggleLamp(this)">
+          <svg class="ring-svg" viewBox="0 0 36 36"><circle class="ring-track" cx="18" cy="18" r="14"/><circle class="ring-fill" cx="18" cy="18" r="14"/></svg>
+          <i class="bi bi-power card-icon"></i>
+          <span class="card-label">ON / OFF</span>
+        </button>
+        <button class="card back-btn" onclick="navigate('dashboard')">
+          <i class="bi bi-arrow-return-left card-icon"></i>
+          <span class="card-label">BACK</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════
+         DOOR CONTROLS
+    ═══════════════════════════════════════════════════ -->
+    <div class="screen" id="screen-door">
+      <header>
+        <div class="header-left">
+          <i class="bi bi-house-door"></i>
+          <span>DOOR CONTROLS</span>
+        </div>
+        <div class="header-right">
+          <span class="clock">10:30</span>
+          <i class="bi bi-wifi"></i>
+        </div>
+      </header>
+      <div class="grid g2-plus-1">
+        <button class="card action-btn" id="btn-door-lock" onclick="lockDoor(this)">
+          <svg class="ring-svg" viewBox="0 0 36 36"><circle class="ring-track" cx="18" cy="18" r="14"/><circle class="ring-fill" cx="18" cy="18" r="14"/></svg>
+          <i class="bi bi-lock-fill card-icon"></i>
+          <span class="card-label">LOCK</span>
+        </button>
+        <button class="card action-btn" id="btn-door-unlock" onclick="unlockDoor(this)">
+          <svg class="ring-svg" viewBox="0 0 36 36"><circle class="ring-track" cx="18" cy="18" r="14"/><circle class="ring-fill" cx="18" cy="18" r="14"/></svg>
+          <i class="bi bi-unlock-fill card-icon"></i>
+          <span class="card-label">UNLOCK</span>
+        </button>
+        <button class="card back-btn span2" onclick="navigate('dashboard')">
+          <i class="bi bi-arrow-return-left card-icon"></i>
+          <span class="card-label">BACK</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════
+         TV CONTROLS
+    ═══════════════════════════════════════════════════ -->
+    <div class="screen" id="screen-tv">
+      <header>
+        <div class="header-left">
+          <i class="bi bi-house-door"></i>
+          <span>TV CONTROLS</span>
+        </div>
+        <div class="header-right">
+          <span class="clock">10:30</span>
+          <i class="bi bi-wifi"></i>
+        </div>
+      </header>
+      <div class="grid g2x2">
+        <button class="card action-btn" id="btn-tv-power" onclick="toggleTV(this)">
+          <svg class="ring-svg" viewBox="0 0 36 36"><circle class="ring-track" cx="18" cy="18" r="14"/><circle class="ring-fill" cx="18" cy="18" r="14"/></svg>
+          <i class="bi bi-power card-icon"></i>
+          <span class="card-label">ON / OFF</span>
+        </button>
+        <button class="card nav-btn" onclick="navigate('volume')">
+          <i class="bi bi-volume-up-fill card-icon"></i>
+          <span class="card-label">VOLUME</span>
+        </button>
+        <button class="card nav-btn" onclick="navigate('channel')">
+          <i class="bi bi-tv-fill card-icon"></i>
+          <span class="card-label">CHANNELS</span>
+        </button>
+        <button class="card back-btn" onclick="navigate('dashboard')">
+          <i class="bi bi-arrow-return-left card-icon"></i>
+          <span class="card-label">BACK</span>
+        </button>
+      </div>
+      <div class="info-bar">
+        <span>STATUS: <strong id="tv-status-label">OFF</strong></span>
+        <span>CH: <strong id="tv-ch-label">1</strong></span>
+        <span>VOL: <strong id="tv-vol-label">50</strong></span>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════
+         VOLUME CONTROLS
+    ═══════════════════════════════════════════════════ -->
+    <div class="screen" id="screen-volume">
+      <header>
+        <div class="header-left">
+          <i class="bi bi-house-door"></i>
+          <span>TV CONTROLS - VOLUME</span>
+        </div>
+        <div class="header-right">
+          <span class="clock">10:30</span>
+          <i class="bi bi-wifi"></i>
+        </div>
+      </header>
+      <div class="grid g2-plus-1">
+        <button class="card action-btn" onclick="volumeUp(this)">
+          <svg class="ring-svg" viewBox="0 0 36 36"><circle class="ring-track" cx="18" cy="18" r="14"/><circle class="ring-fill" cx="18" cy="18" r="14"/></svg>
+          <i class="bi bi-arrow-up-circle card-icon"></i>
+          <span class="card-label">VOLUME UP</span>
+        </button>
+        <button class="card action-btn" onclick="volumeDown(this)">
+          <svg class="ring-svg" viewBox="0 0 36 36"><circle class="ring-track" cx="18" cy="18" r="14"/><circle class="ring-fill" cx="18" cy="18" r="14"/></svg>
+          <i class="bi bi-arrow-down-circle card-icon"></i>
+          <span class="card-label">VOLUME DOWN</span>
+        </button>
+        <button class="card back-btn span2" onclick="navigate('tv')">
+          <i class="bi bi-arrow-return-left card-icon"></i>
+          <span class="card-label">BACK</span>
+        </button>
+      </div>
+      <div class="info-bar">
+        <span>VOLUME: <strong id="volume-display">50</strong>%</span>
+        <div class="vol-track"><div class="vol-fill" id="volume-bar" style="width:50%"></div></div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════
+         CHANNEL CONTROLS
+    ═══════════════════════════════════════════════════ -->
+    <div class="screen" id="screen-channel">
+      <header>
+        <div class="header-left">
+          <i class="bi bi-house-door"></i>
+          <span>TV CONTROLS - CHANNELS</span>
+        </div>
+        <div class="header-right">
+          <span class="clock">10:30</span>
+          <i class="bi bi-wifi"></i>
+        </div>
+      </header>
+      <div class="grid g2-plus-1">
+        <button class="card action-btn" onclick="prevChannel(this)">
+          <svg class="ring-svg" viewBox="0 0 36 36"><circle class="ring-track" cx="18" cy="18" r="14"/><circle class="ring-fill" cx="18" cy="18" r="14"/></svg>
+          <i class="bi bi-arrow-left-circle card-icon"></i>
+          <span class="card-label">PREV</span>
+        </button>
+        <button class="card action-btn" onclick="nextChannel(this)">
+          <svg class="ring-svg" viewBox="0 0 36 36"><circle class="ring-track" cx="18" cy="18" r="14"/><circle class="ring-fill" cx="18" cy="18" r="14"/></svg>
+          <i class="bi bi-arrow-right-circle card-icon"></i>
+          <span class="card-label">NEXT</span>
+        </button>
+        <button class="card back-btn span2" onclick="navigate('tv')">
+          <i class="bi bi-arrow-return-left card-icon"></i>
+          <span class="card-label">BACK</span>
+        </button>
+      </div>
+      <div class="info-bar">
+        <span>CHANNEL: <strong id="channel-display">1</strong></span>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════
+         SUCCESS SCREEN
+    ═══════════════════════════════════════════════════ -->
+    <div class="screen" id="screen-success">
+      <header>
+        <div class="header-left"></div>
+        <div class="header-right">
+          <span class="clock">10:30</span>
+          <i class="bi bi-wifi"></i>
+        </div>
+      </header>
+      <div class="success-body">
+        <div class="success-ring">
+          <i class="bi bi-check-lg success-check"></i>
+        </div>
+        <span class="success-label">SUCCESS</span>
+      </div>
+    </div>
+
+  </div><!-- #app -->
+  <script src="app.js"></script>
+</body>
+</html>

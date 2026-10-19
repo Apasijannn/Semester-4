@@ -1,0 +1,202 @@
+@import url('https://fonts.googleapis.com/css2?family=Limelight&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
+
+:root {
+    --base-color: #ffffff;
+    --text-color: #1a1a1a;
+    --primary-color: #E8E2DB;
+    --secondary-color: #F7F8F0;
+    --accent-color: #C9B97A;
+    --nav-background: #DBCEA5;
+    --card-background: #FAF3E1;
+    --divider-color: #D5CEBC;
+    --subtle-text: #777;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    padding: 1.5em;
+    background-color: var(--primary-color);
+    font-family: 'Poppins', sans-serif;
+    color: var(--text-color);
+}
+
+/* ── Main Card ── */
+.main-card {
+    margin: 0 auto;
+    width: min(100%, 75em);
+    background-color: var(--secondary-color);
+    border-radius: 1em;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    overflow: hidden;
+}
+
+/* ── Nav ── */
+nav {
+    background-color: var(--nav-background);
+    padding: 1.25em 2em;
+}
+nav ul { display: flex; align-items: center; list-style: none; gap: 1.5em; }
+nav li:first-child { margin-right: auto; font-family: 'Limelight', cursive; font-size: 1.75rem; }
+.nav-socials { margin-left: auto; }
+nav a { text-decoration: none; color: var(--text-color); transition: opacity 0.2s; }
+nav a:hover { opacity: 0.6; }
+nav .fa-brands { font-size: 1.5rem; }
+
+/* ── Hero ── */
+.hero-section { padding: 3em 2em; }
+.flex-container { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 3em; }
+.main-card img:not([src$=".svg"]) { max-width: 100%; border-radius: 1em; object-fit: cover; object-position: top; }
+.text-container { flex: 0 1 34em; }
+h1 { font-size: 2.5rem; margin-bottom: 0.5em; }
+.text-container p { font-size: 1.1rem; line-height: 1.7; color: #444; margin-bottom: 1.5em; }
+
+.cta-button {
+    display: inline-block;
+    text-decoration: none;
+    padding: 0.75em 1.75em;
+    background-color: var(--accent-color);
+    color: var(--base-color);
+    border-radius: 0.5em;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: background-color 0.2s;
+}
+.cta-button:hover { background-color: #b8a45e; }
+
+/* ── Divider ── */
+.section-divider { border: none; border-top: 2px solid var(--divider-color); margin: 0 2em; }
+
+/* ── Sections ── */
+.projects-section { padding: 2.5em 2em; }
+.plans-section { padding: 2.5em 2em; }
+
+h2 { font-size: 1.75rem; margin-bottom: 0.25em; }
+.section-subtitle { font-size: 0.95rem; color: var(--subtle-text); margin-bottom: 1.5em; }
+
+/* ── Timeline ── */
+.timeline {
+    position: relative;
+    overflow: hidden;
+}
+
+/* Garis vertikal tengah */
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    transform: translateX(-50%);
+    background: linear-gradient(to bottom, transparent, var(--accent-color) 5%, var(--accent-color) 95%, transparent);
+}
+
+.timeline-container {
+    position: relative;
+    width: 50%;
+    padding: 0 3.5em 2.5em 0;
+}
+
+/* Dot */
+.timeline-container::after {
+    content: '';
+    position: absolute;
+    right: -7px;
+    top: 1em;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background-color: var(--accent-color);
+    border: 3px solid var(--secondary-color);
+    box-shadow: 0 0 0 2px var(--accent-color);
+    transition: transform 0.2s;
+    z-index: 1;
+}
+
+.timeline-container:hover::after { transform: scale(1.3); }
+
+.right-container {
+    left: 50%;
+    padding: 0 0 2.5em 3.5em;
+}
+.right-container::after { right: auto; left: -7px; }
+
+/* Text box */
+.text-box {
+    padding: 1.25em 1.5em;
+    background-color: var(--card-background);
+    border-radius: 0.75em;
+    border: 1px solid var(--divider-color);
+    position: relative;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.text-box:hover { transform: translateY(-3px); box-shadow: 0 6px 18px rgba(0,0,0,0.08); }
+
+.text-box-icon { font-size: 1.1rem; color: var(--accent-color); margin-bottom: 0.5em; }
+.text-box h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.25em; }
+.text-box small {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--accent-color);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 0.6em;
+}
+.text-box p { font-size: 0.88rem; color: var(--subtle-text); line-height: 1.65; }
+
+/* Panah */
+.left-container-arrow {
+    position: absolute;
+    top: 1em; right: -8px;
+    border-top: 7px solid transparent;
+    border-bottom: 7px solid transparent;
+    border-left: 8px solid var(--card-background);
+}
+.right-container-arrow {
+    position: absolute;
+    top: 1em; left: -8px;
+    border-top: 7px solid transparent;
+    border-bottom: 7px solid transparent;
+    border-right: 8px solid var(--card-background);
+}
+
+/* ── Plan Cards ── */
+.plans-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.25em;
+}
+.plan-card {
+    background-color: var(--card-background);
+    border-radius: 0.75em;
+    padding: 1.5em;
+    border: 1px solid var(--divider-color);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75em;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.plan-card:hover { transform: translateY(-3px); box-shadow: 0 6px 16px rgba(0,0,0,0.07); }
+.plan-icon { font-size: 1.5rem; color: var(--accent-color); }
+.plan-card p { font-size: 0.9rem; color: var(--subtle-text); line-height: 1.6; }
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+    .timeline::before { left: 1em; }
+    .timeline-container,
+    .right-container {
+        width: 100%;
+        left: 0;
+        padding: 0 0 2em 3em;
+    }
+    .timeline-container::after,
+    .right-container::after { left: calc(1em - 7px); right: auto; }
+    .left-container-arrow {
+        right: auto; left: -8px;
+        border-left: none;
+        border-right: 8px solid var(--card-background);
+    }
+}

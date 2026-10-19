@@ -1,0 +1,63 @@
+# Shared defaults for every ablation variant.
+# Per-variant files (A1-A4) override only use_pinn / use_dino — nothing else,
+# so the ablation is fair (identical training budget across variants).
+
+seed: 42
+
+paths:
+  vol:        /vol
+  lsui_raw:   /vol/data/lsui/input
+  lsui_ref:   /vol/data/lsui/GT
+  uieb_raw:   /vol/data/uieb/raw
+  uieb_ref:   /vol/data/uieb/ref
+  pretrained: /vol/pretrained/gaussian_color_denoising_blind.pth
+  cache:      /vol/cache
+  outputs:    /vol/outputs
+
+# Asset sources — used by download.py only.
+assets:
+  kaggle:
+    lsui:     cbhavik/lsui-dataset
+    uieb_raw: larjeck/uieb-dataset-raw
+    uieb_ref: larjeck/uieb-dataset-reference
+  pretrained_gdrive_folder: "1Qwsjyny54RZWa7zC4Apg7exixLBo4uF0"
+  pretrained_filename:      gaussian_color_denoising_blind.pth
+
+# Backbone = official Restormer config. layernorm_type MUST be BiasFree to match
+# the Gaussian-denoising checkpoint, otherwise the weights will not load.
+model:
+  dim: 48
+  num_blocks: [4, 6, 6, 8]
+  num_refinement_blocks: 4
+  heads: [1, 2, 4, 8]
+  ffn_expansion_factor: 2.66
+  bias: false
+  layernorm_type: BiasFree
+  use_grad_ckpt: true
+
+train:
+  num_epochs: 35           # identical for all variants (fairness)
+  batch_size: 48           # A100 40GB (~3-4GB peak with DINOv2, well within 40GB)
+  accum_steps: 1           # effective batch = 16
+  patch_size: 256
+  lr: 2.0e-4               # backbone LR (pretrained, fine-tune slow)
+  pinn_lr: 1.0e-3          # PINN branch LR (random init, needs 5x higher)
+  weight_decay: 1.0e-4
+  warmup_epochs: 3
+  min_lr: 1.0e-6
+  grad_clip: 1.0
+  ema_decay: 0.9999
+  phys_warmup_epochs: 5    # ramp L_phys 0 -> full; protects pretrained decoder early
+  num_workers: 8
+  compile: false            # torch.compile training forward (~1.3-1.6x); set false if graph breaks
+
+loss:
+  w_char: 1.0
+  w_phys: 0.1
+  w_percep: 0.05
+
+eval:
+  num_samples: 8           # qualitative grids saved per variant
+  use_tta: true
+  save_every: 5            # checkpoint cadence (epochs)
+  eval_every: 5            # validation cadence (epochs)

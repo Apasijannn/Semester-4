@@ -1,0 +1,87 @@
+@import "tailwindcss";
+
+/* ============================================================
+   KARSA — Design tokens (Tailwind v4 @theme)
+   >>> SESUAIKAN warna pastel per-modul di sini <<<
+   Token --color-mod-* dipakai juga di src/data/modules.js —
+   kalau mengubah salah satu, samakan keduanya.
+   ============================================================ */
+@theme {
+  --font-display: "Caveat", "Segoe Script", cursive;
+  --font-sans: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+
+  /* Warna dasar "kertas & tinta" (nuansa hand-drawn retro) */
+  --color-ink: #241e15;
+  --color-ink-soft: #56503f;
+  --color-paper: #f6efdd;
+  --color-paper-dim: #cfc5ab;
+  --color-night: #171410;
+  --color-night-soft: #221d16;
+
+  /* Pastel per-modul */
+  --color-mod-dashboard: #efdfbe;
+  --color-mod-health: #b5e0c4;
+  --color-mod-finance: #f2d785;
+  --color-mod-task: #a9c7e8;
+  --color-mod-skincare: #eec5cf;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-night text-paper font-sans antialiased;
+  overflow-x: hidden;
+}
+
+/* Setiap section yang jadi target anchor navbar */
+section[id] {
+  scroll-margin-top: 4.5rem;
+}
+
+/* ============================================================
+   Border "sketsa tangan" — trik border-radius asimetris klasik.
+   Dipakai untuk card, tombol, dan frame agar terkesan digambar.
+   ============================================================ */
+.sketchy {
+  border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+}
+.sketchy-alt {
+  border-radius: 15px 225px 15px 255px / 255px 15px 225px 15px;
+}
+
+/* Garis bawah coretan (dipakai di tagline & heading) */
+.scribble-underline {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 8' preserveAspectRatio='none'%3E%3Cpath d='M2 5 C 20 2, 40 7, 60 4 S 100 2, 118 5' fill='none' stroke='%23f2d785' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-size: 100% 0.4em;
+  padding-bottom: 0.35em;
+}
+
+/* ============================================================
+   Grain overlay — noise kertas di seluruh halaman (pengganti
+   post-processing grain, jauh lebih murah untuk GPU).
+   ============================================================ */
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  pointer-events: none;
+  opacity: 0.09;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Scrollbar tipis biar tidak merusak tema */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-night);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-ink-soft);
+  border-radius: 8px;
+}

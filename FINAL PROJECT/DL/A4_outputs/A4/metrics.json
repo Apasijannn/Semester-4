@@ -1,0 +1,21 @@
+{
+  "variant": "A4",
+  "n_images": 890,
+  "use_tta": true,
+  "eval_set": "UIEB-890",
+  "psnr_mean": 20.148189544677734,
+  "psnr_std": 4.297276496887207,
+  "ssim_mean": 0.8515872359275818,
+  "ssim_std": 0.10252867639064789,
+  "lpips_mean": 0.16588932275772095,
+  "lpips_std": 0.1026383563876152,
+  "uciqe_mean": 4.420614242553711,
+  "uciqe_std": 2.1970767974853516,
+  "uiqm_mean": 2.9141063690185547,
+  "uiqm_std": 0.510663628578186,
+  "beta_R_mean": 4.51231,
+  "beta_G_mean": 4.4559,
+  "beta_B_mean": 2.8411,
+  "depth_mean": 0.01741,
+  "beta_ordered_R_G_B": true
+}

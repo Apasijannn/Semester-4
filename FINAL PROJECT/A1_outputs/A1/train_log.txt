@@ -1,0 +1,94 @@
+=== Variant A1 | pinn=False dino=False | epochs=50 | device=cuda ===
+[pretrained] 664/664 checkpoint tensors loaded
+[pretrained] 0 missing in model (0 are PINN branch, expected)
+[pretrained] 0 unexpected (skipped)
+[stage] /vol/data/lsui/input -> /tmp/data/lsui/input (4279 files, 393s)
+[stage] /vol/data/lsui/GT -> /tmp/data/lsui/GT (4279 files, 409s)
+[stage] /vol/data/uieb/raw -> /tmp/data/uieb/raw (890 files, 95s)
+[stage] /vol/data/uieb/ref -> /tmp/data/uieb/ref (890 files, 100s)
+[data] train=4279 pairs  val=890 pairs
+[freeze] encoder frozen for first 2 epoch(s)
+[  1/50] loss=0.0760 (char=0.0760 phys=0.0000 percep=0.0000) lr=1.33e-04 57s  vram=9.1/42GB
+[  2/50] loss=0.0632 (char=0.0632 phys=0.0000 percep=0.0000) lr=2.00e-04 58s  vram=9.1/42GB
+[freeze] encoder unfrozen at epoch 3 — full fine-tune
+[  3/50] loss=0.0596 (char=0.0596 phys=0.0000 percep=0.0000) lr=2.00e-04 72s  vram=16.9/42GB
+[  4/50] loss=0.0517 (char=0.0517 phys=0.0000 percep=0.0000) lr=2.00e-04 72s  vram=16.9/42GB
+[  5/50] loss=0.0482 (char=0.0482 phys=0.0000 percep=0.0000) lr=1.99e-04 72s  val_psnr=15.9416 val_ssim=0.7027  vram=16.9/42GB
+[  6/50] loss=0.0453 (char=0.0453 phys=0.0000 percep=0.0000) lr=1.98e-04 72s  vram=17.0/42GB
+[  7/50] loss=0.0433 (char=0.0433 phys=0.0000 percep=0.0000) lr=1.96e-04 74s  vram=17.0/42GB
+[  8/50] loss=0.0413 (char=0.0413 phys=0.0000 percep=0.0000) lr=1.94e-04 73s  vram=17.0/42GB
+[  9/50] loss=0.0397 (char=0.0397 phys=0.0000 percep=0.0000) lr=1.92e-04 75s  vram=17.0/42GB
+[ 10/50] loss=0.0391 (char=0.0391 phys=0.0000 percep=0.0000) lr=1.89e-04 73s  val_psnr=16.2270 val_ssim=0.7349  <<BEST  vram=17.0/42GB
+[ 11/50] loss=0.0378 (char=0.0378 phys=0.0000 percep=0.0000) lr=1.86e-04 75s  vram=17.0/42GB
+[ 12/50] loss=0.0369 (char=0.0369 phys=0.0000 percep=0.0000) lr=1.83e-04 74s  vram=17.0/42GB
+[ 13/50] loss=0.0366 (char=0.0366 phys=0.0000 percep=0.0000) lr=1.79e-04 84s  vram=17.0/42GB
+[ 14/50] loss=0.0356 (char=0.0356 phys=0.0000 percep=0.0000) lr=1.74e-04 95s  vram=17.0/42GB
+[ 15/50] loss=0.0347 (char=0.0347 phys=0.0000 percep=0.0000) lr=1.70e-04 91s  val_psnr=16.5772 val_ssim=0.7622  vram=17.0/42GB
+[ 16/50] loss=0.0343 (char=0.0343 phys=0.0000 percep=0.0000) lr=1.65e-04 92s  vram=17.0/42GB
+[ 17/50] loss=0.0336 (char=0.0336 phys=0.0000 percep=0.0000) lr=1.60e-04 86s  vram=17.0/42GB
+[ 18/50] loss=0.0331 (char=0.0331 phys=0.0000 percep=0.0000) lr=1.54e-04 95s  vram=17.0/42GB
+[ 19/50] loss=0.0325 (char=0.0325 phys=0.0000 percep=0.0000) lr=1.48e-04 82s  vram=17.0/42GB
+[ 20/50] loss=0.0318 (char=0.0318 phys=0.0000 percep=0.0000) lr=1.42e-04 85s  val_psnr=16.9397 val_ssim=0.7839  vram=17.0/42GB
+[ 21/50] loss=0.0312 (char=0.0312 phys=0.0000 percep=0.0000) lr=1.36e-04 84s  vram=17.0/42GB
+[ 22/50] loss=0.0309 (char=0.0309 phys=0.0000 percep=0.0000) lr=1.30e-04 72s  vram=17.0/42GB
+[ 23/50] loss=0.0301 (char=0.0301 phys=0.0000 percep=0.0000) lr=1.24e-04 72s  vram=17.0/42GB
+[ 24/50] loss=0.0299 (char=0.0299 phys=0.0000 percep=0.0000) lr=1.17e-04 72s  vram=17.0/42GB
+[ 25/50] loss=0.0293 (char=0.0293 phys=0.0000 percep=0.0000) lr=1.10e-04 76s  val_psnr=17.2884 val_ssim=0.8008  vram=17.0/42GB
+[ 26/50] loss=0.0290 (char=0.0290 phys=0.0000 percep=0.0000) lr=1.04e-04 74s  vram=17.0/42GB
+[ 27/50] loss=0.0286 (char=0.0286 phys=0.0000 percep=0.0000) lr=9.72e-05 73s  vram=17.0/42GB
+[ 28/50] loss=0.0283 (char=0.0283 phys=0.0000 percep=0.0000) lr=9.05e-05 75s  vram=17.0/42GB
+[ 29/50] loss=0.0278 (char=0.0278 phys=0.0000 percep=0.0000) lr=8.40e-05 73s  vram=17.0/42GB
+[ 30/50] loss=0.0272 (char=0.0272 phys=0.0000 percep=0.0000) lr=7.74e-05 72s  val_psnr=17.6183 val_ssim=0.8143  vram=17.0/42GB
+[ 31/50] loss=0.0266 (char=0.0266 phys=0.0000 percep=0.0000) lr=7.10e-05 72s  vram=17.0/42GB
+[ 32/50] loss=0.0265 (char=0.0265 phys=0.0000 percep=0.0000) lr=6.47e-05 72s  vram=17.0/42GB
+[ 33/50] loss=0.0260 (char=0.0260 phys=0.0000 percep=0.0000) lr=5.86e-05 72s  vram=17.0/42GB
+[ 34/50] loss=0.0258 (char=0.0258 phys=0.0000 percep=0.0000) lr=5.27e-05 72s  vram=17.0/42GB
+[ 35/50] loss=0.0253 (char=0.0253 phys=0.0000 percep=0.0000) lr=4.70e-05 73s  val_psnr=17.9251 val_ssim=0.8253  <<BEST  vram=17.0/42GB
+[ 36/50] loss=0.0254 (char=0.0254 phys=0.0000 percep=0.0000) lr=4.15e-05 72s  vram=17.0/42GB
+[ 37/50] loss=0.0248 (char=0.0248 phys=0.0000 percep=0.0000) lr=3.63e-05 72s  vram=17.0/42GB
+[ 38/50] loss=0.0245 (char=0.0245 phys=0.0000 percep=0.0000) lr=3.13e-05 72s  vram=17.0/42GB
+[ 39/50] loss=0.0242 (char=0.0242 phys=0.0000 percep=0.0000) lr=2.67e-05 72s  vram=17.0/42GB
+[ 40/50] loss=0.0239 (char=0.0239 phys=0.0000 percep=0.0000) lr=2.24e-05 72s  val_psnr=18.2104 val_ssim=0.8343  vram=17.0/42GB
+[ 41/50] loss=0.0236 (char=0.0236 phys=0.0000 percep=0.0000) lr=1.85e-05 72s  vram=17.0/42GB
+[ 42/50] loss=0.0235 (char=0.0235 phys=0.0000 percep=0.0000) lr=1.49e-05 72s  vram=17.0/42GB
+[ 43/50] loss=0.0233 (char=0.0233 phys=0.0000 percep=0.0000) lr=1.17e-05 72s  vram=17.0/42GB
+[ 44/50] loss=0.0230 (char=0.0230 phys=0.0000 percep=0.0000) lr=8.90e-06 72s  vram=17.0/42GB
+[ 45/50] loss=0.0229 (char=0.0229 phys=0.0000 percep=0.0000) lr=6.51e-06 74s  val_psnr=18.4638 val_ssim=0.8417  vram=17.0/42GB
+=== Variant A1 | pinn=False dino=False | epochs=50 | device=cuda ===
+[pretrained] 664/664 checkpoint tensors loaded
+[pretrained] 0 missing in model (0 are PINN branch, expected)
+[pretrained] 0 unexpected (skipped)
+[resume] from epoch 45, best_psnr=18.46
+[stage] /vol/data/lsui/input -> /tmp/data/lsui/input (4279 files, 5s)
+[stage] /vol/data/lsui/GT -> /tmp/data/lsui/GT (4279 files, 5s)
+[stage] /vol/data/uieb/raw -> /tmp/data/uieb/raw (890 files, 2s)
+[stage] /vol/data/uieb/ref -> /tmp/data/uieb/ref (890 files, 2s)
+[data] train=4279 pairs  val=890 pairs
+[ 46/50] loss=0.0229 (char=0.0229 phys=0.0000 percep=0.0000) lr=4.54e-06 76s  vram=17.5/42GB
+[ 47/50] loss=0.0227 (char=0.0227 phys=0.0000 percep=0.0000) lr=2.99e-06 72s  vram=17.5/42GB
+[ 48/50] loss=0.0226 (char=0.0226 phys=0.0000 percep=0.0000) lr=1.89e-06 72s  vram=17.5/42GB
+[ 49/50] loss=0.0227 (char=0.0227 phys=0.0000 percep=0.0000) lr=1.22e-06 72s  vram=17.5/42GB
+[ 50/50] loss=0.0228 (char=0.0228 phys=0.0000 percep=0.0000) lr=1.00e-06 72s  val_psnr=18.6769 val_ssim=0.8474  <<BEST  vram=17.5/42GB
+=== A1 done. best_psnr=18.68 ===
+=== Variant A1 | pinn=False dino=False | epochs=50 | device=cuda ===
+[pretrained] 664/664 checkpoint tensors loaded
+[pretrained] 0 missing in model (0 are PINN branch, expected)
+[pretrained] 0 unexpected (skipped)
+[resume] from epoch 50, best_psnr=18.68
+[stage] /vol/data/lsui/input -> /tmp/data/lsui/input (4279 files, 5s)
+[stage] /vol/data/lsui/GT -> /tmp/data/lsui/GT (4279 files, 5s)
+[stage] /vol/data/uieb/raw -> /tmp/data/uieb/raw (890 files, 2s)
+[stage] /vol/data/uieb/ref -> /tmp/data/uieb/ref (890 files, 2s)
+[data] train=4279 pairs  val=890 pairs
+=== A1 done. best_psnr=18.68 ===
+=== Variant A1 | pinn=False dino=False | epochs=50 | device=cuda ===
+[pretrained] 664/664 checkpoint tensors loaded
+[pretrained] 0 missing in model (0 are PINN branch, expected)
+[pretrained] 0 unexpected (skipped)
+[resume] from epoch 50, best_psnr=18.68
+[stage] /vol/data/lsui/input -> /tmp/data/lsui/input (4279 files, 6s)
+[stage] /vol/data/lsui/GT -> /tmp/data/lsui/GT (4279 files, 5s)
+[stage] /vol/data/uieb/raw -> /tmp/data/uieb/raw (890 files, 2s)
+[stage] /vol/data/uieb/ref -> /tmp/data/uieb/ref (890 files, 2s)
+[data] train=4279 pairs  val=890 pairs
+=== A1 done. best_psnr=18.68 ===

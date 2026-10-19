@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://wyt30y2mntw6"]
+
+[ext_resource type="Script" uid="uid://j215w8becmvv" path="res://scripts/bootsplash.gd" id="1_4yk1u"]
+[ext_resource type="Texture2D" uid="uid://dhrb241qoki7s" path="res://assets/Bootsplash/BG.png" id="1_runkw"]
+[ext_resource type="Texture2D" uid="uid://cksygcq0wirf4" path="res://assets/MainMenu/Logo.png" id="3_4yk1u"]
+[ext_resource type="Texture2D" uid="uid://degq4gcreyxsv" path="res://assets/Bootsplash/complete_art.png" id="5_fg8pf"]
+
+[sub_resource type="Animation" id="Animation_6lih8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Logo:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_xwrdj"]
+resource_name = "fade_out"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Logo:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 1),
+"transitions": PackedFloat32Array(0.5, 0.5, 2),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_itmpr"]
+_data = {
+&"RESET": SubResource("Animation_6lih8"),
+&"fade_out": SubResource("Animation_xwrdj")
+}
+
+[node name="Bootsplash" type="Node2D" unique_id=522452393]
+script = ExtResource("1_4yk1u")
+
+[node name="Bg" type="Sprite2D" parent="." unique_id=821589567]
+position = Vector2(640, 360)
+scale = Vector2(80, 44.875)
+texture = ExtResource("1_runkw")
+
+[node name="Logo" type="Node2D" parent="." unique_id=965097317]
+texture_filter = 1
+
+[node name="Logo2" type="Sprite2D" parent="Logo" unique_id=2001135651]
+position = Vector2(640, 360)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("3_4yk1u")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1502914797]
+libraries/ = SubResource("AnimationLibrary_itmpr")
+autoplay = &"fade_out"
+
+[node name="CompleteArt" type="Sprite2D" parent="." unique_id=678398842]
+texture_filter = 1
+position = Vector2(1935, 362)
+scale = Vector2(4.432099, 4.432099)
+texture = ExtResource("5_fg8pf")
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

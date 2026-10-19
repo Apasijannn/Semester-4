@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Karsa Task Manager</title>
+<!-- Fonts & Icons -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;800&amp;family=JetBrains+Mono:wght@400&amp;family=Space+Mono:wght@700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-container": "#f2eee3",
+                      "tertiary": "#002217",
+                      "error-container": "#ffdad6",
+                      "surface-variant": "#e6e2d8",
+                      "background": "#fdf9ee",
+                      "tertiary-fixed-dim": "#27e0a9",
+                      "surface": "#fdf9ee",
+                      "outline": "#77767d",
+                      "on-primary-fixed-variant": "#424658",
+                      "tertiary-fixed": "#54fdc4",
+                      "outline-variant": "#c7c6cd",
+                      "on-error": "#ffffff",
+                      "inverse-primary": "#c2c5db",
+                      "on-secondary-container": "#5a001e",
+                      "secondary": "#b71849",
+                      "on-error-container": "#93000a",
+                      "surface-dim": "#dddacf",
+                      "on-surface": "#1c1c15",
+                      "surface-bright": "#fdf9ee",
+                      "surface-container-low": "#f7f3e8",
+                      "error": "#ba1a1a",
+                      "on-primary": "#ffffff",
+                      "surface-container-high": "#ece8dd",
+                      "on-primary-container": "#9599ad",
+                      "on-tertiary": "#ffffff",
+                      "tertiary-container": "#003a29",
+                      "on-tertiary-fixed-variant": "#00513b",
+                      "primary-container": "#2d3142",
+                      "secondary-fixed-dim": "#ffb2bc",
+                      "on-surface-variant": "#46464c",
+                      "primary-fixed-dim": "#c2c5db",
+                      "on-tertiary-container": "#00af82",
+                      "surface-tint": "#5a5d70",
+                      "on-secondary": "#ffffff",
+                      "inverse-surface": "#313129",
+                      "secondary-fixed": "#ffd9dd",
+                      "inverse-on-surface": "#f4f1e6",
+                      "primary": "#181c2c",
+                      "secondary-container": "#fd5179",
+                      "surface-container-highest": "#e6e2d8",
+                      "primary-fixed": "#dee1f8",
+                      "on-primary-fixed": "#171b2b",
+                      "on-tertiary-fixed": "#002116",
+                      "on-secondary-fixed": "#400013",
+                      "on-background": "#1c1c15",
+                      "surface-container-lowest": "#ffffff",
+                      "on-secondary-fixed-variant": "#910034"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "bento-padding": "1.5rem",
+                      "stack-sm": "0.5rem",
+                      "grid-margin": "2rem",
+                      "grid-gutter": "1.5rem",
+                      "stack-lg": "2rem",
+                      "stack-xs": "0.25rem",
+                      "stack-md": "1rem"
+              },
+              "fontFamily": {
+                      "label-caps": [
+                              "Space Mono"
+                      ],
+                      "body-sm": [
+                              "JetBrains Mono"
+                      ],
+                      "headline-xl": [
+                              "Bricolage Grotesque"
+                      ],
+                      "body-md": [
+                              "JetBrains Mono"
+                      ],
+                      "headline-lg-mobile": [
+                              "Bricolage Grotesque"
+                      ],
+                      "headline-lg": [
+                              "Bricolage Grotesque"
+                      ]
+              },
+              "fontSize": {
+                      "label-caps": [
+                              "12px",
+                              {
+                                      "lineHeight": "1",
+                                      "letterSpacing": "0.1em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-sm": [
+                              "14px",
+                              {
+                                      "lineHeight": "1.5",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-xl": [
+                              "48px",
+                              {
+                                      "lineHeight": "1.1",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "800"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "1.6",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "24px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "fontWeight": "700"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        /* Custom Hand-Drawn / Brutalist Utilities */
+        .paper-grain {
+            background-image: radial-gradient(#181c2c 0.5px, transparent 0.5px);
+            background-size: 8px 8px;
+            opacity: 0.05;
+            pointer-events: none;
+        }
+        
+        .wobbly-border {
+            border-radius: 2% 95% 4% 97% / 96% 2% 98% 4%;
+        }
+        
+        .wobbly-border-alt {
+            border-radius: 95% 4% 97% 5% / 4% 94% 3% 95%;
+        }
+
+        .hard-shadow {
+            box-shadow: 4px 4px 0px 0px #181c2c;
+        }
+
+        .hard-shadow-hover:hover {
+            box-shadow: 6px 6px 0px 0px #181c2c;
+            transform: translate(-2px, -2px);
+        }
+
+        .hard-shadow-active:active {
+            box-shadow: 0px 0px 0px 0px #181c2c;
+            transform: translate(4px, 4px);
+        }
+
+        .stamp-effect {
+            border-radius: 10% 90% 20% 80% / 80% 20% 90% 10%;
+            border: 3px solid;
+            transform: rotate(-15deg);
+        }
+
+        .washi-tape {
+            clip-path: polygon(2% 0, 98% 2%, 100% 98%, 0 100%);
+        }
+        
+        /* Typewriter cursor effect */
+        .blinking-cursor::after {
+            content: '█';
+            animation: blink 1s step-end infinite;
+        }
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md flex h-screen overflow-hidden selection:bg-secondary selection:text-on-secondary">
+<!-- Paper Texture Overlay -->
+<div class="fixed inset-0 paper-grain z-50 mix-blend-multiply"></div>
+<!-- SIDE NAVIGATION (From Shared Components) -->
+<nav class="bg-surface h-screen w-64 border-r-4 border-primary flex flex-col h-full p-stack-md shrink-0 relative z-40">
+<!-- Header -->
+<div class="flex items-center gap-stack-sm mb-stack-lg px-stack-sm">
+<img alt="Karsa AI User Avatar" class="w-10 h-10 border-2 border-primary rounded-full object-cover wobbly-border" data-alt="A detailed, hand-drawn style avatar portrait of a retro robot or user character, rendered in thick black ink outlines with a subtle paper texture background. The style is 90s indie comic book art, high contrast, minimalist but expressive, suitable for a light mode UI profile picture." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWw698uoP5yzAm_d7nBAscd-3S6eTrjKVGjHtih1FPaXyoYnJ5aJkCvrzNkA47jBRorP0_kd2kW4I_UfEuDYbQqMgJCQPwhvRUHWLMn16ticx0FzdPxUquQCe2svpbGg0RA9kcKzUtEBeeb-ekcwt0jxRW7QKN4wUYX6hiItYkP6_rGFDOwnwQ0YW5Hpb9_N0stQaco-bJ_kAPHTCvkrFXbVofvuAuRtPth3cuEGqzgTv40GFOlktbhLINi5l7OycmwGWu1DYOMjNy"/>
+<div>
+<h1 class="font-headline-lg text-headline-lg font-black text-primary">KARSA_V1.0</h1>
+<p class="font-label-caps text-label-caps text-on-surface-variant">SYSTEM_ONLINE</p>
+</div>
+</div>
+<!-- Main Tabs -->
+<div class="flex flex-col gap-stack-sm flex-1">
+<a class="flex items-center gap-stack-sm p-stack-sm font-label-caps text-label-caps text-on-surface-variant hover:translate-x-[-2px] hover:translate-y-[-2px] hover:bg-surface-container-high transition-all duration-75 wobbly-border" href="#">
+<span class="material-symbols-outlined">grid_view</span>
+                Dashboard
+            </a>
+<!-- ACTIVE TAB: Tasks -->
+<a class="flex items-center gap-stack-sm p-stack-sm font-label-caps text-label-caps text-primary font-bold border-2 border-primary bg-secondary-container translate-x-1 translate-y-1 shadow-none wobbly-border transition-transform" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">checklist</span>
+                Tasks
+            </a>
+<a class="flex items-center gap-stack-sm p-stack-sm font-label-caps text-label-caps text-on-surface-variant hover:translate-x-[-2px] hover:translate-y-[-2px] hover:bg-surface-container-high transition-all duration-75 wobbly-border" href="#">
+<span class="material-symbols-outlined">monitor_heart</span>
+                Health
+            </a>
+<a class="flex items-center gap-stack-sm p-stack-sm font-label-caps text-label-caps text-on-surface-variant hover:translate-x-[-2px] hover:translate-y-[-2px] hover:bg-surface-container-high transition-all duration-75 wobbly-border" href="#">
+<span class="material-symbols-outlined">payments</span>
+                Finance
+            </a>
+<a class="flex items-center gap-stack-sm p-stack-sm font-label-caps text-label-caps text-on-surface-variant hover:translate-x-[-2px] hover:translate-y-[-2px] hover:bg-surface-container-high transition-all duration-75 wobbly-border" href="#">
+<span class="material-symbols-outlined">smart_toy</span>
+                Chat
+            </a>
+</div>
+<!-- CTA -->
+<button class="mt-auto mb-stack-md py-stack-sm px-stack-md bg-tertiary text-on-tertiary border-2 border-primary font-label-caps text-label-caps hard-shadow hard-shadow-hover hard-shadow-active transition-all wobbly-border flex justify-center items-center gap-2">
+<span class="material-symbols-outlined">add</span>
+            New Entry
+        </button>
+<!-- Footer Tabs -->
+<div class="flex flex-col gap-stack-xs border-t-2 border-primary pt-stack-sm border-dashed">
+<a class="flex items-center gap-stack-sm p-stack-sm font-label-caps text-label-caps text-on-surface-variant hover:bg-surface-container-high transition-all wobbly-border" href="#">
+<span class="material-symbols-outlined">settings</span>
+                Settings
+            </a>
+<a class="flex items-center gap-stack-sm p-stack-sm font-label-caps text-label-caps text-secondary hover:bg-error-container transition-all wobbly-border" href="#">
+<span class="material-symbols-outlined">logout</span>
+                Log Out
+            </a>
+</div>
+</nav>
+<!-- MAIN CONTENT AREA -->
+<main class="flex-1 flex flex-col h-full overflow-y-auto p-grid-margin relative z-30 bg-surface-container-lowest">
+<!-- Header & Filters -->
+<header class="flex justify-between items-end mb-stack-lg border-b-4 border-primary pb-stack-sm border-dashed">
+<div>
+<h2 class="font-headline-xl text-headline-xl text-primary font-black tracking-tighter">CURRENT_TASKS<span class="blinking-cursor text-secondary"></span></h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-2">SYS_DATE: [2023.10.27] // LOG: ACTIVE</p>
+</div>
+<!-- Washi Tape Filters -->
+<div class="flex gap-stack-sm items-center">
+<span class="font-label-caps text-label-caps mr-2">FILTER:</span>
+<button class="bg-tertiary-fixed text-on-tertiary-fixed font-label-caps text-label-caps px-3 py-1 washi-tape rotate-[-2deg] hover:rotate-0 transition-transform">ALL</button>
+<button class="bg-surface-variant text-on-surface font-label-caps text-label-caps px-3 py-1 washi-tape rotate-[1deg] hover:rotate-0 transition-transform">WORK</button>
+<button class="bg-secondary-fixed text-on-secondary-fixed font-label-caps text-label-caps px-3 py-1 washi-tape rotate-[-1deg] hover:rotate-0 transition-transform">URGENT</button>
+</div>
+</header>
+<!-- Weekly Calendar Strip (Bento Row) -->
+<section class="grid grid-cols-7 gap-stack-sm mb-grid-gutter">
+<!-- Day items -->
+<div class="bg-surface border-2 border-primary p-2 text-center wobbly-border opacity-50">
+<div class="font-label-caps text-label-caps">MON</div>
+<div class="font-headline-lg text-headline-lg">23</div>
+</div>
+<div class="bg-surface border-2 border-primary p-2 text-center wobbly-border opacity-50">
+<div class="font-label-caps text-label-caps">TUE</div>
+<div class="font-headline-lg text-headline-lg">24</div>
+</div>
+<div class="bg-surface border-2 border-primary p-2 text-center wobbly-border opacity-50">
+<div class="font-label-caps text-label-caps">WED</div>
+<div class="font-headline-lg text-headline-lg">25</div>
+</div>
+<div class="bg-surface border-2 border-primary p-2 text-center wobbly-border opacity-50">
+<div class="font-label-caps text-label-caps">THU</div>
+<div class="font-headline-lg text-headline-lg">26</div>
+</div>
+<!-- Active Day -->
+<div class="bg-primary text-on-primary border-2 border-primary p-2 text-center wobbly-border-alt hard-shadow scale-105 transform -translate-y-1 relative">
+<div class="font-label-caps text-label-caps text-primary-fixed">FRI</div>
+<div class="font-headline-lg text-headline-lg">27</div>
+<div class="absolute -top-2 -right-2 bg-secondary w-4 h-4 rounded-full border-2 border-primary wobbly-border"></div>
+</div>
+<div class="bg-surface border-2 border-primary p-2 text-center wobbly-border">
+<div class="font-label-caps text-label-caps">SAT</div>
+<div class="font-headline-lg text-headline-lg">28</div>
+</div>
+<div class="bg-surface border-2 border-primary p-2 text-center wobbly-border">
+<div class="font-label-caps text-label-caps">SUN</div>
+<div class="font-headline-lg text-headline-lg">29</div>
+</div>
+</section>
+<!-- Bento Grid Main Tasks -->
+<section class="grid grid-cols-12 gap-grid-gutter pb-32">
+<!-- URGENT TASK (Span 4) -->
+<div class="col-span-4 bg-surface border-4 border-primary p-bento-padding wobbly-border hard-shadow relative group hover:bg-surface-container-low transition-colors">
+<div class="absolute top-4 right-4 stamp-effect text-secondary border-secondary px-2 py-1 font-label-caps text-label-caps font-black opacity-80 group-hover:scale-110 transition-transform">
+                    ASAP
+                </div>
+<div class="font-label-caps text-label-caps mb-2 text-outline">ID: 9942</div>
+<h3 class="font-headline-lg text-headline-lg mb-4 leading-tight">Fix Auth Core Dump</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">System is rejecting valid tokens. Check the redis cache configuration.</p>
+<div class="mt-6 flex justify-between items-center">
+<span class="bg-error-container text-on-error-container px-2 py-1 font-label-caps text-label-caps wobbly-border border border-error">BUG</span>
+<button class="material-symbols-outlined text-outline hover:text-primary transition-colors">edit_square</button>
+</div>
+</div>
+<!-- NORMAL TASK (Span 4) -->
+<div class="col-span-4 bg-surface border-4 border-primary p-bento-padding wobbly-border-alt hard-shadow relative hover:bg-surface-container-low transition-colors">
+<div class="font-label-caps text-label-caps mb-2 text-outline">ID: 9945</div>
+<h3 class="font-headline-lg text-headline-lg mb-4 leading-tight">Draft UI Specs</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Compile the final brutalist design tokens for the new dashboard view.</p>
+<div class="mt-6 flex justify-between items-center border-t-2 border-dashed border-outline-variant pt-4">
+<span class="bg-primary-fixed text-on-primary-fixed px-2 py-1 font-label-caps text-label-caps wobbly-border border border-primary">DESIGN</span>
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full bg-tertiary border-2 border-primary"></div>
+<div class="w-8 h-8 rounded-full bg-secondary border-2 border-primary"></div>
+</div>
+</div>
+</div>
+<!-- COMPLETED TASK (Span 4) -->
+<div class="col-span-4 bg-surface-container-high border-4 border-primary p-bento-padding wobbly-border hard-shadow opacity-60 hover:opacity-100 transition-opacity relative">
+<!-- Large Hand-drawn Check -->
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
+<span class="font-headline-xl text-[120px] text-tertiary-fixed-dim rotate-12 opacity-50" style="font-family: 'Space Mono', monospace;">X</span>
+</div>
+<div class="font-label-caps text-label-caps mb-2 text-outline line-through">ID: 9940</div>
+<h3 class="font-headline-lg text-headline-lg mb-4 leading-tight line-through text-outline">Weekly Sync</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-through">Review sprint goals with the engineering team.</p>
+<div class="mt-6">
+<span class="bg-surface text-outline px-2 py-1 font-label-caps text-label-caps wobbly-border border border-outline">MEETING</span>
+</div>
+</div>
+<!-- LARGE TASK / NOTE (Span 8) -->
+<div class="col-span-8 bg-surface-bright border-4 border-primary p-bento-padding wobbly-border hard-shadow bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjEiIGZpbGw9IiNjN2M2Y2QiLz48L3N2Zz4=')]">
+<!-- Using a tiny SVG grid pattern inline just for the ruled paper effect, since it's structurally part of the bento box design, but I will fall back to a CSS gradient to strictly follow the prompt rules about no base64 -->
+<div class="absolute inset-0" style="background-image: repeating-linear-gradient(transparent, transparent 31px, #c7c6cd 31px, #c7c6cd 32px); background-position: 0 40px; pointer-events: none; opacity: 0.5;"></div>
+<div class="relative z-10">
+<div class="flex justify-between items-start mb-4">
+<div class="font-label-caps text-label-caps text-outline bg-surface px-2 border border-primary wobbly-border inline-block">BRAINDUMP / LOG</div>
+<button class="material-symbols-outlined text-primary hover:text-secondary transition-colors">more_horiz</button>
+</div>
+<h3 class="font-headline-xl text-headline-xl mb-4">Project Architecture Revision</h3>
+<p class="font-body-md text-body-md text-on-surface leading-loose">
+                        &gt; Need to reconsider the component hierarchy.<br/>
+                        &gt; The current state management is becoming fragile.<br/>
+                        &gt; Propose moving to a more decentralized model by next week.<br/>
+                        &gt; <strong>ACTION:</strong> Schedule a 2hr block on Tuesday to prototype.
+                    </p>
+<div class="mt-8 flex gap-4">
+<button class="bg-surface border-2 border-primary px-4 py-2 font-label-caps text-label-caps wobbly-border hover:bg-surface-container-high transition-colors">ATTACHMENTS (2)</button>
+<button class="bg-primary text-on-primary border-2 border-primary px-4 py-2 font-label-caps text-label-caps wobbly-border hard-shadow hover:translate-y-1 hover:translate-x-1 hover:shadow-none transition-all">CONVERT TO TASK</button>
+</div>
+</div>
+</div>
+<!-- SMALL WIDGET (Span 4) -->
+<div class="col-span-4 bg-tertiary-container text-on-tertiary-container border-4 border-primary p-bento-padding wobbly-border hard-shadow flex flex-col justify-center items-center text-center">
+<span class="material-symbols-outlined text-6xl mb-4 text-tertiary-fixed">battery_charging_80</span>
+<h3 class="font-headline-lg text-headline-lg mb-2">Energy Level</h3>
+<p class="font-body-sm text-body-sm opacity-80">Take a break in 45 mins.</p>
+</div>
+</section>
+</main>
+<!-- FLOATING ACTION BUTTON (Physical Retro Style) -->
+<button class="fixed bottom-grid-margin right-grid-margin z-50 bg-secondary text-on-secondary border-4 border-primary w-16 h-16 rounded-full flex items-center justify-center hard-shadow hard-shadow-hover hard-shadow-active transition-all group">
+<span class="material-symbols-outlined text-3xl group-active:scale-75 transition-transform" style="font-variation-settings: 'FILL' 1;">add</span>
+</button>
+</body></html>

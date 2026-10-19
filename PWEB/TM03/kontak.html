@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Kontak SMAIT Darul Qur'an Mulia</title>
+    </head>
+    
+    <style>
+        h2 {
+            text-align: center;
+        }
+
+        form {
+            border: 3px solid #f1f1f1;
+            width: 300px;
+            margin: auto;
+            padding: 16px;
+        }
+        
+        input[type=text], input[type=password] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        legend {
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        textarea {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+    </style>
+
+    <body>
+        <form>
+            <fieldset>
+                <legend>Kontak Kami</legend>
+                <label for="name">Nama:</label><br>
+                <input type="text" id="name" name="name"><br><br>
+
+                <label for="email">Email:</label><br>
+                <input type="email" id="email" name="email"><br><br>
+
+                <label for="message">Pesan:</label><br>
+                <textarea id="message" name="message" rows="4" cols="50"></textarea><br><br>
+                <input type="submit" value="Kirim">
+                <button>Reset</button>
+            </fieldset>
+        </form>
+
+    </body>
+</html>
+

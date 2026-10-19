@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Origami Bird - Epic RGB Transform</title>
+<style>
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background: #111; /* Latar luar canvas digelapkan */
+    }
+    canvas {
+        /* Hapus warna background statis di sini karena akan digambar via JavaScript */
+        box-shadow: 0 15px 40px rgba(0,0,0,0.8);
+        border-radius: 12px;
+    }
+</style>
+</head>
+<body>
+<canvas id="c" width="500" height="500"></canvas>
+<script>
+    const ctx = document.getElementById("c").getContext("2d");
+
+    // Fungsi untuk menggambar segitiga dengan gradasi dan bayangan
+    function tri(a, b, c, colorStart, colorEnd, scaleFactor = 1.0) {
+        const a_s = { x: a.x * scaleFactor, y: a.y * scaleFactor };
+        const b_s = { x: b.x * scaleFactor, y: b.y * scaleFactor };
+        const c_s = { x: c.x * scaleFactor, y: c.y * scaleFactor };
+
+        const g = ctx.createLinearGradient(a_s.x, a_s.y, c_s.x, c_s.y);
+        g.addColorStop(0, colorStart);
+        g.addColorStop(1, colorEnd);
+
+        ctx.beginPath();
+        ctx.moveTo(a_s.x, a_s.y);
+        ctx.lineTo(b_s.x, b_s.y);
+        ctx.lineTo(c_s.x, c_s.y);
+        ctx.closePath();
+
+        ctx.fillStyle = g;
+        ctx.shadowColor = "rgba(0,0,0,0.3)";
+        ctx.shadowBlur = 10;
+        ctx.shadowOffsetX = 3;
+        ctx.shadowOffsetY = 5;
+        ctx.fill();
+
+        ctx.shadowBlur = 0;
+        ctx.strokeStyle = "rgba(255,255,255,0.1)";
+        ctx.stroke();
+    }
+
+    function animate() {
+        // 1. Hitung variabel waktu & animasi warna (Hue)
+        const time = Date.now() / 600; 
+        const hoverOffset = Math.sin(time) * 15; 
+        const foldFactor = 1.0 + Math.sin(time * 0.5) * 0.15; 
+        const rotateAngle = Math.sin(time * 0.2) * 0.15; 
+        
+        // Hue berputar dari 0 sampai 360 berdasarkan waktu nyata
+        const h = (Date.now() / 40) % 360; 
+
+        // 2. GAMBAR LATAR BELAKANG DINAMIS (Menggantikan clearRect)
+        // Latar belakang mengambil warna kebalikan (komplementer) dari warna burung
+        const bgGradient = ctx.createLinearGradient(0, 0, 500, 500);
+        bgGradient.addColorStop(0, `hsl(${(h + 180) % 360}, 60%, 15%)`); 
+        bgGradient.addColorStop(1, `hsl(${(h + 220) % 360}, 80%, 5%)`);
+        ctx.fillStyle = bgGradient;
+        ctx.fillRect(0, 0, 500, 500);
+
+        ctx.save();
+
+        // 3. Transformasi Global
+        ctx.translate(250, 250); 
+        ctx.rotate(rotateAngle); 
+        ctx.translate(-250, -250); 
+        ctx.translate(500, 0); 
+        ctx.scale(-1, 1); 
+
+        // 4. BAYANGAN KOMPOSIT DINAMIS
+        const floorY = 470; 
+        const shadowOpacityBase = 0.3; 
+        const shadowOpacityFactor = 1.0 - Math.abs(hoverOffset * 0.005);
+        const currentShadowOpacity = shadowOpacityBase * shadowOpacityFactor;
+        const baseBlur = 18 - Math.abs(hoverOffset * 0.4); 
+
+        const baseCenterX = 250;
+        const shadowShiftX = rotateAngle * -50; 
+
+        ctx.shadowBlur = baseBlur;
+        ctx.shadowColor = `rgba(0,0,0,${currentShadowOpacity})`;
+        ctx.fillStyle = `rgba(0,0,0,${currentShadowOpacity * 0.8})`; 
+
+        // Bayangan Tubuh
+        const shadowBodyRadiusX = 110 * foldFactor;
+        const shadowBodyRadiusY = 22 * foldFactor;
+        ctx.beginPath();
+        ctx.ellipse(baseCenterX - 10, floorY, shadowBodyRadiusX, shadowBodyRadiusY, 0, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Bayangan Sayap/Ekor
+        const shadowWingRadiusX = 140 * foldFactor * (1 + Math.abs(rotateAngle) * 0.5);
+        const shadowWingRadiusY = 18 * foldFactor;
+        ctx.beginPath();
+        ctx.ellipse(baseCenterX + shadowShiftX, floorY, shadowWingRadiusX, shadowWingRadiusY, rotateAngle * -0.5, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.shadowBlur = 0; 
+
+        // 5. ANIMASI MELAYANG (Hover) & PENYESUAIAN POSISI
+        ctx.translate(0, hoverOffset);
+        ctx.translate(-27.5, -40);
+
+        // =======================
+        // 6. GAMBAR ORIGAMI BURUNG DENGAN RGB SHIFT (HSL)
+        // Format HSL: Hue (warna), Saturation (ketajaman), Lightness (gelap-terang untuk 3D)
+        // =======================
+        
+        // 1. Sayap Kiri
+        tri({x: 120, y: 140}, {x: 250, y: 130}, {x: 210, y: 250}, `hsl(${h}, 70%, 80%)`, `hsl(${h}, 70%, 55%)`, foldFactor);
+        // 2. Sayap Kanan Atas
+        tri({x: 250, y: 130}, {x: 360, y: 240}, {x: 210, y: 250}, `hsl(${h}, 50%, 95%)`, `hsl(${h}, 60%, 75%)`, foldFactor);
+        // 3. Badan Utama
+        tri({x: 210, y: 250}, {x: 360, y: 240}, {x: 270, y: 360}, `hsl(${h}, 60%, 90%)`, `hsl(${h}, 70%, 50%)`, foldFactor);
+        // 4. Ekor
+        tri({x: 230, y: 290}, {x: 270, y: 360}, {x: 190, y: 450}, `hsl(${h}, 50%, 65%)`, `hsl(${h}, 60%, 35%)`, foldFactor);
+        // 5. Leher 
+        tri({x: 400, y: 155}, {x: 315, y: 195}, {x: 360, y: 240}, `hsl(${h}, 50%, 95%)`, `hsl(${h}, 60%, 60%)`, foldFactor);
+        // 6. Kepala / Paruh 
+        tri({x: 400, y: 155}, {x: 435, y: 195}, {x: 380, y: 195}, `hsl(${h}, 40%, 98%)`, `hsl(${h}, 50%, 75%)`, foldFactor);
+
+        ctx.restore();
+        requestAnimationFrame(animate);
+    }
+
+    // Mulai jalankan animasi
+    animate();
+</script>
+</body>
+</html>

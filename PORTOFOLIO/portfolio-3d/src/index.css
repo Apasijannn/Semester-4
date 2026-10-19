@@ -1,0 +1,85 @@
+@import "tailwindcss";
+
+/*
+  Palet warna situs — elegan & profesional.
+  ✏️ EDIT: warna aksen utama diatur di src/data/siteConfig.js (accentColor).
+  Nilai di bawah hanyalah fallback; App.jsx menimpanya saat runtime
+  supaya UI dan objek 3D selalu memakai satu warna yang sama.
+*/
+@theme {
+  --color-ink: #0e0f12; /* dark charcoal — background utama */
+  --color-ink-soft: #15171c; /* charcoal sedikit lebih terang — panel/modal */
+  --color-paper: #e9e7e2; /* off-white — teks utama */
+  --color-muted: #8b8e96; /* abu netral — teks sekunder */
+  --color-accent: #c8a15b; /* emas muted — fallback, lihat siteConfig.js */
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-ink font-sans text-paper antialiased;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--color-accent) 35%, transparent);
+}
+
+/* scrollbar tipis agar senada dengan tema */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-ink);
+}
+::-webkit-scrollbar-thumb {
+  background: #26282e;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #33363d;
+}
+
+/* komponen teks section yang dipakai berulang */
+.section-eyebrow {
+  @apply mb-4 text-xs uppercase tracking-[0.35em] text-accent;
+}
+.section-title {
+  @apply text-3xl font-semibold tracking-tight text-paper md:text-5xl;
+}
+
+/* tombol */
+.btn-accent {
+  @apply inline-block rounded-full bg-accent px-6 py-2.5 text-sm font-medium tracking-wide text-ink transition-opacity hover:opacity-85;
+}
+.btn-ghost {
+  @apply inline-block rounded-full border border-white/15 px-6 py-2.5 text-sm tracking-wide text-paper transition-colors hover:border-accent hover:text-accent;
+}
+
+/* link navbar dengan garis bawah aksen yang tumbuh saat hover */
+.nav-link {
+  @apply relative transition-colors hover:text-accent;
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  height: 1px;
+  width: 100%;
+  background: var(--color-accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+.nav-link:hover::after {
+  transform: scaleX(1);
+}
+
+/* vignette lembut di tepi layar (dipakai di mobile; desktop lewat postprocessing) */
+.vignette {
+  background: radial-gradient(ellipse at center, transparent 52%, rgba(0, 0, 0, 0.5) 100%);
+}

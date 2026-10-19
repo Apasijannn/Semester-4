@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://wurk3jlbdfox"]
+
+[ext_resource type="Script" uid="uid://dj0c8lo0w27g1" path="res://scripts/teks_popup.gd" id="1_equw6"]
+
+[node name="TeksPopup" type="Node2D" unique_id=1091423653]
+script = ExtResource("1_equw6")
+
+[node name="Label" type="Label" parent="." unique_id=1965907052]
+offset_right = 40.0
+offset_bottom = 23.0

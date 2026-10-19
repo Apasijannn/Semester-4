@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ruang Sintaks | Modul JavaScript</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ===== NAVIGASI ===== -->
+    <nav>
+        <div class="nav-inner">
+            <a href="index.html" class="logo">
+                <span class="logo-text">Ruang<span>Sintaks</span></span>
+            </a>
+            <ul class="navbar">
+                <li><a href="index.html" class="nav-active">Beranda</a></li>
+                <li><a href="daftar.html" class="nav-cta">Daftar Sekarang</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ===== PROGRESS BAR ===== -->
+    <div class="materi-progress-bar">
+        <div class="materi-progress-fill" style="width: 75%"></div>
+    </div>
+
+    <main>
+
+        <!-- ===== HEADER MODUL ===== -->
+        <div class="materi-hero">
+            <div class="materi-hero-inner">
+                <span class="modul-badge modul-js">Modul 3 · JavaScript</span>
+                <h1>JavaScript:<br>Interaktivitas Web</h1>
+                <p>Buat website yang hidup dan responsif. Pelajari variabel, fungsi, logika kondisional, hingga cara memanipulasi elemen HTML secara langsung lewat DOM.</p>
+                <div class="materi-hero-meta">
+                    <span>⏱ <strong>14 Jam</strong> Materi</span>
+                    <span>📊 <strong>Tingkat:</strong> Menengah</span>
+                    <span>🏆 <strong>Bersertifikat</strong></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== KONTEN MATERI ===== -->
+        <div class="material-container">
+
+            <!-- Video Tutorial -->
+            <div class="material-panel">
+                <div class="panel-title">
+                    <div class="panel-icon icon-video">🎬</div>
+                    Video Tutorial
+                </div>
+                <div class="video-placeholder">
+                    <div class="play-btn">
+                        <svg viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+                    </div>
+                    <p class="video-title">JavaScript dari Nol: Variabel, Fungsi, dan DOM</p>
+                </div>
+            </div>
+
+            <!-- Catatan Materi -->
+            <div class="material-panel">
+                <div class="panel-title">
+                    <div class="panel-icon icon-notes">📖</div>
+                    Catatan Materi
+                </div>
+                <div class="notes-content">
+                    <p><strong>JavaScript (JS)</strong> adalah bahasa pemrograman yang membuat halaman web menjadi interaktif dan dinamis. Jika HTML adalah kerangka dan CSS adalah tampilan, maka JavaScript adalah <em>otaknya</em> — ia memproses logika, merespons aksi pengguna, dan memperbarui konten tanpa perlu reload halaman.</p>
+                    <ul class="notes-list js-list">
+                        <li><strong><code>let</code> / <code>const</code></strong> — Cara mendeklarasikan variabel. Gunakan <code>const</code> jika nilainya tidak berubah, dan <code>let</code> jika bisa berubah. Hindari <code>var</code> di kode modern.</li>
+                        <li><strong>Tipe Data</strong> — JS mengenal beberapa tipe: <code>String</code> (teks), <code>Number</code> (angka), <code>Boolean</code> (<code>true</code>/<code>false</code>), <code>Array</code> (daftar), dan <code>Object</code> (pasangan key-value).</li>
+                        <li><strong>Function</strong> — Blok kode yang bisa dipanggil berulang kali. Dua cara menulis: <code>function nama() {}</code> atau arrow function <code>const nama = () => {}</code>.</li>
+                        <li><strong>Kondisional</strong> — Logika percabangan menggunakan <code>if</code>, <code>else if</code>, dan <code>else</code> untuk mengambil keputusan berdasarkan kondisi tertentu.</li>
+                        <li><strong>DOM (Document Object Model)</strong> — Representasi HTML sebagai pohon objek. JS bisa mengakses dan mengubah elemen HTML secara langsung. Contoh: <code>document.getElementById('id')</code>.</li>
+                        <li><strong>Event Listener</strong> — Cara JS "mendengar" aksi pengguna seperti klik, hover, atau input. Contoh: <code>element.addEventListener('click', fungsi)</code>.</li>
+                        <li><strong>Console</strong> — Alat debug utama. Gunakan <code>console.log(nilai)</code> untuk melihat output di DevTools browser.</li>
+                    </ul>
+
+                    <div class="info-box info-box-js">
+                        <span class="info-box-icon">💡</span>
+                        <div><strong>Urutan Belajar yang Tepat:</strong> Kuasai HTML dan CSS dulu sebelum masuk ke JavaScript. JS bekerja di atas struktur HTML — kalau fondasinya belum kuat, kode JS kamu akan lebih sulit dipahami.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contoh Kode -->
+            <div class="material-panel">
+                <div class="panel-title">
+                    <div class="panel-icon icon-code">💻</div>
+                    Contoh Kode
+                </div>
+                <p class="code-desc">Contoh JavaScript dasar: variabel, fungsi, kondisional, dan manipulasi DOM untuk membuat tombol interaktif:</p>
+                <div class="code-box">
+                    <div class="code-header">
+                        <span class="dot" style="background: #FF5F56;"></span>
+                        <span class="dot" style="background: #FFBD2E;"></span>
+                        <span class="dot" style="background: #27C93F;"></span>
+                        <span class="code-lang">JavaScript</span>
+                    </div>
+                    <pre><code>// === Variabel ===
+const nama = "Budi";          // const: nilai tetap
+let skor = 0;                 // let: nilai bisa berubah
+
+// === Fungsi ===
+function sapa(pengguna) {
+    return `Halo, ${pengguna}! Selamat belajar.`;
+}
+
+console.log(sapa(nama));
+// Output: "Halo, Budi! Selamat belajar."
+
+// === Kondisional ===
+function cekKelulusan(nilai) {
+    if (nilai >= 75) {
+        return "✅ Lulus!";
+    } else if (nilai >= 60) {
+        return "⚠️ Hampir lulus, coba lagi.";
+    } else {
+        return "❌ Belum lulus.";
+    }
+}
+
+// === Manipulasi DOM ===
+const tombol = document.getElementById('tombol-klik');
+const output = document.getElementById('output-teks');
+
+tombol.addEventListener('click', function() {
+    skor++;
+    output.textContent = `Tombol diklik ${skor} kali!`;
+    output.style.color = skor >= 5 ? '#1D9E75' : '#D85A30';
+});</code></pre>
+                </div>
+            </div>
+
+            <!-- Demo Interaktif -->
+            <div class="material-panel">
+                <div class="panel-title">
+                    <div class="panel-icon icon-video">🚀</div>
+                    Demo Langsung
+                </div>
+                <p class="code-desc">Coba kode di atas secara langsung! Klik tombol di bawah dan lihat JavaScript bekerja:</p>
+                <div class="js-demo-box">
+                    <div class="js-demo-screen" id="demoScreen">
+                        <span id="demoText">Belum ada klik...</span>
+                    </div>
+                    <div class="js-demo-controls">
+                        <button class="btn-primary" id="demoBtn" onclick="handleDemoClick()">
+                            👆 Klik Aku!
+                        </button>
+                        <button class="btn-secondary" onclick="resetDemo()">Reset</button>
+                    </div>
+                    <div class="js-demo-code" id="demoCode">
+                        <span class="demo-code-line"><span style="color:#6A9FB5">let</span> <span style="color:#e8e6e0">skor</span> = <span style="color:#EF9F27">0</span>;</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Latihan Interaktif -->
+            <div class="material-panel interactive-panel js-panel">
+                <div class="panel-title">
+                    <div class="panel-icon icon-quiz">✍️</div>
+                    Latihan Interaktif
+                </div>
+
+                <!-- Soal 1 -->
+                <p class="quiz-question">
+                    <strong>Soal 1 dari 3</strong><br><br>
+                    Kapan sebaiknya kamu menggunakan <code>const</code> dibanding <code>let</code> untuk mendeklarasikan variabel?
+                </p>
+                <div class="quiz-form" id="quizJs1">
+                    <label class="quiz-option">
+                        <input type="radio" name="js_q1" value="a">
+                        <span>A. Ketika nilainya akan berubah di kemudian hari</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="js_q1" value="b">
+                        <span>B. Ketika nilainya tidak akan pernah berubah (tetap)</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="js_q1" value="c">
+                        <span>C. Keduanya sama saja, tidak ada bedanya</span>
+                    </label>
+                </div>
+                <div class="quiz-result" id="resultJs1"></div>
+                <button class="btn-primary" onclick="checkQuiz('js_q1', 'b', 'resultJs1', 'const digunakan untuk nilai yang tidak akan pernah di-reassign (ditimpa). Jika nilainya perlu diubah, gunakan let. Praktik ini membuat kode lebih aman dan mudah diprediksi — JS modern sangat menganjurkan const sebagai default.')">
+                    Cek Jawaban
+                </button>
+
+                <hr style="border: none; border-top: 1px solid var(--border); margin: 28px 0;">
+
+                <!-- Soal 2 -->
+                <p class="quiz-question">
+                    <strong>Soal 2 dari 3</strong><br><br>
+                    Apa fungsi utama dari <strong>DOM (Document Object Model)</strong> dalam JavaScript?
+                </p>
+                <div class="quiz-form" id="quizJs2">
+                    <label class="quiz-option">
+                        <input type="radio" name="js_q2" value="a">
+                        <span>A. Menyimpan data pengguna ke database</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="js_q2" value="b">
+                        <span>B. Mengatur tampilan warna dan font halaman</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="js_q2" value="c">
+                        <span>C. Mengakses dan memanipulasi elemen HTML dari JavaScript</span>
+                    </label>
+                </div>
+                <div class="quiz-result" id="resultJs2"></div>
+                <button class="btn-primary" onclick="checkQuiz('js_q2', 'c', 'resultJs2', 'DOM adalah antarmuka yang merepresentasikan dokumen HTML sebagai pohon objek. Melalui DOM, JavaScript bisa membaca, mengubah, menambah, atau menghapus elemen HTML secara dinamis tanpa perlu reload halaman.')">
+                    Cek Jawaban
+                </button>
+
+                <hr style="border: none; border-top: 1px solid var(--border); margin: 28px 0;">
+
+                <!-- Soal 3 -->
+                <p class="quiz-question">
+                    <strong>Soal 3 dari 3</strong><br><br>
+                    Method apa yang digunakan untuk membuat JavaScript <strong>"mendengar"</strong> aksi klik pengguna pada sebuah elemen?
+                </p>
+                <div class="quiz-form" id="quizJs3">
+                    <label class="quiz-option">
+                        <input type="radio" name="js_q3" value="a">
+                        <span>A. <code>element.onClick()</code></span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="js_q3" value="b">
+                        <span>B. <code>element.addEventListener('click', fungsi)</code></span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="js_q3" value="c">
+                        <span>C. <code>element.listenClick(fungsi)</code></span>
+                    </label>
+                </div>
+                <div class="quiz-result" id="resultJs3"></div>
+                <button class="btn-primary" onclick="checkQuiz('js_q3', 'b', 'resultJs3', 'addEventListener adalah cara modern dan dianjurkan untuk menangani event. Parameter pertama adalah nama event (seperti click, input, submit), dan parameter kedua adalah fungsi yang akan dijalankan ketika event tersebut terjadi.')">
+                    Cek Jawaban
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- Navigasi Modul -->
+        <div class="materi-nav">
+            <a href="materi-css.html" class="materi-nav-btn prev">
+                <span class="materi-nav-arrow">←</span>
+                <div>
+                    <span class="materi-nav-label">Modul Sebelumnya</span>
+                    <span class="materi-nav-title">CSS Styling & Layout</span>
+                </div>
+            </a>
+            <a href="daftar.html" class="materi-nav-btn next">
+                <span class="materi-nav-arrow">→</span>
+                <div>
+                    <span class="materi-nav-label">Selanjutnya</span>
+                    <span class="materi-nav-title">Daftar & Mulai Belajar</span>
+                </div>
+            </a>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-inner">
+            <p>&copy; 2026 Ruang Sintaks. Hak Cipta Dilindungi.</p>
+            <div class="footer-links">
+                <a href="index.html">Beranda</a>
+                <a href="materi-html.html">Materi HTML</a>
+                <a href="materi-css.html">Materi CSS</a>
+                <a href="materi-js.html">Materi JS</a>
+                <a href="daftar.html">Daftar</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ===== QUIZ =====
+        function checkQuiz(name, correct, resultId, explanation) {
+            const selected = document.querySelector(`input[name="${name}"]:checked`);
+            const result = document.getElementById(resultId);
+            if (!selected) {
+                result.className = 'quiz-result wrong';
+                result.innerHTML = '⚠️ Pilih salah satu jawaban dulu!';
+                return;
+            }
+            if (selected.value === correct) {
+                result.className = 'quiz-result correct';
+                result.innerHTML = `✅ <strong>Benar!</strong> ${explanation}`;
+            } else {
+                result.className = 'quiz-result wrong';
+                result.innerHTML = `❌ <strong>Kurang tepat.</strong> Coba lagi! Perhatikan kata kunci di soal.`;
+            }
+        }
+
+        // ===== DEMO =====
+        let demoSkor = 0;
+
+        function handleDemoClick() {
+            demoSkor++;
+            const text = document.getElementById('demoText');
+            const code = document.getElementById('demoCode');
+            const btn = document.getElementById('demoBtn');
+
+            text.textContent = `Tombol diklik ${demoSkor} kali!`;
+            text.style.color = demoSkor >= 5 ? '#1D9E75' : '#D85A30';
+
+            code.innerHTML = `<span class="demo-code-line"><span style="color:#6A9FB5">let</span> <span style="color:#e8e6e0">skor</span> = <span style="color:#EF9F27">${demoSkor}</span>; <span style="color:#888">// diperbarui!</span></span>`;
+
+            if (demoSkor >= 5) {
+                btn.textContent = '🎉 Kamu JS-nya!';
+            }
+        }
+
+        function resetDemo() {
+            demoSkor = 0;
+            document.getElementById('demoText').textContent = 'Belum ada klik...';
+            document.getElementById('demoText').style.color = '';
+            document.getElementById('demoCode').innerHTML = `<span class="demo-code-line"><span style="color:#6A9FB5">let</span> <span style="color:#e8e6e0">skor</span> = <span style="color:#EF9F27">0</span>;</span>`;
+            document.getElementById('demoBtn').textContent = '👆 Klik Aku!';
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --paper: #ffffff;
+  --line: #1a1a1a;
+  --grid-line: #e6dcc2;
+  --muted: #8a8a8a;
+}
+.dark {
+  --paper: #242019;
+  --line: #f3ecd9;
+  --grid-line: #3a352c;
+  --muted: #8f8672;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+body {
+  margin: 0;
+}
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--line);
+  border-radius: 10px;
+}

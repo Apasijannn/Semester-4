@@ -1,0 +1,63 @@
+seed: 42
+paths:
+  vol: /vol
+  lsui_raw: /vol/data/lsui/input
+  lsui_ref: /vol/data/lsui/GT
+  uieb_raw: /vol/data/uieb/raw
+  uieb_ref: /vol/data/uieb/ref
+  pretrained: /vol/pretrained/NAFNet-SIDD-width32.pth
+  cache: /vol/cache
+  outputs: /vol/outputs
+assets:
+  kaggle:
+    lsui: cbhavik/lsui-dataset
+    uieb_raw: larjeck/uieb-dataset-raw
+    uieb_ref: larjeck/uieb-dataset-reference
+  pretrained_url: https://huggingface.co/nyanko7/nafnet-models/resolve/main/NAFNet-SIDD-width32.pth
+  pretrained_filename: NAFNet-SIDD-width32.pth
+model:
+  width: 32
+  enc_blk_nums:
+  - 2
+  - 2
+  - 4
+  - 8
+  middle_blk_num: 12
+  dec_blk_nums:
+  - 2
+  - 2
+  - 2
+  - 2
+  use_grad_ckpt: false
+train:
+  num_epochs: 50
+  batch_size: 16
+  accum_steps: 1
+  patch_size: 256
+  lr: 0.0002
+  pinn_lr: 0.001
+  weight_decay: 0.0001
+  betas:
+  - 0.9
+  - 0.9
+  warmup_epochs: 3
+  min_lr: 1.0e-06
+  grad_clip: 1.0
+  ema_decay: 0.9999
+  freeze_encoder_epochs: 2
+  phys_warmup_epochs: 5
+  num_workers: 8
+  compile: false
+loss:
+  w_char: 1.0
+  w_phys: 0.1
+  w_percep: 0.05
+eval:
+  num_samples: 8
+  use_tta: true
+  save_every: 5
+  eval_every: 5
+variant: A1
+use_pinn: false
+use_dino: false
+out_dir: /vol/outputs/A1

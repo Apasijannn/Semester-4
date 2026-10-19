@@ -1,0 +1,311 @@
+/* ==========================================================================
+   Karsa — Retro Bento Paper-Cut Design System (Desktop)
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+:root{
+  --cream:        #F5F1E8;
+  --cream-panel:  #EFE8D8;
+  --ink:          #1A1A1A;
+  --white:        #FFFDF7;
+
+  --coral:        #FF6B54;
+  --coral-light:  #FFE1D6;
+  --teal:         #2E9D8F;
+  --teal-light:   #D9EEE9;
+  --navy:         #2B3A55;
+  --navy-light:   #DEE3EC;
+  --mustard:      #E9B824;
+  --mustard-light:#FBEDC2;
+
+  --border-w: 2.5px;
+  --shadow-off: 5px;
+  --radius-blob: 26px 12px 22px 14px / 14px 24px 12px 22px;
+  --radius-blob-2: 12px 26px 14px 22px / 22px 14px 24px 12px;
+}
+
+*{ box-sizing:border-box; margin:0; padding:0; }
+
+html,body{
+  width:1440px;
+  height:900px;
+  overflow:hidden;
+  background:var(--cream);
+  font-family:'Space Grotesk', sans-serif;
+  color:var(--ink);
+  position:relative;
+}
+
+/* paper grain texture overlay */
+body::before{
+  content:"";
+  position:absolute; inset:0;
+  pointer-events:none;
+  z-index:0;
+  opacity:.05;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+}
+
+.display{
+  font-family:'Archivo Black', sans-serif;
+  letter-spacing:.2px;
+}
+
+/* ---------------------------------- layout shell ---------------------- */
+.app{
+  position:relative;
+  z-index:1;
+  display:flex;
+  width:1440px;
+  height:900px;
+}
+
+/* ---------------------------------- sidebar ----------------------------- */
+.sidebar{
+  width:240px;
+  min-width:240px;
+  height:900px;
+  background:var(--navy);
+  border-right:var(--border-w) solid var(--ink);
+  display:flex;
+  flex-direction:column;
+  padding:24px 18px;
+  position:relative;
+  z-index:2;
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin-bottom:34px;
+}
+.logo-mark{
+  width:34px; height:34px;
+  background:var(--mustard);
+  border:var(--border-w) solid var(--ink);
+  border-radius:var(--radius-blob);
+  display:flex; align-items:center; justify-content:center;
+  transform:rotate(-6deg);
+  box-shadow:3px 3px 0 var(--ink);
+}
+.logo-word{
+  font-family:'Archivo Black', sans-serif;
+  font-size:22px;
+  color:var(--cream);
+  letter-spacing:.5px;
+}
+
+.nav{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  margin-bottom:auto;
+}
+.nav-item{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:11px 14px;
+  background:var(--cream);
+  border:var(--border-w) solid var(--ink);
+  border-radius:var(--radius-blob);
+  font-weight:600;
+  font-size:14.5px;
+  color:var(--ink);
+  cursor:pointer;
+  box-shadow:3px 3px 0 var(--ink);
+  transition:transform .08s ease;
+}
+.nav-item svg{ flex-shrink:0; }
+.nav-item.active{
+  background:var(--coral);
+  color:var(--ink);
+  transform:translate(-2px,-2px);
+  box-shadow:5px 5px 0 var(--ink);
+}
+.nav-item:not(.active){ opacity:.92; }
+
+.profile-card{
+  background:var(--cream);
+  border:var(--border-w) solid var(--ink);
+  border-radius:var(--radius-blob-2);
+  padding:12px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  box-shadow:4px 4px 0 var(--ink);
+  margin-top:18px;
+}
+.profile-avatar{
+  width:38px; height:38px;
+  border-radius:50%;
+  background:var(--teal);
+  border:var(--border-w) solid var(--ink);
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Archivo Black', sans-serif;
+  font-size:14px;
+  color:var(--white);
+  flex-shrink:0;
+}
+.profile-name{ font-weight:700; font-size:13.5px; line-height:1.2; }
+.profile-sub{ font-size:11px; opacity:.65; }
+
+/* ---------------------------------- main / topbar ----------------------- */
+.main{
+  flex:1;
+  height:900px;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+}
+
+.topbar{
+  height:88px;
+  min-height:88px;
+  border-bottom:var(--border-w) solid var(--ink);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 32px;
+  gap:24px;
+}
+.greeting{
+  font-family:'Archivo Black', sans-serif;
+  font-size:22px;
+  white-space:nowrap;
+}
+.greeting span{ color:var(--coral); }
+
+.search-bar{
+  flex:1;
+  max-width:440px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  background:var(--white);
+  border:var(--border-w) solid var(--ink);
+  border-radius:40px;
+  padding:9px 18px;
+  box-shadow:3px 3px 0 var(--ink);
+}
+.search-bar input{
+  border:none; outline:none; background:transparent;
+  font-family:'Space Grotesk', sans-serif;
+  font-size:13.5px;
+  flex:1;
+  color:var(--ink);
+}
+.search-bar input::placeholder{ color:#8a8578; }
+
+.topbar-right{ display:flex; align-items:center; gap:14px; }
+
+.icon-btn{
+  width:44px; height:44px;
+  background:var(--white);
+  border:var(--border-w) solid var(--ink);
+  border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  position:relative;
+  box-shadow:3px 3px 0 var(--ink);
+  cursor:pointer;
+}
+.icon-btn .dot{
+  position:absolute; top:6px; right:7px;
+  width:9px; height:9px;
+  background:var(--coral);
+  border:1.5px solid var(--ink);
+  border-radius:50%;
+}
+
+.content{
+  flex:1;
+  overflow:hidden;
+  padding:24px 32px;
+}
+
+/* ---------------------------------- generic card ------------------------ */
+.card{
+  background:var(--white);
+  border:var(--border-w) solid var(--ink);
+  border-radius:var(--radius-blob);
+  box-shadow:5px 5px 0 var(--ink);
+  padding:18px;
+  position:relative;
+}
+.card.tilt-r{ transform:rotate(.6deg); }
+.card.tilt-l{ transform:rotate(-.6deg); }
+
+.card-corner{
+  position:absolute;
+  width:26px; height:26px;
+  border:2px solid var(--ink);
+}
+.card-corner.tl{ top:-11px; left:14px; }
+.card-corner.tr{ top:-11px; right:14px; }
+.card-corner.br{ bottom:-11px; right:16px; }
+
+.card-title{
+  font-weight:700;
+  font-size:14px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin-bottom:12px;
+}
+
+/* accent surfaces */
+.fill-coral{ background:var(--coral); }
+.fill-teal{ background:var(--teal); }
+.fill-navy{ background:var(--navy); color:var(--cream); }
+.fill-mustard{ background:var(--mustard); }
+.tint-coral{ background:var(--coral-light); }
+.tint-teal{ background:var(--teal-light); }
+.tint-navy{ background:var(--navy-light); }
+.tint-mustard{ background:var(--mustard-light); }
+
+.tag{
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  font-size:10.5px;
+  font-weight:700;
+  padding:4px 10px;
+  border:1.5px solid var(--ink);
+  border-radius:20px;
+  white-space:nowrap;
+}
+
+.btn{
+  font-family:'Space Grotesk', sans-serif;
+  font-weight:700;
+  font-size:13px;
+  border:var(--border-w) solid var(--ink);
+  border-radius:14px;
+  padding:10px 18px;
+  cursor:pointer;
+  box-shadow:3px 3px 0 var(--ink);
+  background:var(--white);
+  color:var(--ink);
+}
+.btn.primary{ background:var(--coral); }
+.btn.ghost{ background:var(--cream); }
+.btn.sm{ padding:7px 12px; font-size:11.5px; border-radius:10px; }
+
+/* scrollable inner regions (visually hidden scrollbar) */
+.scroll{ overflow-y:auto; }
+.scroll::-webkit-scrollbar{ width:0; height:0; }
+
+/* checkbox */
+.chk{
+  width:20px; height:20px;
+  border:2px solid var(--ink);
+  border-radius:6px;
+  flex-shrink:0;
+  display:flex; align-items:center; justify-content:center;
+  background:var(--white);
+}
+.chk.done{ background:var(--teal); }
+
+/* decorative squiggle / star svg reused inline */

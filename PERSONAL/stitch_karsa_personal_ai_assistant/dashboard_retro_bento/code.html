@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>KARSA_OS - Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&amp;family=JetBrains+Mono:wght@400;700&amp;family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-container": "#f2eee3",
+                      "tertiary": "#002217",
+                      "error-container": "#ffdad6",
+                      "surface-variant": "#e6e2d8",
+                      "background": "#fdf9ee",
+                      "tertiary-fixed-dim": "#27e0a9",
+                      "surface": "#fdf9ee",
+                      "outline": "#77767d",
+                      "on-primary-fixed-variant": "#424658",
+                      "tertiary-fixed": "#54fdc4",
+                      "outline-variant": "#c7c6cd",
+                      "on-error": "#ffffff",
+                      "inverse-primary": "#c2c5db",
+                      "on-secondary-container": "#5a001e",
+                      "secondary": "#b71849",
+                      "on-error-container": "#93000a",
+                      "surface-dim": "#dddacf",
+                      "on-surface": "#1c1c15",
+                      "surface-bright": "#fdf9ee",
+                      "surface-container-low": "#f7f3e8",
+                      "error": "#ba1a1a",
+                      "on-primary": "#ffffff",
+                      "surface-container-high": "#ece8dd",
+                      "on-primary-container": "#9599ad",
+                      "on-tertiary": "#ffffff",
+                      "tertiary-container": "#003a29",
+                      "on-tertiary-fixed-variant": "#00513b",
+                      "primary-container": "#2d3142",
+                      "secondary-fixed-dim": "#ffb2bc",
+                      "on-surface-variant": "#46464c",
+                      "primary-fixed-dim": "#c2c5db",
+                      "on-tertiary-container": "#00af82",
+                      "surface-tint": "#5a5d70",
+                      "on-secondary": "#ffffff",
+                      "inverse-surface": "#313129",
+                      "secondary-fixed": "#ffd9dd",
+                      "inverse-on-surface": "#f4f1e6",
+                      "primary": "#181c2c",
+                      "secondary-container": "#fd5179",
+                      "surface-container-highest": "#e6e2d8",
+                      "primary-fixed": "#dee1f8",
+                      "on-primary-fixed": "#171b2b",
+                      "on-tertiary-fixed": "#002116",
+                      "on-secondary-fixed": "#400013",
+                      "on-background": "#1c1c15",
+                      "surface-container-lowest": "#ffffff",
+                      "on-secondary-fixed-variant": "#910034"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "bento-padding": "1.5rem",
+                      "stack-sm": "0.5rem",
+                      "grid-margin": "2rem",
+                      "grid-gutter": "1.5rem",
+                      "stack-lg": "2rem",
+                      "stack-xs": "0.25rem",
+                      "stack-md": "1rem"
+              },
+              "fontFamily": {
+                      "label-caps": [
+                              "Space Mono"
+                      ],
+                      "body-sm": [
+                              "JetBrains Mono"
+                      ],
+                      "headline-xl": [
+                              "Bricolage Grotesque"
+                      ],
+                      "body-md": [
+                              "JetBrains Mono"
+                      ],
+                      "headline-lg-mobile": [
+                              "Bricolage Grotesque"
+                      ],
+                      "headline-lg": [
+                              "Bricolage Grotesque"
+                      ]
+              },
+              "fontSize": {
+                      "label-caps": [
+                              "12px",
+                              {
+                                      "lineHeight": "1",
+                                      "letterSpacing": "0.1em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-sm": [
+                              "14px",
+                              {
+                                      "lineHeight": "1.5",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-xl": [
+                              "48px",
+                              {
+                                      "lineHeight": "1.1",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "800"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "1.6",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "24px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "fontWeight": "700"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        /* Paper Texture Overlay */
+        .paper-texture {
+            position: relative;
+        }
+        .paper-texture::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 10;
+        }
+        
+        /* Wobbly Borders */
+        .brutal-border {
+            border: 3px solid #181c2c;
+            border-radius: 4px;
+        }
+        
+        /* Hard Shadows */
+        .brutal-shadow {
+            box-shadow: 4px 4px 0px 0px #181c2c;
+            transition: all 0.1s ease-in-out;
+        }
+        .brutal-shadow:active {
+            box-shadow: 0px 0px 0px 0px #181c2c;
+            transform: translate(4px, 4px);
+        }
+        .brutal-shadow-hover:hover {
+            box-shadow: 6px 6px 0px 0px #181c2c;
+            transform: translate(-2px, -2px);
+        }
+
+        /* Bento Grid */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 1.5rem;
+        }
+        .bento-col-12 { grid-column: span 12; }
+        .bento-col-8 { grid-column: span 8; }
+        .bento-col-6 { grid-column: span 6; }
+        .bento-col-4 { grid-column: span 4; }
+        .bento-col-3 { grid-column: span 3; }
+        
+        /* Scribble Backgrounds */
+        .scribble-bg-secondary {
+            background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(183, 24, 73, 0.1) 10px, rgba(183, 24, 73, 0.1) 11px);
+        }
+        .scribble-bg-tertiary {
+            background-image: repeating-linear-gradient(-45deg, transparent, transparent 10px, rgba(0, 58, 41, 0.1) 10px, rgba(0, 58, 41, 0.1) 11px);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex font-body-md text-body-md overflow-hidden">
+<!-- SideNavBar -->
+<nav class="bg-surface border-r-4 border-primary h-screen w-64 flex flex-col shrink-0 shadow-[4px_4px_0px_0px_rgba(24,28,44,1)] z-20">
+<!-- Header -->
+<div class="p-stack-md border-b-4 border-primary bg-surface-container flex flex-col gap-stack-sm items-center text-center">
+<div class="w-20 h-20 rounded-full border-4 border-primary overflow-hidden brutal-shadow mb-2 bg-surface">
+<img class="w-full h-full object-cover" data-alt="A stylized retro hand-drawn avatar of a user in a sketchy, bold bento aesthetic, high contrast, black and white with a pop of primary color, set against a subtle paper texture background, conveying a 90s digital interface vibe." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAwPAXqkAQhfAa1PW3qwQxx04ZgUQe8mu2uu10hwLgBNzYulOB9RtbVNzs-7-shpUEQZMJlUUDBENTOxyie7jElacW2JyYKfHBczxh2KfK_lb1RDg264V-a_7FdU2D8lCH1yNJbvzc52mYZF7So44ajpGPx_jUVmrDk6iu41Br4vGiflp4I0_tOXgVxgH6tQcMW_taRX7lmRd3CYtVDjfG8lbrG9J8sBIUqMTRL9jtHDl5Y7b_ppOEDvPoSUsSB61xVTE0m_w7F-hw"/>
+</div>
+<h1 class="font-headline-lg text-headline-lg font-black text-primary">KARSA_V1.0</h1>
+<span class="font-label-caps text-label-caps text-primary-container">SYSTEM_ONLINE</span>
+<button class="mt-4 w-full brutal-border brutal-shadow brutal-shadow-hover bg-tertiary-fixed text-on-tertiary-fixed font-label-caps text-label-caps py-2 px-4 uppercase tracking-widest flex items-center justify-center gap-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">add</span>
+                New Entry
+            </button>
+</div>
+<!-- Navigation Tabs -->
+<div class="flex-1 overflow-y-auto p-stack-md flex flex-col gap-stack-sm paper-texture">
+<!-- Active Tab: Dashboard -->
+<a class="flex items-center gap-3 p-3 font-label-caps text-label-caps text-primary font-bold border-2 border-primary bg-secondary-container translate-x-1 translate-y-1 shadow-none rounded" href="#">
+<span class="material-symbols-outlined">grid_view</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-3 p-3 font-label-caps text-label-caps text-on-surface-variant hover:translate-x-[-2px] hover:translate-y-[-2px] hover:bg-surface-container-high transition-all duration-75 rounded brutal-border bg-surface" href="#">
+<span class="material-symbols-outlined">checklist</span>
+<span>Tasks</span>
+</a>
+<a class="flex items-center gap-3 p-3 font-label-caps text-label-caps text-on-surface-variant hover:translate-x-[-2px] hover:translate-y-[-2px] hover:bg-surface-container-high transition-all duration-75 rounded brutal-border bg-surface" href="#">
+<span class="material-symbols-outlined">monitor_heart</span>
+<span>Health</span>
+</a>
+<a class="flex items-center gap-3 p-3 font-label-caps text-label-caps text-on-surface-variant hover:translate-x-[-2px] hover:translate-y-[-2px] hover:bg-surface-container-high transition-all duration-75 rounded brutal-border bg-surface" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span>Finance</span>
+</a>
+<a class="flex items-center gap-3 p-3 font-label-caps text-label-caps text-on-surface-variant hover:translate-x-[-2px] hover:translate-y-[-2px] hover:bg-surface-container-high transition-all duration-75 rounded brutal-border bg-surface" href="#">
+<span class="material-symbols-outlined">smart_toy</span>
+<span>Chat</span>
+</a>
+</div>
+<!-- Footer -->
+<div class="p-stack-md border-t-4 border-primary bg-surface-container flex flex-col gap-stack-sm">
+<a class="flex items-center gap-3 p-2 font-label-caps text-label-caps text-on-surface hover:bg-surface-container-high rounded transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>Settings</span>
+</a>
+<a class="flex items-center gap-3 p-2 font-label-caps text-label-caps text-on-surface hover:bg-surface-container-high rounded transition-colors" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span>Log Out</span>
+</a>
+</div>
+</nav>
+<!-- Main Canvas -->
+<main class="flex-1 overflow-y-auto p-grid-margin paper-texture relative bg-background">
+<!-- Subtle background texture grid -->
+<div class="absolute inset-0 pointer-events-none opacity-5 bg-[linear-gradient(#181c2c_1px,transparent_1px),linear-gradient(90deg,#181c2c_1px,transparent_1px)] bg-[size:40px_40px]"></div>
+<div class="max-w-7xl mx-auto bento-grid relative z-10">
+<!-- Greeting Card (Bento 8) -->
+<div class="bento-col-8 bg-surface-container-lowest brutal-border brutal-shadow p-bento-padding flex flex-col justify-between relative overflow-hidden">
+<div class="absolute top-4 right-4 opacity-10">
+<span class="material-symbols-outlined text-[120px]">sunny</span>
+</div>
+<div>
+<span class="inline-block bg-primary-fixed text-on-primary-fixed px-2 py-1 font-label-caps text-label-caps border border-primary transform -rotate-2 mb-4">LOG_ENTRY_24</span>
+<h2 class="font-headline-xl text-headline-xl text-primary mb-2">Good Morning, Karsa.</h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-md">System diagnostics are optimal. You have 3 tasks pending and a 5-day streak to maintain. Let's get to work.</p>
+</div>
+<div class="mt-6">
+<button class="brutal-border brutal-shadow bg-primary text-on-primary font-label-caps text-label-caps py-3 px-6 hover:translate-x-[-2px] hover:translate-y-[-2px] transition-transform">
+                        INITIALIZE DAY
+                    </button>
+</div>
+</div>
+<!-- Quick Stats: Tasks Due (Bento 4) -->
+<div class="bento-col-4 bg-error-container brutal-border brutal-shadow p-bento-padding flex flex-col justify-between scribble-bg-secondary">
+<div class="flex justify-between items-start mb-4">
+<span class="font-label-caps text-label-caps text-on-error-container uppercase tracking-widest bg-surface px-2 py-1 brutal-border">TASKS_DUE</span>
+<span class="material-symbols-outlined text-secondary text-3xl">priority_high</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-xl text-headline-xl text-on-error-container">3</span>
+<span class="font-body-sm text-body-sm text-on-secondary-container">High Priority</span>
+</div>
+<p class="font-label-caps text-label-caps text-secondary mt-4 bg-surface-container-lowest inline-block px-2 py-1 border-b-2 border-secondary self-start">Review needed</p>
+</div>
+<!-- Large Module: Tasks (Bento 6) -->
+<div class="bento-col-6 bg-surface brutal-border brutal-shadow p-bento-padding">
+<div class="flex justify-between items-center mb-6 border-b-4 border-primary pb-2">
+<h3 class="font-headline-lg text-headline-lg text-primary flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container text-4xl">checklist</span>
+                        Current Tasks
+                    </h3>
+<span class="bg-primary-fixed text-on-primary-fixed font-label-caps text-label-caps px-2 py-1 brutal-border">MODULE_T</span>
+</div>
+<ul class="flex flex-col gap-4">
+<li class="flex items-center gap-4 p-3 bg-surface-container-lowest brutal-border">
+<div class="w-6 h-6 border-2 border-primary flex items-center justify-center cursor-pointer hover:bg-surface-variant"></div>
+<span class="flex-1 font-body-md text-body-md font-bold strike-hover cursor-pointer">Draft Q3 Report Architecture</span>
+<span class="font-label-caps text-label-caps text-secondary bg-error-container px-2 py-1">URGENT</span>
+</li>
+<li class="flex items-center gap-4 p-3 bg-surface-container-lowest brutal-border">
+<div class="w-6 h-6 border-2 border-primary flex items-center justify-center cursor-pointer bg-primary">
+<span class="material-symbols-outlined text-on-primary text-sm" style="font-variation-settings: 'FILL' 1;">close</span>
+</div>
+<span class="flex-1 font-body-md text-body-md text-outline line-through">Review Server Logs</span>
+<span class="font-label-caps text-label-caps text-tertiary-container bg-surface-container px-2 py-1">DONE</span>
+</li>
+<li class="flex items-center gap-4 p-3 bg-surface-container-lowest brutal-border border-dashed">
+<div class="w-6 h-6 border-2 border-primary flex items-center justify-center cursor-pointer hover:bg-surface-variant"></div>
+<span class="flex-1 font-body-md text-body-md text-on-surface-variant italic cursor-pointer text-outline">+ Add new task...</span>
+</li>
+</ul>
+</div>
+<!-- Chat Preview (Bento 6) -->
+<div class="bento-col-6 bg-surface-container-low brutal-border brutal-shadow p-bento-padding flex flex-col">
+<div class="flex justify-between items-center mb-4">
+<h3 class="font-headline-lg text-headline-lg text-primary flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary-container text-4xl">smart_toy</span>
+                        Karsa AI
+                    </h3>
+<span class="bg-secondary-fixed text-on-secondary-fixed font-label-caps text-label-caps px-2 py-1 brutal-border">AWAITING_INPUT</span>
+</div>
+<div class="flex-1 bg-surface brutal-border p-4 mb-4 flex flex-col gap-4 overflow-y-auto relative scribble-bg-tertiary max-h-64">
+<div class="flex gap-3 max-w-[80%]">
+<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-primary text-sm">smart_toy</span>
+</div>
+<div class="bg-surface-container p-3 brutal-border rounded-tr-xl rounded-b-xl">
+<p class="font-body-sm text-body-sm">I've analyzed the recent health data. Sleep patterns are slightly irregular this week.</p>
+</div>
+</div>
+<div class="flex gap-3 max-w-[80%] self-end flex-row-reverse">
+<div class="w-8 h-8 rounded-full border-2 border-primary overflow-hidden shrink-0">
+<img class="w-full h-full object-cover" data-alt="A stylized retro hand-drawn avatar of a user in a sketchy, bold bento aesthetic, high contrast, black and white with a pop of primary color, set against a subtle paper texture background, conveying a 90s digital interface vibe." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhGV0YClJCyALtMQa1-MysrogmGYlHQasyh2-hBCfkXoeqrDsRZslTK6JwQlmpZUUfDA9H1CqgK2HkV-nKSssP6mO1jbm9YoXXK18hbDlWklacfvkf8N7hbK3F5rC6FNzmahPwYcpD6YWrRuLGH1URKxURidXLgCkEQ41z-OXb788SsOyBoe8PDy6G--NXCNLX4nYX0Lq3VtP37TreoyHWBGUvBDfWdtNBpRg34rQAdWHB1gPb8fPb5BzbJJ6GO44arjPozYZwZWzG"/>
+</div>
+<div class="bg-tertiary-fixed text-on-tertiary-fixed p-3 brutal-border rounded-tl-xl rounded-b-xl text-right">
+<p class="font-body-sm text-body-sm">Acknowledge. Remind me to wrap up by 10 PM tonight.</p>
+</div>
+</div>
+</div>
+<div class="relative">
+<input class="w-full bg-surface-container-lowest brutal-border p-3 font-body-md text-body-md focus:outline-none focus:border-secondary border-b-4 placeholder-outline-variant pr-12" placeholder="Query system..." type="text"/>
+<button class="absolute right-2 top-1/2 -translate-y-1/2 bg-primary text-on-primary w-8 h-8 flex items-center justify-center brutal-border hover:bg-secondary hover:text-on-secondary transition-colors">
+<span class="material-symbols-outlined text-sm">send</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+</body></html>
